@@ -1,0 +1,47 @@
+plantParent_id,plantGroup_id,plantParent_name,plantParent_spacing,plantParent_sowDepth,plantParent_sun,plantParent_soil,plantParent_watering
+46,Flower,Sunflower,18,1,"Full Sun",Loam,"High moisture/Well-drained"
+45,Flower,Cosmos,12,1,"Full Sun",Loam,Well-drained
+44,Flower,Marigold,12,1,"Full Sun",Loam,Well-drained
+43,Flower,Zinnia,12,1,"Full Sun",Loam,Well-drained
+42,Flower,Sunflower,18,1,"Full Sun",Loam,"High moisture/Well-drained"
+7,Fruit,Melon,18,1,"Full Sun",Loam,Well-drained
+12,Fruit,Cucumber,12,1,"Full Sun",Loam,Well-drained
+13,Fruit,Eggplant,21,0,"Full Sun",Sandy,Well-drained
+21,Fruit,Pepper,18,0,"Full Sun",Loam,Well-drained
+27,Fruit,"Summer Squash",24,1,"Full Sun",Loam,Well-drained
+28,Fruit,"Winter Squash",24,1,"Full Sun",Loam,Well-drained
+29,Fruit,Tomato,18,1,"Full Sun",Loam,"High Moisture/Well-drained"
+41,Herb,Sage,17,1,"Full Sun",Loam,Well-drained
+40,Herb,Rosemary,21,1,"Full Sun",Loam,Well-drained
+39,Herb,Mint,18,1,"Full Sun",Loam,Well-drained
+38,Herb,Parsley,8,1,"Full Sun",Loam,Well-drained
+37,Herb,Oregano,8,1,"Full Sun",Loam,Well-drained
+36,Herb,Lavender,21,1,"Full Sun",Loam,Well-drained
+35,Herb,Coriander,12,1,"Full Sun",Loam,Well-drained
+34,Herb,Catnip,18,0,"Full Sun",Loam,Well-drained
+33,Herb,Basil,11,1,"Full Sun",Loam,Well-drained
+6,"Leafy Greens",Cabbage,18,1,"Full Sun",Loam,Well-drained
+10,"Leafy Greens",Chard,9,1,"Full Sun/Part Shade","High organic matter/Loam",Well-drained
+15,"Leafy Greens",Kale,15,1,"Full Sun",Loam,Well-drained
+17,"Leafy Greens",Lettuce,8,1,"Full Sun/Part Shade",Loam,"High moisture/Well-drained"
+32,"Leafy Greens",Arugula,6,0,"Full Sun/Part Shade",Loam,Well-drained
+26,"Leafy Greens",Spinach,7,1,"Full Sun/Part Shade",Loam,"High moisture/Well-drained"
+3,Legume,Beans,4,2,"Full Sun",Loam,Well-drained
+20,Legume,Pea,3,2,"Full Sun/Part Shade",Loam,Well-drained
+30,Vegetable,Turnip,7,1,"Full Sun/Part Shade",Loam,Well-drained
+31,Vegetable,Celery,8,1,"Full Sun/Part Shade",Loam,Well-drained
+25,Vegetable,Shallot,1,0,"Full Sun/Part Shade",Loam,Well-drained
+1,Vegetable,Artichoke,30,1,"Full Sun",Loam,Well-drained
+23,Vegetable,"Sweet Potato",15,1,"Full Sun",Loam,Well-drained
+22,Vegetable,Potato,10,4,"Full Sun",Loam,"Loose, Well-drained"
+19,Vegetable,Onion,4,1,"Full Sun",Loam,Well-drained
+18,Vegetable,Okra,15,1,"Full Sun",Loam,Well-drained
+16,Vegetable,Leek,5,1,"Full Sun/Part Shade",Loam,Well-drained
+14,Vegetable,Garlic,4,2,"Full Sun",Loam,Well-drained
+11,Vegetable,Corn,5,1,"Full Sun",Loam,Well-drained
+9,Vegetable,Cauliflower,30,1,"Full Sun",Loam,Well-drained
+8,Vegetable,Carrots,3,1,"Full Sun",Sandy,Well-drained
+5,Vegetable,"Brussels Sprouts",18,1,"Full Sun",Loam,Well-drained
+4,Vegetable,Beets,4,1,"Full Sun/Part Shade",Loam,Well-drained
+2,Vegetable,Asparagus,21,8,"Full Sun/Part Shade",Loam,"Loose soil"
+24,Vegetable,Radish,2,1,"Full Sun",Clay/Loam/Sandy,"Loose, Well-drained"

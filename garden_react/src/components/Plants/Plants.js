@@ -1,23 +1,3 @@
-// import React from 'react'
-// import Button from '@material-ui/core/Button';
-// import { makeStyles } from '@material-ui/core/styles';
-
-
-// import './Plants.css'
-
-// function Plants() {
-//     return (
-//         <div className="plantsBody">
-//             <div className="topBar">
-                
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Plants
-
-
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, useTheme } from '@material-ui/core/styles';

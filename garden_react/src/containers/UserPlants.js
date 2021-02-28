@@ -1,17 +1,19 @@
 import { connect } from 'react-redux'
 import UserPlants from '../components/UserPlants/UserPlants'
-import { getAllPlantsByType } from '../redux/actions'
+import { addPlantToUserList, getAllPlantsByType } from '../redux/actions'
 
 const mapStateToProps = (state) => {
     return {
         loggedIn: state.loggedIn,
-        allPlantsByType: state.allPlantsByType
+        allPlantsByType: state.allPlantsByType,
+        userPlantList: state.userPlantList,
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllPlantsByType: () => dispatch(getAllPlantsByType()),
+        addPlantToUserList: () => dispatch(addPlantToUserList()),
     }
 
 }

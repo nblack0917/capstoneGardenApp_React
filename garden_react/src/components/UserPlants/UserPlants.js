@@ -6,8 +6,10 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import './UserPlants.css'
 import leafLogo from './Leaf_lg.png'
+import { addPlantToUserList } from '../../redux/actions';
 
 
 function TabPanel(props) {
@@ -72,21 +74,37 @@ export default function FullWidthTabs(props) {
     const stateCheck = () => {
         console.log(props.allPlantsByType)
     }
-
+    
     const fruitList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Fruit")
     const veggieList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Vegetable")
     const herbList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Herb")
     const flowerList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Flower")
+    
+    const addPlant = index => {
+        let selectedPlant = fruitList[index];
+        console.log(selectedPlant)
+        addPlantToUserList(selectedPlant)
+    }
 
     useEffect(() => {
         props.getAllPlantsByType()
     }, [])
 
+    useEffect(() => {
+        console.log(props.userPlantList)
+    })
+
     return (
         <div className="plantsBody">
             <div className="listContainer">
                 <div className="selectedPlants">
-                    Hello
+                    <h3>Hello</h3>
+                    <ul>
+                        {props.userPlantList.map(plant => {
+                            return <li>{plant.plantParent_name}</li>
+                        })}
+                    </ul>
+                    
                 </div>
             </div>
             <div className={classes.root}>
@@ -107,10 +125,9 @@ export default function FullWidthTabs(props) {
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
-                    {/* <button onClick={stateCheck}>click</button> */}
                     <ul style={{listStyle: 'none'}}>
-                        {fruitList.map(plant => {
-                            return <li><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name}</li>
+                        {fruitList.map((plant, index) => {
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => addPlant(index)} /></li>
                             })}
                     </ul>
                 </TabPanel>

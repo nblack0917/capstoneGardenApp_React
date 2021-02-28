@@ -35,3 +35,10 @@ export const getAllPlantsByType = (plantList) => {
             })
     }
 }
+
+export const addPlantToUserList = (plant) => {
+    return  {
+        type: "ADD_PLANT",
+        value: plant
+    }
+}

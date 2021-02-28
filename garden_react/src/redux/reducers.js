@@ -37,5 +37,17 @@ const allPlantsByType = (state = [], action) => {
     }
 }
 
+const userPlantList = (state = [], action) => {
+    switch(action.type) {
+        case 'ADD_PLANT':
+            return {
+                ...state,
+                userPlantList: [...state.userPlantList, action.payload]
+            }
+        default:
+            return state
+    }
+}
 
-export default combineReducers({  loggedIn, userName, allPlantsByType })
+
+export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList })

@@ -7,6 +7,7 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import './UserPlants.css'
 import leafLogo from './Leaf_lg.png'
 import { addPlantToUserList } from '../../redux/actions';
@@ -80,10 +81,31 @@ export default function FullWidthTabs(props) {
     const herbList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Herb")
     const flowerList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Flower")
     
-    const addPlant = index => {
-        let selectedPlant = fruitList[index];
-        console.log(selectedPlant)
-        addPlantToUserList(selectedPlant)
+    const handleClick = (index, groupName) => {
+        // console.log(groupName)
+        let selectedPlant;
+        switch(groupName) {
+            case "Fruit":
+                selectedPlant = fruitList[index];
+                break;
+            case "Vegetable":
+                selectedPlant = veggieList[index];
+                break;
+            case "Herb":
+                selectedPlant = herbList[index];
+                break;
+            case "Flower":
+                selectedPlant = flowerList[index];
+                break;
+            default:
+                console.log("Error: plant type not found")
+            }
+        // console.log(selectedPlant, index)
+        // props.addPlantToUserList(selectedPlant)
+        if(!props.userPlantList.some(plant => plant.plantParent_name === selectedPlant.plantParent_name)) {
+            console.log(selectedPlant.plantParent_name)
+            props.addPlantToUserList(selectedPlant)
+        }
     }
 
     useEffect(() => {
@@ -98,10 +120,10 @@ export default function FullWidthTabs(props) {
         <div className="plantsBody">
             <div className="listContainer">
                 <div className="selectedPlants">
-                    <h3>Hello</h3>
-                    <ul>
-                        {props.userPlantList.map(plant => {
-                            return <li>{plant.plantParent_name}</li>
+                    <h3>Selected Plants</h3>
+                    <ul style={{ listStyle: 'none', margin: 0, padding: 0}}>
+                        {props.userPlantList.map((plant, index) => {
+                            return <li style={{ listStyle: 'none'}}>{plant.plantParent_name} <DeleteForeverIcon color="secondary" style={{ cursor: 'pointer' }} onClick={() => props.removePlantFromUserList(index)} /></li>
                         })}
                     </ul>
                     
@@ -127,28 +149,28 @@ export default function FullWidthTabs(props) {
                 <TabPanel value={value} index={0}>
                     <ul style={{listStyle: 'none'}}>
                         {fruitList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => addPlant(index)} /></li>
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <ul style={{listStyle: 'none'}}>
-                            {veggieList.map(plant => {
-                            return <li><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name}</li>
+                        {veggieList.map((plant, index) => {
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <ul style={{listStyle: 'none'}}>
-                            {herbList.map(plant => {
-                                return <li><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name}</li>
+                        {herbList.map((plant, index) => {
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
                     <ul style={{listStyle: 'none'}}>
-                            {flowerList.map(plant => {
-                                return <li><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name}</li>
+                        {flowerList.map((plant, index) => {
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>

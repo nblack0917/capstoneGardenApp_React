@@ -40,10 +40,12 @@ const allPlantsByType = (state = [], action) => {
 const userPlantList = (state = [], action) => {
     switch(action.type) {
         case 'ADD_PLANT':
-            return {
-                ...state,
-                userPlantList: [...state.userPlantList, action.payload]
-            }
+            // console.log("adding plant", action.value)
+            return [...state, action.value]
+        case 'REMOVE_PLANT':
+            const plantList = [...state]
+            plantList.splice(action.value, 1)
+            return plantList
         default:
             return state
     }

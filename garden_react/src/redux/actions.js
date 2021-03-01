@@ -42,3 +42,10 @@ export const addPlantToUserList = (plant) => {
         value: plant
     }
 }
+
+export const removePlantFromUserList = (index) => {
+    return {
+        type: 'REMOVE_PLANT',
+        value: index
+    }
+}

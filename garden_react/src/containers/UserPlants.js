@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import UserPlants from '../components/UserPlants/UserPlants'
-import { addPlantToUserList, getAllPlantsByType } from '../redux/actions'
+import { addPlantToUserList, getAllPlantsByType, removePlantFromUserList } from '../redux/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -13,7 +13,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         getAllPlantsByType: () => dispatch(getAllPlantsByType()),
-        addPlantToUserList: () => dispatch(addPlantToUserList()),
+        addPlantToUserList: (plant) => dispatch(addPlantToUserList(plant)),
+        removePlantFromUserList: (index) => dispatch(removePlantFromUserList(index)),
     }
 
 }

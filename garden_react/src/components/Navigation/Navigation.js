@@ -18,28 +18,28 @@ const login = (props) => {
     // history.push('/home')
 }
 
-const netlifyAuth = {
-    isAuthenticated: false,
-    user: null,
-    authenticate(callback) {
-        this.isAuthenticated = true;
-        netlifyIdentity.open('login');
-        netlifyIdentity.on('login', user => {
-            this.user = user;
-            console.log(user);
-            login();
-            callback(user);
-        });
-    },
-    signout(callback) {
-        this.isAuthenticated = false;
-        netlifyIdentity.logout();
-        netlifyIdentity.on('logout', () => {
-            this.user = null;
-            callback();
-        });
-    }
-};
+// const netlifyAuth = {
+//     isAuthenticated: false,
+//     user: null,
+//     authenticate(callback) {
+//         this.isAuthenticated = true;
+//         netlifyIdentity.open('login');
+//         netlifyIdentity.on('login', user => {
+//             this.user = user;
+//             console.log(user);
+//             login();
+//             callback(user);
+//         });
+//     },
+//     signout(callback) {
+//         this.isAuthenticated = false;
+//         netlifyIdentity.logout();
+//         netlifyIdentity.on('logout', () => {
+//             this.user = null;
+//             callback();
+//         });
+//     }
+// };
 
 // //function to initialize Netlify Identity Widget
 // function initNetlifyIdentity() {
@@ -189,7 +189,37 @@ const NavBar = (props) => {
     //     history.push('/home')
     // }
 
-    const setLogOut = (props) => {
+    const netlifyAuth = {
+        isAuthenticated: false,
+        user: null,
+        authenticate(callback) {
+            this.isAuthenticated = true;
+            netlifyIdentity.open('login');
+            netlifyIdentity.on('login', user => {
+                this.user = user;
+                console.log(user);
+                login();
+                callback(user);
+            });
+        },
+        signout(callback) {
+            this.isAuthenticated = false;
+            netlifyIdentity.logout();
+            netlifyIdentity.on('logout', () => {
+                this.user = null;
+                callback();
+            });
+        }
+    };
+
+    const login = () => {
+        console.log("hi")
+        document.cookie = "loggedIn=true"
+        props.enableLogin();
+        history.push('/home')
+    }
+
+    const setLogOut = () => {
         props.updateUserName("")
         props.disableLogin();
         logout();
@@ -204,9 +234,9 @@ const NavBar = (props) => {
         netlifyAuth.authenticate();
         
     }
-    if (netlifyAuth.isAuthenticated){
-        login();
-    }
+    // if (netlifyAuth.isAuthenticated){
+    //     login();
+    // }
     const logOutAuth = () => {
         netlifyAuth.signout();
         setLogOut();

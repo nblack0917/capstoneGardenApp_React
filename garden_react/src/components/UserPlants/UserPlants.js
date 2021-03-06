@@ -78,6 +78,8 @@ export default function FullWidthTabs(props) {
     
     const fruitList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Fruit")
     const veggieList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Vegetable")
+    const legumeList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Legume")
+    const greensList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Leafy Greens")
     const herbList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Herb")
     const flowerList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Flower")
     
@@ -90,6 +92,12 @@ export default function FullWidthTabs(props) {
                 break;
             case "Vegetable":
                 selectedPlant = veggieList[index];
+                break;
+            case "Legume":
+                selectedPlant = legumeList[index];
+                break;
+            case "Leafy Greens":
+                selectedPlant = greensList[index];
                 break;
             case "Herb":
                 selectedPlant = herbList[index];
@@ -142,8 +150,10 @@ export default function FullWidthTabs(props) {
                     >
                     <Tab label="Fruits" {...a11yProps(0)} />
                     <Tab label="Vegetables" {...a11yProps(1)} />
-                    <Tab label="Herbs" {...a11yProps(2)} />
-                    <Tab label="Flowers" {...a11yProps(2)} />
+                    <Tab label="Legumes" {...a11yProps(2)} />
+                    <Tab label="Leafy Greens" {...a11yProps(3)} />
+                    <Tab label="Herbs" {...a11yProps(4)} />
+                    <Tab label="Flowers" {...a11yProps(5)} />
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
@@ -162,12 +172,26 @@ export default function FullWidthTabs(props) {
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <ul style={{listStyle: 'none'}}>
-                        {herbList.map((plant, index) => {
+                        {legumeList.map((plant, index) => {
                             return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
+                    <ul style={{listStyle: 'none'}}>
+                        {greensList.map((plant, index) => {
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            })}
+                    </ul>
+                </TabPanel>
+                <TabPanel value={value} index={4}>
+                    <ul style={{listStyle: 'none'}}>
+                        {herbList.map((plant, index) => {
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            })}
+                    </ul>
+                </TabPanel>
+                <TabPanel value={value} index={5}>
                     <ul style={{listStyle: 'none'}}>
                         {flowerList.map((plant, index) => {
                             return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>

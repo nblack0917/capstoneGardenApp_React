@@ -28,9 +28,9 @@ VALUES
 INSERT INTO usersCredentials
     (user_id, username, password)
 VALUES
-    (1, "nlack123", "Password123!"),
-    (2, "jennyZam", "PassGo34"),
-    (3, "CindyWeer", "Word123!"),
+    (1, "nblack0917", "Password123!"),
+    (2, "jennyZam0917", "PassGo34"),
+    (3, "cindyWeer", "Word123!"),
     (4, "tommyBoy", "Password6234!!"),
     (5, "funktheskunk", "skunkworks.");
 

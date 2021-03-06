@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const plantsRouter = require('./routes/plants')
 const gardenRouter = require('./routes/gardens')
 const bedsRouter = require('./routes/beds')
+const usersRouter = require('./routes/users')
 const { logger } = require('./middleware')
 var cors = require("cors");
 
@@ -13,8 +14,9 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(logger);
 app.use('/plants', plantsRouter);
-app.use('/gardens', gardenRouter)
-app.use('/beds', bedsRouter)
+app.use('/gardens', gardenRouter);
+app.use('/beds', bedsRouter);
+app.use('/users', usersRouter);
 
 
 app.get('/', (req, res) => {

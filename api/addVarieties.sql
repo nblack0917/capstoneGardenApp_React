@@ -1,70 +1,3 @@
-INSERT INTO plantTypes
-    (plantGroupName)
-VALUES
-    ("Fruit"),
-    ("Vegetable"),
-    ("Leafy Greens"),
-    ("Gourd"),
-    ("Herb"),
-    ("Legume"),
-    ("Flower");
-
-INSERT INTO plantParents
-    (plantGroup_id, plantParent_name, plantParent_spacing, plantParent_sowDepth, plantParent_sun, plantParent_soil, plantParent_watering)
-VALUES
-    ("Vegetable", "Artichoke", 30, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Vegetable", "Asparagus", 21, 8, "Full Sun/Part Shade", "Loam", "Loose soil"),
-    ("Legume", "Beans", 3.5, 1.5, "Full Sun", "Loam", "Well-drained"),
-    ("Vegetable", "Beets", 3.5, 0.75, "Full Sun/Part Shade", "Loam", "Well-drained"),
-    ("Vegetable", "Brussels Sprouts", 18, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Leafy Greens", "Cabbage", 18, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Fruit", "Melon", 18, 1, "Full Sun", "Loam", "Well-drained"),
-    ("Vegetable", "Carrots", 3, 0.5, "Full Sun", "Sandy", "Well-drained"),
-    ("Vegetable", "Cauliflower", 30, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Leafy Greens", "Chard", 9, 0.75, "Full Sun/Part Shade", "High organic matter/Loam", "Well-drained"),
-    ("Vegetable", "Corn", 5, 1, "Full Sun", "Loam", "Well-drained"),
-    ("Fruit", "Cucumber", 12, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Fruit", "Eggplant", 21, 0.25, "Full Sun", "Sandy", "Well-drained"),
-    ("Vegetable", "Garlic", 4, 2, "Full Sun", "Loam", "Well-drained"),
-    ("Leafy Greens", "Kale", 15, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Vegetable", "Leek", 5, 0.5, "Full Sun/Part Shade", "Loam", "Well-drained"),
-    ("Leafy Greens", "Lettuce", 8, 0.5, "Full Sun/Part Shade", "Loam", "High moisture/Well-drained"),
-    ("Fruit", "Okra", 15, 0.75, "Full Sun", "Loam", "Well-drained"),
-    ("Vegetable", "Onion", 4, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Legume", "Pea", 2.5, 1.5, "Full Sun/Part Shade", "Loam", "Well-drained"),
-    ("Fruit", "Pepper", 18, 0.25, "Full Sun", "Loam", "Well-drained"),
-    ("Vegetable", "Potato", 10, 4, "Full Sun", "Loam", "Loose, Well-drained"),
-    ("Vegetable", "Sweet Potato", 15, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Vegetable", "Radish", 2, 0.5, "Full Sun", "Clay/Loam/Sandy", "Loose, Well-drained"),
-    ("Vegetable", "Shallot", 1, 0.25, "Full Sun/Part Shade", "Loam", "Well-drained"),
-    ("Leafy Greens", "Spinach", 7, 0.5, "Full Sun/Part Shade", "Loam", "High moisture/Well-drained"),
-    ("Fruit", "Summer Squash", 24, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Fruit", "Winter Squash", 24, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Fruit", "Tomato", 18, 0.5, "Full Sun", "Loam", "High Moisture/Well-drained"),
-    ("Vegetable", "Turnip", 7, 0.5, "Full Sun/Part Shade", "Loam", "Well-drained"),
-    ("Vegetable", "Celery", 8, 0.5, "Full Sun/Part Shade", "Loam", "Well-drained"),
-    ("Leafy Greens", "Arugula", 6, 0.25, "Full Sun/Part Shade", "Loam", "Well-drained"),
-    ("Herb", "Basil", 11, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Dill", 12, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Catnip", 18, 0.25, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Coriander", 12, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Lavender", 21, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Oregano", 8, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Parsley", 8, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Mint", 18, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Rosemary", 21, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Herb", "Sage", 17, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Flower", "Sunflower", 18, 1, "Full Sun", "Loam", "High moisture/Well-drained"),
-    ("Flower", "Zinnia", 12, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Flower", "Marigold", 12, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Flower", "Cosmos", 12, 0.5, "Full Sun", "Loam", "Well-drained"),
-    ("Flower", "Hibiscus", 24, 0.25, "Full Sun", "Loam", "High moisture/Well-drained"),
-    ("Vegetable", "Broccoli", 18, 0.5, "Full Sun", "Loam", "Well-drained");
-
-
-
-
-    
 INSERT INTO plantVarieties
     (plantParent_id, variety_name, variety_description, height, daysToHarvest)
 VALUES
@@ -86,7 +19,6 @@ VALUES
     (7, "Cantaloupe", "The cantaloupe plant, also known as muskmelon, is a popular melon that is commonly grown in many home gardens, as well as commercially. It is easily recognized by the net-like rind and sweet orange color inside. Cantaloupes are closely related to cucumbers, squash, and pumpkins and, therefore, share similar growing conditions.", 56, 90),
     (7, "Watermelon", "Watermelons have firm outer rinds and soft inner flesh with high water content which is dotted throughout with seeds. Watermelons should be grown in well-draining soil as they are intolerant of soggy conditions. They grow on hairy vines which trail along the ground, producing hairy foliage and pale green flowers in July and August.", 56, 90),
     (7, "Honeydew Melon", "This melon grows on an annual vine, which is frost tender. The flesh is pale green and watery and can be eaten raw or dried. These melons usually ripen in late summer or early fall, following flowering in early to mid-summer months. Honeydews are rich in Vitamin C and Vitamin B and are very low in calories. It grows best is warmer, almost tropical environments", 56, 90),
-    (8, "Danvers Carrot", "The carrot is a root vegetable. Danvers carrots are medium sized carrots, often called “half size.” They were once a choice carrot for their flavor, especially when young, because mature roots can become fibrous.", 10, 90),
     (8, "Kaleidoscope Carrot", "The carrot is a root vegetable. The Kaleidoscope variety is a seed mix that will grow in 5 different colors. The most commonly eaten part of the plant is the taproot, but the greens are sometimes eaten as well. The leaves appear first, and the taproot grows more slowly beneath the soil. Fast-growing cultivars mature within three months of sowing the seed. Slower-maturing cultivars are harvested four months after sowing.", 10, 90),
     (8, "Deep Purple Hybrid Carrot", "The carrot is a root vegetable. This variety is purple all the way through, and makes an irresistible ornamental display of color in salads, snacks, or dips.. It is The most commonly eaten part of the plant is the taproot, but the greens are sometimes eaten as well. The leaves appear first, and the taproot grows more slowly beneath the soil. Fast-growing cultivars mature within three months of sowing the seed. Slower-maturing cultivars are harvested four months after sowing.", 10, 90),
     (9, "White Cauliflower", "Cauliflower is a sun-loving, cool-season crop to grow in spring and fall. An annual plant in the Brassica family, cauliflower’s edible white flesh is extremely healthy and considered a superfood. It grows a tightly bunched florets of cauliflower connected by a thick core, often with a few light leaves surrounding it.", 18, 80),
@@ -106,7 +38,7 @@ VALUES
     (14, "Hardneck Garlic", "A bulbous perennial, garlic is a species in the genus Allium, with close cousins including chives, leeks, onions, and shallots. It grows 18-24 inches tall, and the head, or bulb, is a storage organ used for fuel reserves to prepare for adverse and wintery conditions. Hardnecks produce a scape, or stalk, in late spring that grows from the center of the plant.", 18, 90),
     (14, "Elephant Garlic", "A bulbous perennial, garlic is a species in the genus Allium, with close cousins including chives, leeks, onions, and shallots. It grows 18-24 inches tall, and the head, or bulb, is a storage organ used for fuel reserves to prepare for adverse and wintery conditions. Elephant garlic is a completely different kind of garlic and grows huge bulbs.", 18, 90),
     (15, "Dinosaur Kale", "Dinosaur kale is a dark green leafy vegetable. Popular in Italian food, it's also called Tuscan kale or cavolo nero. The leaves are so hearty that, even when well cooked, they retain a wonderful firm texture, making it a great choice for braising or adding to stews. It's also sweeter and less bitter than other types of kale and packed with healthy nutrients.", 18, 65),
-    (15, "Common Curly Kale", "Curly kale is one of the most common types of kale you will see in the grocery store. It is a green variety with large, ruffled leaves. A popular cultivar is Winterbor, which is cold hardy and can grow 2-3 feet tall. ", 32, 65),
+    (15, "Common Curly Kale", "Curly kale is one of the most common types of kale you will see in the grocery store. It is a green variety with large, ruffled leaves. A popular cultivar is ‘Winterbor’, which is cold hardy and can grow 2-3 feet tall. ", 32, 65),
     (15, "Scotch Kale", "The most popular variety is ‘Blue Curled Scotch’ kale, also called ‘Vates’ kale. This variety has blue green leaves that are very curly. It tends to be a shorter variety that grows less than 2 feet tall. It produces early, but is biennial, and can survive for two growing seasons.", 18, 65),
     (16, "American Flag Leek", "Native to Europe and Africa and best planted in the cool early spring or fall months, leeks are characterized by tough, flat, bluish-green leaves encircle each other, forming a cylindrical base at one end and a fan of folded leaves at the other. The leaves grow opposite each other, and the plant takes on an almost flat appearance until the leaves become long and floppy. One of the tallest heirloom varietals, the American flag leek has long, narrow shafts and a mild, sweet flavor. They're a good choice to overwinter in mild climates.", 30, 115),
     (16, "Early Giant Leek", "Native to Europe and Africa and best planted in the cool early spring or fall months, leeks are characterized by tough, flat, bluish-green leaves encircle each other, forming a cylindrical base at one end and a fan of folded leaves at the other. The leaves grow opposite each other, and the plant takes on an almost flat appearance until the leaves become long and floppy. As alluded to by its name, the early giant leek has one of the shorter maturation periods, ready to harvest in around 98 days. It also boasts especially thick stems, with a mild flavor.", 30, 115),
@@ -126,30 +58,3 @@ VALUES
     (33, "Thai Basil", "Fragrant and delicious herb with tender green leaves. Great in just about anything - salad, sauces, meat marinades, and even popcorn.", 18, 30),
     (34, "Fernleaf Dill", "Dill is an herb wth slender green stems and feathery, delicate leaves. It's flowers are white to yellow. Fresh and dried dill leaves are used to season fish, borscht, and to make pickles. Dill is best when used fresh. It loses its flavor rapidly if dried. Dill seed is also used as a spice.", 18, 30);
     
-INSERT INTO gardenPlants
-    (bed_id, plant_variety)
-VALUES
-    (1, "Beefsteak Tomato"),
-    (1, "Beefsteak Tomato"),
-    (1, "Italian Eggplant"),
-    (1, "Italian Eggplant"),
-    (1, "Kentucky Wonder Pole Beans"),
-    (1, "Kentucky Wonder Pole Beans"),
-    (1, "Kentucky Wonder Pole Beans"),
-    (1, "Dinosaur Kale"),
-    (1, "Dinosaur Kale"),
-    (3, "Dinosaur Kale"),
-    (2, "Danvers Carrot"),
-    (2, "Danvers Carrot"),
-    (5, "Danvers Carrot"),
-    (5, "Danvers Carrot"),
-    (5, "Danvers Carrot"),
-    (4, "American Flag Leek"),
-    (4, "American Flag Leek"),
-    (4, "American Flag Leek"),
-    (4, "American Flag Leek"),
-    (4, "American Flag Leek"),
-    (4, "American Flag Leek"),
-    (4, "American Flag Leek"),
-    (6, "Sweet Basil"),
-    (7, "Fernleaf Dill");

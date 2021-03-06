@@ -14,6 +14,7 @@ const getAllGardenPlantsByUserId = (req, res) => {
     sqlQuery = `SELECT users.id,
 	users.first_name,
     users.last_name,
+    usersContact.email,
     userGardens.garden_id,
     userGardens.zone_id,
     gardenBeds.bed_id,
@@ -44,6 +45,7 @@ FROM plantVarieties
 	JOIN userGardens ON gardenBeds.garden_id=userGardens.garden_id
 	JOIN users ON userGardens.user_id=users.id
     JOIN zones ON plantParents.plantParent_id=zones.plant_id
+    JOIN usersContact ON usersContact.user_id=users.id
     WHERE users.id=? AND zones.zone_id=userGardens.zone_id`;
     sqlQuery = mysql.format(sqlQuery, [req.params.id]);
 

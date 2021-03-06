@@ -1,0 +1,27 @@
+INSERT INTO gardenPlants
+    (bed_id, plant_variety)
+VALUES
+    (1, "Beefsteak Tomato"),
+    (1, "Beefsteak Tomato"),
+    (1, "Italian Eggplant"),
+    (1, "Italian Eggplant"),
+    (1, "Kentucky Wonder Pole Beans"),
+    (1, "Kentucky Wonder Pole Beans"),
+    (1, "Kentucky Wonder Pole Beans"),
+    (1, "Dinosaur Kale"),
+    (1, "Dinosaur Kale"),
+    (3, "Dinosaur Kale"),
+    (2, "Danvers Carrot"),
+    (2, "Danvers Carrot"),
+    (5, "Danvers Carrot"),
+    (5, "Danvers Carrot"),
+    (5, "Danvers Carrot"),
+    (4, "American Flag Leek"),
+    (4, "American Flag Leek"),
+    (4, "American Flag Leek"),
+    (4, "American Flag Leek"),
+    (4, "American Flag Leek"),
+    (4, "American Flag Leek"),
+    (4, "American Flag Leek"),
+    (6, "Sweet Basil"),
+    (7, "Fernleaf Dill");

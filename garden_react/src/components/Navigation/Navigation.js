@@ -1,16 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
+import React, { useState, useEffect, Component } from 'react';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import cookie from 'cookie'
-import leafLogo from './Leaf_lg.png'
+import cookie from 'cookie';
+import leafLogo from './Leaf_lg.png';
+import netlifyIdentity from 'netlify-identity-widget';
 
-//Logout function to change cookie and redirect to login page
+// netlifyIdentity.init({
+//     container: '#netlify-modal', // defaults to document.body,
+//     locale: 'en' // defaults to 'en'
+//   });
 
+
+function initNetlifyIdentity() {
+    console.log("NetIdent called")
+    const script = document.createElement('script');
+
+    script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js"
+    script.async = true;
+
+    document.body.appendChild(script)
+}
+
+function openNetlifyModal() {
+    const netlifyIdentity = window.netlifyIdentity;
+
+    if(netlifyIdentity)
+        netlifyIdentity.open();
+    else
+        console.log("netlifyIdentity not defined")
+}
 
 // function to check to see if cookie has loggedIn
 const checkAuth = () => {
@@ -95,8 +118,20 @@ const buttonStyle = {
     fontSize: 18,
 }
 
+// class NetlifyIdentity extends Component {
+//     componentDidMount() {
+//         initNetlifyIdentity();
+//     }
+
+//     render() {
+//         return (<div></div>)
+//     }
+// }
+
 // NavBar component with two versions depending on login status
 const NavBar = (props) => {
+    
+
     const history = useHistory();
     const [loggedIn, setLoggedIn] =  useState(false);
 
@@ -111,6 +146,10 @@ const NavBar = (props) => {
         props.disableLogin();
         logout();
     }
+
+    useEffect(() => {
+        initNetlifyIdentity();
+    }, [])
     
     useEffect(() => {
         if (!props.loggedIn) {
@@ -137,9 +176,11 @@ const NavBar = (props) => {
                         <Link to="/plants" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Plants</Button>
                         </Link>
-                        <Link to="/login" style={{textDecoration: 'none'}}>
+                            <Button color="inherit" className={classes.linkStyle} onClick={ () => openNetlifyModal() } >Log In</Button>
+
+                        {/* <Link to="/login" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Log In</Button>
-                        </Link>
+                        </Link> */}
                         <Link to="/contact" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Contact</Button>
                         </Link>

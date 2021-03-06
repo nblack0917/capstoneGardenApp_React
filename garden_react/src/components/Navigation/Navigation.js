@@ -8,13 +8,15 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import cookie from 'cookie';
 import leafLogo from './Leaf_lg.png';
-import GoTrue from 'gotrue-js';
+// import GoTrue from 'gotrue-js';
 
 // auth = new GoTrue({
 //     APIUrl: 'https://thirsty-wescoff-9aeb6d.netlify.app/.netlify/identity',
 //     setCookie: false,
 //   });
 
+
+//function to initialize Netlify Identity Widget
 function initNetlifyIdentity() {
     console.log("NetIdent called")
     const script = document.createElement('script');
@@ -25,20 +27,57 @@ function initNetlifyIdentity() {
     document.body.appendChild(script)
 }
 
-function openNetlifyModal() {
+
+//function to open login widget
+function openNetlifyModal(props) {
     const netlifyIdentity = window.netlifyIdentity;
 
-    if(netlifyIdentity)
-        netlifyIdentity.open();
-    else
+    if(netlifyIdentity) {
+        netlifyIdentity.open('login')
+        .on('login', user => {
+            console.log('login', user);
+            login()
+        })
+        .on('error', err => console.error('Error', err));
+    } else
         console.log("netlifyIdentity not defined")
 }
+
+//function to log out
+// function logOutOfNetlify() {
+//     const netlifyIdentity = window.netlifyIdentity;
+
+//     netlifyIdentity.logout()
+//         .on('logout', () => {
+//             console.log('Logged out');
+//             setLogOut();
+//     });
+// }
 
 // function to check to see if cookie has loggedIn
 const checkAuth = () => {
     const cookies = cookie.parse(document.cookie)
     return cookies["loggedIn"] ? true : false
 }
+
+const login = (props) => {
+    // const history = useHistory();
+    document.cookie = "loggedIn=true"
+    props.enableLogin();
+    // history.push('/home')
+}
+
+// const setLogOut = (props) => {
+//     props.updateUserName("")
+//     props.disableLogin();
+//     logout();
+// }
+
+// const logout = () => {
+//     const history = useHistory();
+//     document.cookie = "null;max-age=1"
+//     history.push('/') 
+// }
 
 // Styles for navbar
 const useStyles = makeStyles((theme) => ({
@@ -126,17 +165,38 @@ const NavBar = (props) => {
     const history = useHistory();
     const [loggedIn, setLoggedIn] =  useState(false);
 
-    const logout = () => {
-        document.cookie = "null;max-age=1"
-        history.push('/')
-        
-    }
-    
-    const setLogin = () => {
+    //function to log out
+function logOutOfNetlify() {
+    const netlifyIdentity = window.netlifyIdentity;
+
+    netlifyIdentity.logout()
+        .on('logout', () => {
+            console.log('Logged out');
+            setLogOut();
+    });
+}
+
+    const setLogOut = (props) => {
         props.updateUserName("")
         props.disableLogin();
         logout();
     }
+    
+    const logout = () => {
+        document.cookie = "null;max-age=1"
+        history.push('/') 
+    }
+    // const logout = () => {
+    //     document.cookie = "null;max-age=1"
+    //     history.push('/')
+        
+    // }
+    
+    // const setLogOut = () => {
+    //     props.updateUserName("")
+    //     props.disableLogin();
+    //     logout();
+    // }
 
     useEffect(() => {
         initNetlifyIdentity();
@@ -204,9 +264,10 @@ const NavBar = (props) => {
                         <Link to="/contact" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Contact</Button>
                         </Link>
-                        <Link to="/" style={{textDecoration: 'none'}}>
+                            <Button color="inherit" className={classes.linkStyle} onClick={ () => logOutOfNetlify() }>Log Out</Button>
+                        {/* <Link to="/" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle} onClick={setLogin}>Log Out</Button>
-                        </Link>
+                        </Link> */}
                         <Link to="/my_gardens" style={{textDecoration: 'none'}}>
                             <Button  variant="contained" className={classes.buttonStyle}>My Gardens</Button>
                         </Link>

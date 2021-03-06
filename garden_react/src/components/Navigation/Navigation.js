@@ -10,12 +10,20 @@ import netlifyIdentity from 'netlify-identity-widget';
 import cookie from 'cookie';
 import leafLogo from './Leaf_lg.png';
 
+const login = (props) => {
+    // const history = useHistory();
+    console.log("hi")
+    document.cookie = "loggedIn=true"
+    props.enableLogin();
+    // history.push('/home')
+}
+
 const netlifyAuth = {
     isAuthenticated: false,
     user: null,
     authenticate(callback) {
         this.isAuthenticated = true;
-        netlifyIdentity.open();
+        netlifyIdentity.open('login');
         netlifyIdentity.on('login', user => {
             this.user = user;
             console.log(user);
@@ -77,12 +85,7 @@ const checkAuth = () => {
     return cookies["loggedIn"] ? true : false
 }
 
-const login = (props) => {
-    // const history = useHistory();
-    document.cookie = "loggedIn=true"
-    props.enableLogin();
-    // history.push('/home')
-}
+
 
 // const setLogOut = (props) => {
 //     props.updateUserName("")

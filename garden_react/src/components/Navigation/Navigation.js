@@ -18,7 +18,8 @@ const netlifyAuth = {
         netlifyIdentity.open();
         netlifyIdentity.on('login', user => {
             this.user = user;
-            console.log(user)
+            console.log(user);
+            login();
             callback(user);
         });
     },
@@ -150,19 +151,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // adding style a different way for the links
-const linkStyle = {
-    color: "#009344",
-    fontWeight: 400,
-    fontSize: 18,
-    marginLeft: 20,
-}
-const buttonStyle = {
-    backgroundColor: "#009344",
-    color: "white",
-    fontWeight: 300,
-    marginLeft: 20,
-    fontSize: 18,
-}
+// const linkStyle = {
+//     color: "#009344",
+//     fontWeight: 400,
+//     fontSize: 18,
+//     marginLeft: 20,
+// }
+// const buttonStyle = {
+//     backgroundColor: "#009344",
+//     color: "white",
+//     fontWeight: 300,
+//     marginLeft: 20,
+//     fontSize: 18,
+// }
 
 // class NetlifyIdentity extends Component {
 //     componentDidMount() {
@@ -179,11 +180,11 @@ const NavBar = (props) => {
     const history = useHistory();
     const [loggedIn, setLoggedIn] =  useState(false);
 
-    const login = (props) => {
-        document.cookie = "loggedIn=true"
-        props.enableLogin();
-        history.push('/home')
-    }
+    // const login = (props) => {
+    //     document.cookie = "loggedIn=true"
+    //     props.enableLogin();
+    //     history.push('/home')
+    // }
 
     const setLogOut = (props) => {
         props.updateUserName("")

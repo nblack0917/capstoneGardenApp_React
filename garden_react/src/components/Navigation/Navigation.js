@@ -8,13 +8,12 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import cookie from 'cookie';
 import leafLogo from './Leaf_lg.png';
-import netlifyIdentity from 'netlify-identity-widget';
+import GoTrue from 'gotrue-js';
 
-// netlifyIdentity.init({
-//     container: '#netlify-modal', // defaults to document.body,
-//     locale: 'en' // defaults to 'en'
+// auth = new GoTrue({
+//     APIUrl: 'https://thirsty-wescoff-9aeb6d.netlify.app/.netlify/identity',
+//     setCookie: false,
 //   });
-
 
 function initNetlifyIdentity() {
     console.log("NetIdent called")
@@ -46,9 +45,6 @@ const useStyles = makeStyles((theme) => ({
     root: {
         flexGrow: 1,
     },
-    // menuButton: {
-    //     marginRight: theme.spacing(3),
-    // },
     title: {
         flexGrow: 1,
         fontWeight: 300,
@@ -62,11 +58,6 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: 'none',
         paddingTop: 20,
     },
-    // loginBar: {
-    //     zIndex: 0,
-    //     background: "linear-gradient(0deg, rgba(217,217,217,1) 59%, rgba(166,166,166,1) 100%)",
-    //     height: 25,
-    // },
     loginType: {
         fontSize: 14,
         color: '#808080',

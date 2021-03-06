@@ -6,42 +6,57 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import netlifyIdentity from 'netlify-identity-widget';
 import cookie from 'cookie';
 import leafLogo from './Leaf_lg.png';
-// import GoTrue from 'gotrue-js';
 
-// auth = new GoTrue({
-//     APIUrl: 'https://thirsty-wescoff-9aeb6d.netlify.app/.netlify/identity',
-//     setCookie: false,
-//   });
+const netlifyAuth = {
+    isAuthenticated: false,
+    user: null,
+    authenticate(callback) {
+        this.isAuthenticated = true;
+        netlifyIdentity.open();
+        netlifyIdentity.on('login', user => {
+            this.user = user;
+            callback(user);
+        });
+    },
+    signout(callback) {
+        this.isAuthenticated = false;
+        netlifyIdentity.logout();
+        netlifyIdentity.on('logout', () => {
+            this.user = null;
+            callback();
+        });
+    }
+};
+
+// //function to initialize Netlify Identity Widget
+// function initNetlifyIdentity() {
+//     console.log("NetIdent called")
+//     const script = document.createElement('script');
+
+//     script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js"
+//     script.async = true;
+
+//     document.body.appendChild(script)
+// }
 
 
-//function to initialize Netlify Identity Widget
-function initNetlifyIdentity() {
-    console.log("NetIdent called")
-    const script = document.createElement('script');
+// //function to open login widget
+// function openNetlifyModal(props) {
+//     const netlifyIdentity = window.netlifyIdentity;
 
-    script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js"
-    script.async = true;
-
-    document.body.appendChild(script)
-}
-
-
-//function to open login widget
-function openNetlifyModal(props) {
-    const netlifyIdentity = window.netlifyIdentity;
-
-    if(netlifyIdentity) {
-        netlifyIdentity.open('login')
-        .on('login', user => {
-            console.log('login', user);
-            login()
-        })
-        .on('error', err => console.error('Error', err));
-    } else
-        console.log("netlifyIdentity not defined")
-}
+//     if(netlifyIdentity) {
+//         netlifyIdentity.open('login');
+//         netlifyIdentity.on('login', user => {
+//             console.log('login', user);
+//             login()
+//         })
+//         netlifyIdentity.on('error', err => console.error('Error', err));
+//     } else
+//         console.log("netlifyIdentity not defined")
+// }
 
 //function to log out
 // function logOutOfNetlify() {
@@ -160,21 +175,14 @@ const buttonStyle = {
 
 // NavBar component with two versions depending on login status
 const NavBar = (props) => {
-    
-
     const history = useHistory();
     const [loggedIn, setLoggedIn] =  useState(false);
 
-    //function to log out
-function logOutOfNetlify() {
-    const netlifyIdentity = window.netlifyIdentity;
-
-    netlifyIdentity.logout()
-        .on('logout', () => {
-            console.log('Logged out');
-            setLogOut();
-    });
-}
+    const login = (props) => {
+        document.cookie = "loggedIn=true"
+        props.enableLogin();
+        history.push('/home')
+    }
 
     const setLogOut = (props) => {
         props.updateUserName("")
@@ -186,6 +194,31 @@ function logOutOfNetlify() {
         document.cookie = "null;max-age=1"
         history.push('/') 
     }
+
+    const loginAuth = () => {
+        netlifyAuth.authenticate();
+        
+    }
+    if (netlifyAuth.isAuthenticated){
+        login();
+    }
+    const logOutAuth = () => {
+        netlifyAuth.signout();
+        setLogOut();
+    }
+
+//     //function to log out
+// function logOutOfNetlify() {
+//     const netlifyIdentity = window.netlifyIdentity;
+
+//     netlifyIdentity.logout()
+//         .on('logout', () => {
+//             console.log('Logged out');
+//             setLogOut();
+//     });
+// }
+
+    
     // const logout = () => {
     //     document.cookie = "null;max-age=1"
     //     history.push('/')
@@ -198,9 +231,6 @@ function logOutOfNetlify() {
     //     logout();
     // }
 
-    useEffect(() => {
-        initNetlifyIdentity();
-    }, [])
     
     useEffect(() => {
         if (!props.loggedIn) {
@@ -227,7 +257,7 @@ function logOutOfNetlify() {
                         <Link to="/plants" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Plants</Button>
                         </Link>
-                            <Button color="inherit" className={classes.linkStyle} onClick={ () => openNetlifyModal() } >Log In</Button>
+                            <Button color="inherit" className={classes.linkStyle} onClick={ () => loginAuth() } >Log In</Button>
 
                         {/* <Link to="/login" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Log In</Button>
@@ -264,7 +294,7 @@ function logOutOfNetlify() {
                         <Link to="/contact" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Contact</Button>
                         </Link>
-                            <Button color="inherit" className={classes.linkStyle} onClick={ () => logOutOfNetlify() }>Log Out</Button>
+                            <Button color="inherit" className={classes.linkStyle} onClick={ () => logOutAuth() }>Log Out</Button>
                         {/* <Link to="/" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle} onClick={setLogin}>Log Out</Button>
                         </Link> */}

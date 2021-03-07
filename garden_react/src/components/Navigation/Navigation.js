@@ -87,6 +87,7 @@ const NavBar = (props) => {
                 this.user = user;
                 console.log(user);
                 currentUserInfo = user;
+                console.log("current user info", currentUserInfo)
                 login();
                 callback(user);
             });
@@ -112,7 +113,7 @@ const NavBar = (props) => {
     }
 
     const setLogOut = () => {
-        props.updateUserName("")
+        // props.updateUserName("")
         props.disableLogin();
         logout();
     }

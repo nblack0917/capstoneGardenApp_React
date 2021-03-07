@@ -137,11 +137,11 @@ const NavBar = (props) => {
         setLogOut();
     }
 
-    const logout = () => {
-        document.cookie = "null;max-age=1"
-        history.push('/')
+    // const logout = () => {
+    //     document.cookie = "null;max-age=1"
+    //     history.push('/')
         
-    }
+    // }
     
     const setLogOut = () => {
         props.updateUserName("")

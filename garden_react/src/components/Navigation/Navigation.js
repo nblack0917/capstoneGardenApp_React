@@ -131,13 +131,6 @@ const NavBar = (props) => {
         setLogOut();
     }
 
-    
-    const setLogOut = () => {
-        props.updateUserName("")
-        props.disableLogin();
-        logout();
-    }
-
     useEffect(() => {
         if (!props.loggedIn) {
             setLoggedIn(false)

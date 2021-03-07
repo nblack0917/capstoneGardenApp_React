@@ -89,7 +89,7 @@ const NavBar = (props) => {
                 currentUserInfo = user;
                 // console.log("current user info", currentUserInfo)
                 login();
-                callback(user);
+                callback();
             });
         },
         signout(callback) {
@@ -105,10 +105,10 @@ const NavBar = (props) => {
 
     const login = () => {
         console.log(currentUserInfo)
-        // const currentUserName = currentUserInfo.app_metadata.email
+        const currentUserName = currentUserInfo.e.app_metadata.email
         document.cookie = "loggedIn=true"
         props.enableLogin();
-        // props.updateUserName(currentUserName)
+        props.updateUserName(currentUserName)
         history.push('/home')
     }
 

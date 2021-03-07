@@ -7,96 +7,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import netlifyIdentity from 'netlify-identity-widget';
-import cookie from 'cookie';
+// import cookie from 'cookie';
 import leafLogo from './Leaf_lg.png';
 
-const login = (props) => {
-    // const history = useHistory();
-    console.log("hi")
-    document.cookie = "loggedIn=true"
-    props.enableLogin();
-    // history.push('/home')
-}
-
-// const netlifyAuth = {
-//     isAuthenticated: false,
-//     user: null,
-//     authenticate(callback) {
-//         this.isAuthenticated = true;
-//         netlifyIdentity.open('login');
-//         netlifyIdentity.on('login', user => {
-//             this.user = user;
-//             console.log(user);
-//             login();
-//             callback(user);
-//         });
-//     },
-//     signout(callback) {
-//         this.isAuthenticated = false;
-//         netlifyIdentity.logout();
-//         netlifyIdentity.on('logout', () => {
-//             this.user = null;
-//             callback();
-//         });
-//     }
-// };
-
-// //function to initialize Netlify Identity Widget
-// function initNetlifyIdentity() {
-//     console.log("NetIdent called")
-//     const script = document.createElement('script');
-
-//     script.src = "https://identity.netlify.com/v1/netlify-identity-widget.js"
-//     script.async = true;
-
-//     document.body.appendChild(script)
-// }
-
-
-// //function to open login widget
-// function openNetlifyModal(props) {
-//     const netlifyIdentity = window.netlifyIdentity;
-
-//     if(netlifyIdentity) {
-//         netlifyIdentity.open('login');
-//         netlifyIdentity.on('login', user => {
-//             console.log('login', user);
-//             login()
-//         })
-//         netlifyIdentity.on('error', err => console.error('Error', err));
-//     } else
-//         console.log("netlifyIdentity not defined")
-// }
-
-//function to log out
-// function logOutOfNetlify() {
-//     const netlifyIdentity = window.netlifyIdentity;
-
-//     netlifyIdentity.logout()
-//         .on('logout', () => {
-//             console.log('Logged out');
-//             setLogOut();
-//     });
-// }
-
 // function to check to see if cookie has loggedIn
-const checkAuth = () => {
-    const cookies = cookie.parse(document.cookie)
-    return cookies["loggedIn"] ? true : false
-}
-
-
-
-// const setLogOut = (props) => {
-//     props.updateUserName("")
-//     props.disableLogin();
-//     logout();
-// }
-
-// const logout = () => {
-//     const history = useHistory();
-//     document.cookie = "null;max-age=1"
-//     history.push('/') 
+// const checkAuth = () => {
+//     const cookies = cookie.parse(document.cookie)
+//     return cookies["loggedIn"] ? true : false
 // }
 
 // Styles for navbar
@@ -153,35 +70,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-// adding style a different way for the links
-// const linkStyle = {
-//     color: "#009344",
-//     fontWeight: 400,
-//     fontSize: 18,
-//     marginLeft: 20,
-// }
-// const buttonStyle = {
-//     backgroundColor: "#009344",
-//     color: "white",
-//     fontWeight: 300,
-//     marginLeft: 20,
-//     fontSize: 18,
-// }
-
-// class NetlifyIdentity extends Component {
-//     componentDidMount() {
-//         initNetlifyIdentity();
-//     }
-
-//     render() {
-//         return (<div></div>)
-//     }
-// }
 
 // NavBar component with two versions depending on login status
 const NavBar = (props) => {
     const history = useHistory();
     const [loggedIn, setLoggedIn] =  useState(false);
+    let currentUserInfo;
 
     // const login = (props) => {
     //     document.cookie = "loggedIn=true"
@@ -198,6 +92,7 @@ const NavBar = (props) => {
             netlifyIdentity.on('login', user => {
                 this.user = user;
                 console.log(user);
+                currentUserInfo = user;
                 login();
                 callback(user);
             });
@@ -207,15 +102,17 @@ const NavBar = (props) => {
             netlifyIdentity.logout();
             netlifyIdentity.on('logout', () => {
                 this.user = null;
+                setLogOut();
                 callback();
             });
         }
     };
 
     const login = () => {
-        console.log("hi")
+        const currentUserName = user.app_metadata.email
         document.cookie = "loggedIn=true"
         props.enableLogin();
+        props.updateUserName(currentUserName)
         history.push('/home')
     }
 
@@ -234,39 +131,24 @@ const NavBar = (props) => {
         netlifyAuth.authenticate();
         
     }
-    // if (netlifyAuth.isAuthenticated){
-    //     login();
-    // }
+
     const logOutAuth = () => {
         netlifyAuth.signout();
         setLogOut();
     }
 
-//     //function to log out
-// function logOutOfNetlify() {
-//     const netlifyIdentity = window.netlifyIdentity;
-
-//     netlifyIdentity.logout()
-//         .on('logout', () => {
-//             console.log('Logged out');
-//             setLogOut();
-//     });
-// }
-
-    
-    // const logout = () => {
-    //     document.cookie = "null;max-age=1"
-    //     history.push('/')
+    const logout = () => {
+        document.cookie = "null;max-age=1"
+        history.push('/')
         
-    // }
+    }
     
-    // const setLogOut = () => {
-    //     props.updateUserName("")
-    //     props.disableLogin();
-    //     logout();
-    // }
+    const setLogOut = () => {
+        props.updateUserName("")
+        props.disableLogin();
+        logout();
+    }
 
-    
     useEffect(() => {
         if (!props.loggedIn) {
             setLoggedIn(false)

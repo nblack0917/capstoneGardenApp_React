@@ -186,6 +186,9 @@ const NavBar = (props) => {
                                 garden app
                             </Link>
                         </Typography>
+                        <Link to="/home" style={{textDecoration: 'none'}}>
+                            <Button color="inherit" className={classes.linkStyle}>Dashboard</Button>
+                        </Link>
                         <Link to="/user_plants" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Plants</Button>
                         </Link>

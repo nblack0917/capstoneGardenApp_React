@@ -15,11 +15,15 @@ const useStyles = makeStyles({
   root: {
     width: 325,
     marginBottom: 50,
-    cursor: 'none',
   },
   media: {
     height: 200,
   },
+  foot: {
+    display: 'flex',
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
+  }
 });
 
 export default function PlantCard(props) {
@@ -39,7 +43,6 @@ export default function PlantCard(props) {
   if(props.loggedIn) {
     return (
       <Card className={classes.root}>
-        <CardActionArea>
           <CardMedia
             className={classes.media}
             image={veggiePlaceholder}
@@ -50,8 +53,7 @@ export default function PlantCard(props) {
               {thisPlant.variety_name}
             </Typography>
           </CardContent>
-        </CardActionArea>
-        <CardActions>
+        <CardActions className={classes.foot}>
           <Button size="small" color="primary" onClick={() => handleAddToList(currentIndex, thisPlant.plantGroupName)}>
         <ControlPointIcon color="primary" style={{cursor: "pointer"}}  />
           Add to List

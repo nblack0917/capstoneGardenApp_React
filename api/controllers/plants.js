@@ -14,6 +14,7 @@ const getAllPlantyByType = (req, res) => {
 	plantParents.plantParent_id,
 	plantTypes.plantGroupName,
     plantParents.plantParent_name,
+    plantVarieties.id AS variety_id,
     plantVarieties.variety_name,
     plantVarieties.variety_description
 FROM plantTypes

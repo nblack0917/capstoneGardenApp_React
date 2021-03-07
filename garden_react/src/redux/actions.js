@@ -49,3 +49,10 @@ export const removePlantFromUserList = (index) => {
         value: index
     }
 }
+
+export const updateLastTab = (tab) => {
+    return {
+        type: 'CHANGE_TAB',
+        value: tab
+    }
+}

@@ -51,5 +51,15 @@ const userPlantList = (state = [], action) => {
     }
 }
 
+const lastTab = (state = [], action) => {
+    switch(action.type) {
+        case 'CHANGE_TAB':
+            const newTab = action.value
+            return newTab;
+        default:
+            return state
+    }
+}
 
-export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList })
+
+export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab })

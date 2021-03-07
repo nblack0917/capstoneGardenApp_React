@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import cookie from 'cookie'
 import Home from './components/Home/Home'
+import PlantDetails from './containers/PlantDetails'
 import UserHome from './containers/UserHome'
 import Login from './containers/Login'
 import Plants from './containers/Plants'
@@ -28,6 +29,17 @@ const ProtectedRoute = ({component: Component, ...rest}) => {
         />
     )
 }
+const ProtectedPlantRoute = ({component: Component, ...rest}) => {
+    return (
+        <Route
+            {...rest}
+            render={props => checkAuth()
+                ? <Component {...props } />
+                : <Redirect to='/plants' />
+            }
+        />
+    )
+}
 
 const Router = () => {
     return (
@@ -38,8 +50,9 @@ const Router = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/plants" component={Plants} />
                 <Route path="/contact" component={Contact} />
+                <Route path="/plant/:id" component={PlantDetails} />
                 <ProtectedRoute exact path="/home" component={UserHome} />
-                <ProtectedRoute exact path="/user_plants" component={UserPlants} />
+                <ProtectedPlantRoute exact path="/user_plants" component={UserPlants} />
             </Switch>
             {/* <Switch>
                 <Route exact path="/" component={Home} />

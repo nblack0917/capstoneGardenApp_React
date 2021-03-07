@@ -3,4 +3,5 @@ export default {
     userName: '',
     allPlantsByType: [],
     userPlantList: [],
+    lastTab: 0,
 }

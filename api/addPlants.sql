@@ -12,7 +12,7 @@ VALUES
 INSERT INTO plantParents
     (plantGroup_id, plantParent_name, plantParent_spacing, plantParent_sowDepth, plantParent_sun, plantParent_soil, plantParent_watering)
 VALUES
-    ("Vegetable", "Artichoke", 30, 0.5, "Full Sun", "Loam", "Well-drained"),
+    ("Vegetable", "Arugula", 30, 0.5, "Full Sun", "Loam", "Well-drained"),
     ("Vegetable", "Asparagus", 21, 8, "Full Sun/Part Shade", "Loam", "Loose soil"),
     ("Legume", "Beans", 3.5, 1.5, "Full Sun", "Loam", "Well-drained"),
     ("Vegetable", "Beets", 3.5, 0.75, "Full Sun/Part Shade", "Loam", "Well-drained"),

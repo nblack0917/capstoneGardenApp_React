@@ -8,9 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import PlantCard from '../PlantCard/PlantCard'
 import './UserPlants.css'
 import leafLogo from './Leaf_lg.png'
-import { addPlantToUserList } from '../../redux/actions';
 
 
 function TabPanel(props) {
@@ -63,9 +63,12 @@ export default function FullWidthTabs(props) {
     const classes = useStyles();
     const theme = useTheme();
     const [value, setValue] = React.useState(0);
+    const lastTab = props.lastTab;
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
+        console.log(newValue)
+        props.updateLastTab(newValue)
     };
 
     const handleChangeIndex = (index) => {
@@ -82,8 +85,14 @@ export default function FullWidthTabs(props) {
     const greensList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Leafy Greens")
     const herbList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Herb")
     const flowerList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Flower")
-    
-    const handleClick = (index, groupName) => {
+  
+    // const handleClick = (event) => {
+    //     console.log(event)
+    // }
+
+    const handleClick = (event) => {
+        let index = event[0];
+        let groupName = event[1]
         // console.log(groupName)
         let selectedPlant;
         switch(groupName) {
@@ -110,8 +119,8 @@ export default function FullWidthTabs(props) {
             }
         // console.log(selectedPlant, index)
         // props.addPlantToUserList(selectedPlant)
-        if(!props.userPlantList.some(plant => plant.plantParent_name === selectedPlant.plantParent_name)) {
-            console.log(selectedPlant.plantParent_name)
+        if(!props.userPlantList.some(plant => plant.variety_name === selectedPlant.variety_name)) {
+            console.log(selectedPlant.variety_name)
             props.addPlantToUserList(selectedPlant)
         }
     }
@@ -131,7 +140,7 @@ export default function FullWidthTabs(props) {
                     <h3>Selected Plants</h3>
                     <ul style={{ listStyle: 'none', margin: 0, padding: 0}}>
                         {props.userPlantList.map((plant, index) => {
-                            return <li style={{ listStyle: 'none'}}>{plant.plantParent_name} <DeleteForeverIcon color="secondary" style={{ cursor: 'pointer' }} onClick={() => props.removePlantFromUserList(index)} /></li>
+                            return <li style={{ listStyle: 'none'}}>{plant.variety_name} <DeleteForeverIcon color="secondary" style={{ cursor: 'pointer' }} onClick={() => props.removePlantFromUserList(index)} /></li>
                         })}
                     </ul>
                     
@@ -140,7 +149,7 @@ export default function FullWidthTabs(props) {
             <div className={classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs
-                    value={value}
+                    value={lastTab}
                     onChange={handleChange}
                     indicatorColor="primary"
                     textColor="primary"
@@ -157,46 +166,46 @@ export default function FullWidthTabs(props) {
                     </Tabs>
                 </AppBar>
                 <TabPanel value={value} index={0}>
-                    <ul style={{listStyle: 'none'}}>
+                    <div className="plantCardContainer">
                         {fruitList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <div className="plantCard"><PlantCard plant={plant} index={index} loggedIn={props.loggedIn} handleClick={e => handleClick(e)} /></div>
                             })}
-                    </ul>
+                    </div>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
-                    <ul style={{listStyle: 'none'}}>
+                    <div className="plantCardContainer">
                         {veggieList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name}<ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <div className="plantCard"><PlantCard plant={plant} index={index} loggedIn={props.loggedIn} handleClick={e => handleClick(e)} /></div>
                             })}
-                    </ul>
+                    </div>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
-                    <ul style={{listStyle: 'none'}}>
+                    <div className="plantCardContainer">
                         {legumeList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <div className="plantCard"><PlantCard plant={plant} index={index} loggedIn={props.loggedIn} handleClick={e => handleClick(e)} /></div>
                             })}
-                    </ul>
+                    </div>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
-                    <ul style={{listStyle: 'none'}}>
+                    <div className="plantCardContainer">
                         {greensList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <div className="plantCard"><PlantCard plant={plant} index={index} loggedIn={props.loggedIn} handleClick={e => handleClick(e)} /></div>
                             })}
-                    </ul>
+                    </div>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
-                    <ul style={{listStyle: 'none'}}>
+                    <div className="plantCardContainer">
                         {herbList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <div className="plantCard"><PlantCard plant={plant} index={index} loggedIn={props.loggedIn} handleClick={e => handleClick(e)} /></div>
                             })}
-                    </ul>
+                    </div>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
-                    <ul style={{listStyle: 'none'}}>
+                    <div className="plantCardContainer">
                         {flowerList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <div className="plantCard"><PlantCard plant={plant} index={index} loggedIn={props.loggedIn} handleClick={e => handleClick(e)} /></div>
                             })}
-                    </ul>
+                    </div>
                 </TabPanel>
             </div>
         </div>

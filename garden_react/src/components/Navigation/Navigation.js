@@ -103,10 +103,11 @@ const NavBar = (props) => {
     };
 
     const login = () => {
-        const currentUserName = currentUserInfo.app_metadata.email
+        console.log(currentUserInfo)
+        // const currentUserName = currentUserInfo.app_metadata.email
         document.cookie = "loggedIn=true"
         props.enableLogin();
-        props.updateUserName(currentUserName)
+        // props.updateUserName(currentUserName)
         history.push('/home')
     }
 

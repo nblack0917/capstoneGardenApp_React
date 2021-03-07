@@ -77,12 +77,6 @@ const NavBar = (props) => {
     const [loggedIn, setLoggedIn] =  useState(false);
     let currentUserInfo;
 
-    // const login = (props) => {
-    //     document.cookie = "loggedIn=true"
-    //     props.enableLogin();
-    //     history.push('/home')
-    // }
-
     const netlifyAuth = {
         isAuthenticated: false,
         user: null,
@@ -137,11 +131,6 @@ const NavBar = (props) => {
         setLogOut();
     }
 
-    // const logout = () => {
-    //     document.cookie = "null;max-age=1"
-    //     history.push('/')
-        
-    // }
     
     const setLogOut = () => {
         props.updateUserName("")

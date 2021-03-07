@@ -86,7 +86,7 @@ const NavBar = (props) => {
             netlifyIdentity.on('login', user => {
                 this.user = user;
                 // console.log(user);
-                // currentUserInfo = user;
+                currentUserInfo = user;
                 // console.log("current user info", currentUserInfo)
                 login();
                 callback(user);

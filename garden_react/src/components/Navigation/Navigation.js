@@ -103,7 +103,7 @@ const NavBar = (props) => {
     };
 
     const login = () => {
-        const currentUserName = user.app_metadata.email
+        const currentUserName = currentUserInfo.app_metadata.email
         document.cookie = "loggedIn=true"
         props.enableLogin();
         props.updateUserName(currentUserName)

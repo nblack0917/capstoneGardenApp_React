@@ -75,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props) => {
     const history = useHistory();
     const [loggedIn, setLoggedIn] =  useState(false);
-    let currentUserInfo;
+    let currentUserInfo = [];
 
     const netlifyAuth = {
         isAuthenticated: false,
@@ -86,7 +86,7 @@ const NavBar = (props) => {
             netlifyIdentity.on('login', user => {
                 this.user = user;
                 // console.log(user);
-                currentUserInfo = user;
+                currentUserInfo.push(user);
                 // console.log("current user info", currentUserInfo)
                 login();
                 callback();

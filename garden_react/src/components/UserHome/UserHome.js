@@ -1,4 +1,5 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -13,6 +14,12 @@ import calendarPlace from './calendarPlaceholder.png'
 import clockPlace from './clockPlaceholder.png'
 
 function UserHome(props) {
+    const history = useHistory();
+
+    const handleMyPlantsClick = () => {
+        history.push('/my_plants')
+    }
+
     return (
         <div className="userHomeBody">
             <h1>Welcome {props.userName ? props.userName : "Gardener"}</h1>
@@ -26,7 +33,7 @@ function UserHome(props) {
                 </CardActionArea>
             </Card>
             <Card className="homeCard">
-            <CardActionArea>
+            <CardActionArea onClick={handleMyPlantsClick}>
                     <CardContent className="cardContent">
                         <img src={leaf} alt="Logo" />
                         <Typography variant="h2">My Plants</Typography>

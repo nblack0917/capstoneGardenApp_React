@@ -75,46 +75,45 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props) => {
     const history = useHistory();
     const [loggedIn, setLoggedIn] =  useState(false);
-    let currentUserInfo = [];
+    // let currentUserInfo = [];
 
-    const netlifyAuth = {
-        isAuthenticated: false,
-        user: null,
-        authenticate(callback) {
-            this.isAuthenticated = true;
-            netlifyIdentity.open('login');
-            netlifyIdentity.on('login', user => {
-                this.user = user;
-                // console.log(user);
-                currentUserInfo.push(user);
-                // console.log("current user info", currentUserInfo)
-                login();
-                callback();
-            });
-        },
-        signout(callback) {
-            this.isAuthenticated = false;
-            netlifyIdentity.logout();
-            netlifyIdentity.on('logout', () => {
-                this.user = null;
-                setLogOut();
-                callback();
-            });
-        }
-    };
+    // Netlify login and logout
 
-    const login = () => {
-        console.log("currentUserInfo", currentUserInfo)
-        const currentUserName = currentUserInfo.e.app_metadata.email
-        console.log("currentUserName", currentUserName)
-        document.cookie = "loggedIn=true"
-        props.enableLogin();
-        // props.updateUserName(currentUserName)
-        history.push('/home')
-    }
+    // const netlifyAuth = {
+    //     isAuthenticated: false,
+    //     user: null,
+    //     authenticate(callback) {
+    //         this.isAuthenticated = true;
+    //         netlifyIdentity.open('login');
+    //         netlifyIdentity.on('login', user => {
+    //             this.user = user;
+    //             // console.log(user);
+    //             currentUserInfo.push(user);
+    //             // console.log("current user info", currentUserInfo)
+    //             login();
+    //             callback();
+    //         });
+    //     },
+    //     signout(callback) {
+    //         this.isAuthenticated = false;
+    //         netlifyIdentity.logout();
+    //         netlifyIdentity.on('logout', () => {
+    //             this.user = null;
+    //             setLogOut();
+    //             callback();
+    //         });
+    //     }
+    // };
+
+    // const login = () => {
+    //     document.cookie = "loggedIn=true"
+    //     props.enableLogin();
+    //     props.updateUserName(currentUserName)
+    //     history.push('/home')
+    // }
 
     const setLogOut = () => {
-        // props.updateUserName("")
+        props.updateUserName("")
         props.disableLogin();
         logout();
     }
@@ -124,15 +123,15 @@ const NavBar = (props) => {
         history.push('/') 
     }
 
-    const loginAuth = () => {
-        netlifyAuth.authenticate();
+    // const loginAuth = () => {
+    //     netlifyAuth.authenticate();
         
-    }
+    // }
 
-    const logOutAuth = () => {
-        netlifyAuth.signout();
-        setLogOut();
-    }
+    // const logOutAuth = () => {
+    //     netlifyAuth.signout();
+    //     setLogOut();
+    // }
 
     useEffect(() => {
         if (!props.loggedIn) {
@@ -159,11 +158,11 @@ const NavBar = (props) => {
                         <Link to="/plants" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Plants</Button>
                         </Link>
-                            <Button color="inherit" className={classes.linkStyle} onClick={ () => loginAuth() } >Log In</Button>
+                            {/* <Button color="inherit" className={classes.linkStyle} onClick={ () => loginAuth() } >Log In</Button> */}
 
-                        {/* <Link to="/login" style={{textDecoration: 'none'}}>
+                        <Link to="/login" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Log In</Button>
-                        </Link> */}
+                        </Link>
                         <Link to="/contact" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Contact</Button>
                         </Link>
@@ -196,10 +195,10 @@ const NavBar = (props) => {
                         <Link to="/contact" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Contact</Button>
                         </Link>
-                            <Button color="inherit" className={classes.linkStyle} onClick={ () => logOutAuth() }>Log Out</Button>
-                        {/* <Link to="/" style={{textDecoration: 'none'}}>
-                            <Button color="inherit" className={classes.linkStyle} onClick={setLogin}>Log Out</Button>
-                        </Link> */}
+                            {/* <Button color="inherit" className={classes.linkStyle} onClick={ () => logOutAuth() }>Log Out</Button> */}
+                        <Link to="/" style={{textDecoration: 'none'}}>
+                            <Button color="inherit" className={classes.linkStyle} onClick={setLogOut}>Log Out</Button>
+                        </Link>
                         <Link to="/my_gardens" style={{textDecoration: 'none'}}>
                             <Button  variant="contained" className={classes.buttonStyle}>My Gardens</Button>
                         </Link>

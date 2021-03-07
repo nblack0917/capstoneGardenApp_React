@@ -10,7 +10,15 @@ const getAllPlants = (req, res) => {
 }
 
 const getAllPlantyByType = (req, res) => {
-    pool.query('SELECT plantParents.plantParent_id, plantTypes.plantGroupName, plantParents.plantParent_name FROM plantTypes JOIN plantParents ON plantParents.plantGroup_id=plantTypes.plantGroupName',
+    pool.query(`SELECT 
+	plantParents.plantParent_id,
+	plantTypes.plantGroupName,
+    plantParents.plantParent_name,
+    plantVarieties.variety_name,
+    plantVarieties.variety_description
+FROM plantTypes
+JOIN plantParents ON plantParents.plantGroup_id=plantTypes.plantGroupName
+JOIN plantVarieties ON plantVarieties.plantParent_id=plantParents.plantParent_id`,
     (err, rows) => {
         if (err) return handleSQLError(res, err);
         return res.json(rows)

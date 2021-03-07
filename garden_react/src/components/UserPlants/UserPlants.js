@@ -159,42 +159,42 @@ export default function FullWidthTabs(props) {
                 <TabPanel value={value} index={0}>
                     <ul style={{listStyle: 'none'}}>
                         {fruitList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={1}>
                     <ul style={{listStyle: 'none'}}>
                         {veggieList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name}<ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={2}>
                     <ul style={{listStyle: 'none'}}>
                         {legumeList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={3}>
                     <ul style={{listStyle: 'none'}}>
                         {greensList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={4}>
                     <ul style={{listStyle: 'none'}}>
                         {herbList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>
                 <TabPanel value={value} index={5}>
                     <ul style={{listStyle: 'none'}}>
                         {flowerList.map((plant, index) => {
-                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
+                            return <li key={index}><img src={leafLogo} alt="Logo" style={{height: 20}} /> {plant.plantGroupName} - {plant.plantParent_name} - {plant.variety_name} <ControlPointIcon color="primary" style={{cursor: "pointer"}} onClick={() => handleClick(index, plant.plantGroupName)} /></li>
                             })}
                     </ul>
                 </TabPanel>

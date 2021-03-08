@@ -1,5 +1,3 @@
-const byTypeUrl = "http://localhost:8080/plants/plantTypes";
-
 export const enableLogin = () => {
     return {
         type: 'ENABLE_LOGIN',
@@ -22,6 +20,7 @@ export const updateUserName = (userName) => {
 }
 
 export const getAllPlantsByType = (plantList) => {
+    const byTypeUrl = "http://localhost:8080/plants/plantTypes";
     return (dispatch) => {
         fetch(byTypeUrl)
             .then(res => res.json())
@@ -30,7 +29,7 @@ export const getAllPlantsByType = (plantList) => {
                     type: 'FETCH_PLANTS_BY_TYPE',
                     value: response
                 }
-                console.log(response)
+                // console.log(response)
                 dispatch(action)
             })
     }
@@ -54,5 +53,53 @@ export const updateLastTab = (tab) => {
     return {
         type: 'CHANGE_TAB',
         value: tab
+    }
+}
+
+export const fetchUserbyUserName = (userName) => {
+    const userInfoUrl = `http://localhost:8080/users/${userName}`
+    return (dispatch) => {
+        fetch(userInfoUrl)
+            .then(res => res.json())
+            .then(response => {
+                const action = {
+                    type: 'FETCH_USER_BY_USERNAME',
+                    value: response[0]
+                }
+                // console.log(response[0])
+                dispatch(action)
+            })
+    }
+}
+
+export const fetchUserGardensById = (id) => {
+    const userGardensUrl = `http://localhost:8080/gardens/id/${id}`
+    return (dispatch) => {
+        fetch(userGardensUrl)
+            .then(res => res.json())
+            .then(response => {
+                const action = {
+                    type: 'FETCH_USER_GARDENS',
+                    value: response
+                }
+                console.log(response)
+                dispatch(action)
+            })
+    }
+}
+
+export const fetchUserGardenPlantsById = (id) => {
+    const userGardensUrl = `http://localhost:8080/users/gardens/${id}`
+    return (dispatch) => {
+        fetch(userGardensUrl)
+            .then(res => res.json())
+            .then(response => {
+                const action = {
+                    type: 'FETCH_USER_GARDENS',
+                    value: response
+                }
+                console.log(response)
+                dispatch(action)
+            })
     }
 }

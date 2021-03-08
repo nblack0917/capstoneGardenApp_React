@@ -192,7 +192,7 @@ const NavBar = (props) => {
                         <Link to="/user_plants" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Plants</Button>
                         </Link>
-                        <Link to="/" style={{textDecoration: 'none'}}>
+                        <Link to="/my_calendar" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Calendar</Button>
                         </Link>
                         <Link to="/contact" style={{textDecoration: 'none'}}>

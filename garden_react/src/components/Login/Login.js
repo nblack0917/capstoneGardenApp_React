@@ -74,6 +74,7 @@ const Login = (props) => {
             }
         }else if(email && password) {  
             props.updateUserName(email);
+            props.fetchUserbyUserName(email)
         }
     }
 

@@ -7,7 +7,9 @@ import UserHome from './containers/UserHome'
 import Login from './containers/Login'
 import Plants from './containers/Plants'
 import UserPlants from './containers/UserPlants'
-import MyPlants from './components/MyPlants/MyPlants'
+import MyPlants from './containers/MyPlants'
+import MyGardens from './components/MyGardens/MyGardens'
+import MyCalendar from './components/MyCalendar/MyCalendar'
 import Contact from './containers/Contact'
 // import BusinessDetail from './containers/BusinessDetail'
 // import AddBusiness from './containers/AddBusiness'
@@ -55,6 +57,8 @@ const Router = () => {
                 <ProtectedRoute exact path="/home" component={UserHome} />
                 <ProtectedPlantRoute exact path="/user_plants" component={UserPlants} />
                 <ProtectedPlantRoute exact path="/my_plants" component={MyPlants} />
+                <ProtectedRoute exact path="/my_gardens" component={MyGardens} />
+                <ProtectedRoute exact path="/my_calendar" component={MyCalendar} />
             </Switch>
             {/* <Switch>
                 <Route exact path="/" component={Home} />

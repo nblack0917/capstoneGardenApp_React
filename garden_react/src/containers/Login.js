@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Login from '../components/Login/Login'
-import { enableLogin, updateUserName } from '../redux/actions'
+import { enableLogin, fetchUserbyUserName, updateUserName } from '../redux/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         enableLogin: () => dispatch(enableLogin()),
-        updateUserName: (userName) => dispatch(updateUserName(userName))
+        updateUserName: (userName) => dispatch(updateUserName(userName)),
+        fetchUserbyUserName: (userName => dispatch(fetchUserbyUserName(userName))),
     }
 }
 

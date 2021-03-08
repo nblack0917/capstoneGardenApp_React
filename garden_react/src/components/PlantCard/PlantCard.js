@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -7,6 +7,8 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Fab from '@material-ui/core/Fab';
+import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from 'react-router-dom';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
 import veggiePlaceholder from './veggie_placeholder_wide.png'
@@ -27,20 +29,60 @@ const useStyles = makeStyles({
 });
 
 export default function PlantCard(props) {
+  // const [myPlants, setMyPlants] = useState(false);
   const classes = useStyles();
   const thisPlant = props.plant
   let currentIndex = props.index
 
- const handleAddToList = (index, plantGroupName) => {
+  // if(props.myPlants) {
+  //   setMyPlants(true);
+  // }
+
+  const handleAddToList = (index, plantGroupName) => {
      let results = []
     //  console.log(index);
     //  console.log(plantGroupName)
     results.push(index);
     results.push(plantGroupName);
-     props.handleClick(results)
- }
+    props.handleClick(results)
+  }
 
-  if(props.loggedIn) {
+  const handleRemoveButton = (index) => {
+    props.handleDelete(index)
+  }
+
+  if(props.myPlants) {
+    return (
+      <Card className={classes.root}>
+          <CardMedia
+            className={classes.media}
+            image={veggiePlaceholder}
+            title="placeholder plant"
+          />
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {thisPlant.variety_name}
+            </Typography>
+          </CardContent>
+        <CardActions className={classes.foot}>
+        <Fab
+            variant="extended"
+            size="small"
+            color="secondary"
+            aria-label="remove"
+            // className={classes.margin}
+            onClick={() => handleRemoveButton(currentIndex)}
+          >
+            <DeleteIcon />
+            Remove
+          </Fab>
+          <Link to={`/plant/${thisPlant.variety_id}`} size="small" color="primary">
+            Learn More
+          </Link>
+        </CardActions>
+      </Card>
+    );
+  } else if(props.loggedIn && !props.myPlants) {
     return (
       <Card className={classes.root}>
           <CardMedia

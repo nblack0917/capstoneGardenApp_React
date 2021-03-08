@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
-import CardMedia from '@material-ui/core/CardMedia';
 import './UserHome.css'
 import garden1 from './gardenPlaceholder_1.png'
 import garden2 from './gardenPlaceholder_2.png'
@@ -19,12 +18,22 @@ function UserHome(props) {
     const handleMyPlantsClick = () => {
         history.push('/my_plants')
     }
+    const handleMyGardensClick = () => {
+        const userID = props.userInfo.id
+        props.fetchUserGardensById(userID)
+        history.push('/my_gardens')
+    }
+    const handleMyCalendarClick = () => {
+        history.push('/my_calendar')
+    }
+    
+    console.log("user info state", props.userInfo)
 
     return (
         <div className="userHomeBody">
             <h1>Welcome {props.userName ? props.userName : "Gardener"}</h1>
             <Card className="homeCard">
-                <CardActionArea>
+                <CardActionArea onClick={handleMyGardensClick}>
                     <CardContent className="cardContent">
                         <img src={garden1} alt="Logo" />
                         <Typography variant="h2">My Gardens</Typography>
@@ -42,7 +51,7 @@ function UserHome(props) {
                 </CardActionArea>
             </Card>
             <Card className="homeCard">
-            <CardActionArea>
+            <CardActionArea onClick={handleMyCalendarClick}>
                     <CardContent className="cardContent">
                         <img src={calendarPlace} alt="Logo" />
                         <Typography variant="h2">My Calendar</Typography>

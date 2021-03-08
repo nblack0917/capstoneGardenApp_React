@@ -27,11 +27,6 @@ const allPlantsByType = (state = [], action) => {
     switch(action.type) {
         case 'FETCH_PLANTS_BY_TYPE':
             return action.value
-        // case 'DELETE_MAKE':
-        //     console.log(action.value)
-        //     const newState = [ ...state ]
-        //     newState.splice(action.value, 1);
-        //     return newState;
         default:
             return state
     }
@@ -61,5 +56,33 @@ const lastTab = (state = [], action) => {
     }
 }
 
+const userInfo = (state = {}, action) => {
+    switch(action.type) {
+        case 'FETCH_USER_BY_USERNAME':
+            const userInfo = action.value
+            return userInfo
+        default:
+            return state
+    }
+}
 
-export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab })
+const userGardens = (state = [], action) => {
+    switch(action.type) {
+        case 'FETCH_USER_GARDENS':
+            return action.value
+        default:
+            return state
+    }
+}
+
+const userallGardenPlants = (state = [], action) => {
+    switch(action.type) {
+        case 'FETCH_ALL_GARDEN_PLANTS_BY_USER':
+            return action.value
+        default:
+            return state
+    }
+}
+
+
+export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab, userInfo, userGardens, userallGardenPlants })

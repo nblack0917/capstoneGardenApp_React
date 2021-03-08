@@ -4,4 +4,7 @@ export default {
     allPlantsByType: [],
     userPlantList: [],
     lastTab: 0,
+    userInfo: {},
+    userGardens: [],
+    userAllGardenPlants: [],
 }

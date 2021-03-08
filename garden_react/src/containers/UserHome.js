@@ -1,21 +1,21 @@
 import { connect } from 'react-redux'
 import UserHome from '../components/UserHome/UserHome'
-import { enableLogin, updateUserName } from '../redux/actions'
+import { fetchUserGardensById } from '../redux/actions'
 
 const mapStateToProps = (state) => {
     return {
         loggedIn: state.loggedIn,
-        userName: state.userName
+        userName: state.userName,
+        userInfo: state.userInfo,
     }
 }
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         enableLogin: () => dispatch(enableLogin()),
-//         updateUserName: (userName) => dispatch(updateUserName(userName))
-//     }
-// }
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchUserGardensById: (id => dispatch(fetchUserGardensById(id))),
+    }
+}
 
 
 // export default connect(mapStateToProps, mapDispatchToProps)(UserHome)
-export default connect(mapStateToProps)(UserHome)
+export default connect(mapStateToProps, mapDispatchToProps)(UserHome)

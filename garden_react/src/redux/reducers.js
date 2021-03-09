@@ -75,7 +75,7 @@ const userGardens = (state = [], action) => {
     }
 }
 
-const userallGardenPlants = (state = [], action) => {
+const userAllGardenPlants = (state = [], action) => {
     switch(action.type) {
         case 'FETCH_ALL_GARDEN_PLANTS_BY_USER':
             return action.value
@@ -84,5 +84,15 @@ const userallGardenPlants = (state = [], action) => {
     }
 }
 
+const gardenId = (state = 0, action) => {
+    switch(action.type) {
+        case 'UPDATE_GARDEN_ID':
+            const newID = action.value
+            return newID
+        default:
+            return state
+    }
+}
 
-export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab, userInfo, userGardens, userallGardenPlants })
+
+export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab, userInfo, userGardens, userAllGardenPlants, gardenId })

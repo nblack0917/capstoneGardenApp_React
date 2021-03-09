@@ -7,7 +7,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import netlifyIdentity from 'netlify-identity-widget';
-// import cookie from 'cookie';
+import cookie from 'cookie';
 import leafLogo from './Leaf_lg.png';
 
 // function to check to see if cookie has loggedIn
@@ -119,7 +119,8 @@ const NavBar = (props) => {
     }
     
     const logout = () => {
-        document.cookie = "null;max-age=1"
+        document.cookie = "loggedIn=false;max-age=1"
+        console.log(document.cookie)
         history.push('/') 
     }
 

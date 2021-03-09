@@ -7,8 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import PlantCard from '../PlantCard/PlantCard'
+import UserPlantList from '../UserPlantList/UserPlantList'
 import './UserPlants.css'
 import leafLogo from './Leaf_lg.png'
 
@@ -125,6 +125,10 @@ export default function FullWidthTabs(props) {
         }
     }
 
+    const handleRemovePlantClick = (index) => {
+        props.removePlantFromUserList(index)
+    }
+
     useEffect(() => {
         props.getAllPlantsByType()
     }, [])
@@ -135,17 +139,7 @@ export default function FullWidthTabs(props) {
 
     return (
         <div className="plantsBody">
-            <div className="listContainer">
-                <div className="selectedPlants">
-                    <h3>Selected Plants</h3>
-                    <ul style={{ listStyle: 'none', margin: 0, padding: 0}}>
-                        {props.userPlantList.map((plant, index) => {
-                            return <li style={{ listStyle: 'none'}}>{plant.variety_name} <DeleteForeverIcon color="secondary" style={{ cursor: 'pointer' }} onClick={() => props.removePlantFromUserList(index)} /></li>
-                        })}
-                    </ul>
-                    
-                </div>
-            </div>
+            <UserPlantList userPlantList={props.userPlantList} handleRemovePlantClick={e => handleRemovePlantClick(e)} />
             <div className={classes.root}>
                 <AppBar position="static" color="default">
                     <Tabs

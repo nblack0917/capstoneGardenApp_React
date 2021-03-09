@@ -89,17 +89,24 @@ export const fetchUserGardensById = (id) => {
 }
 
 export const fetchUserGardenPlantsById = (id) => {
-    const userGardensUrl = `http://localhost:8080/users/gardens/${id}`
+    const userGardenPlantsUrl = `http://localhost:8080/users/gardens/${id}`
     return (dispatch) => {
-        fetch(userGardensUrl)
+        fetch(userGardenPlantsUrl)
             .then(res => res.json())
             .then(response => {
                 const action = {
-                    type: 'FETCH_USER_GARDENS',
+                    type: 'FETCH_ALL_GARDEN_PLANTS_BY_USER',
                     value: response
                 }
-                console.log(response)
+                console.log("allplantsbyID", response)
                 dispatch(action)
             })
+    }
+}
+
+export const updateGardenId = (id) => {
+    return {
+        type: 'UPDATE_GARDEN_ID',
+        value: id
     }
 }

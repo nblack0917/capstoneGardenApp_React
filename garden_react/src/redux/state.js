@@ -7,4 +7,5 @@ export default {
     userInfo: {},
     userGardens: [],
     userAllGardenPlants: [],
+    gardenId: 1,
 }

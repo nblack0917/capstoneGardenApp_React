@@ -36,7 +36,7 @@ const PlantDetails = (props) => {
     }
     
     return (
-        <div className="detailContainer">
+        <div className="userHomeBody">
             <Card className={classes.root} onClick={handleClick}>
               <CardActionArea>
                 <CardMedia

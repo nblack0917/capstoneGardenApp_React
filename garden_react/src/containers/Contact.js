@@ -5,7 +5,8 @@ import Contact from '../components/Contact/Contact'
 const mapStateToProps = (state) => {
     return {
         loggedIn: state.loggedIn,
-        userName: state.userName
+        userName: state.userName,
+        userInfo: state.userInfo,
     }
 }
 

@@ -92,8 +92,71 @@ FROM plantVarieties
 //     })
 // }
 
+const addNewGarden = (req, res) => {
+
+        let id = req.params.id;
+        let zone_id = req.params.zone;
+        let garden_width =  req.params.width;
+        let garden_length = req.params.length;
+
+        const newGarden = {
+            id: id,
+            zone_id: zone_id,
+            garden_width: garden_width,
+            garden_length: garden_length
+        }
+
+        sqlQuery=`INSERT INTO userGardens (user_id, zone_id, garden_width, garden_length) VALUES (?, ?, ?, ?);`
+            sqlQuery = mysql.format(sqlQuery, [id, zone_id, garden_width, garden_length]);
+
+            pool.query(sqlQuery, (err) => {
+                if (err) return handleSQLError(res, err);
+                // return;
+            })
+            res.send(newGarden)
+}
+
+const updateGarden = (req, res) => {
+
+        let garId = req.params.id;
+        let zone = req.params.zone;
+        let width =  req.params.width;
+        let length = req.params.length;
+
+        const updatedGarden = {
+            id: garId,
+            garden_width: width,
+            garden_length: length,
+            zone_id: zone,
+        }
+
+        sqlQuery=`UPDATE userGardens SET garden_width = ?, garden_length = ?, zone_id = ? WHERE garden_id = ?`
+            sqlQuery = mysql.format(sqlQuery, [ width, length, zone, garId]);
+
+            pool.query(sqlQuery, (err) => {
+                if (err) return handleSQLError(res, err);
+                // return;
+            })
+            res.send(updatedGarden)
+    }
+    
+const removeGarden = (req, res) => {
+        sqlQuery=`DELETE FROM userGardens WHERE garden_id = ?`
+            sqlQuery = mysql.format(sqlQuery, [req.params.id]);
+
+            pool.query(sqlQuery, (err, res) => {
+                if (err) return handleSQLError(res, err);
+                console.log("Deleted Gardens: " + res.affectedRows)
+            })
+            res.status(200).end('Success!')
+
+}
+
 module.exports = {
     getAllUsers,
     getUserInfoByUserName,
     getUserGardenInfo,
+    addNewGarden,
+    updateGarden,
+    removeGarden,
 }

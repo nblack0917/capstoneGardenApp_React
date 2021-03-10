@@ -21,8 +21,9 @@ function MyGardens(props)  {
         checkGardenPlants()
     }, [])
     
-    const checkPlants = () => {
-        console.log("all gardens",props.userAllGardenPlants)
+    const recheckGardens = () => {
+        const userID = props.userInfo.id
+        props.fetchUserGardensById(userID)
     }
 
     console.log("user info", props.userInfo)
@@ -32,7 +33,7 @@ function MyGardens(props)  {
 
     return (
         <div className="userHomeBody">
-            <GardenCard userGardens={userGardens} handleGardenClick={e => handleGardenClick(e)} />
+            <GardenCard userInfo={props.userInfo} userGardens={userGardens} handleGardenClick={e => handleGardenClick(e)} recheckGardens={() => recheckGardens()} />
         </div>
     )
 }

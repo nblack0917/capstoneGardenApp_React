@@ -8,4 +8,10 @@ export default {
     userGardens: [],
     userAllGardenPlants: [],
     gardenId: 1,
+    createGarden: {
+        width: 0,
+        length: 0,
+        zipcode: 0,
+        beds: [],
+    }
 }

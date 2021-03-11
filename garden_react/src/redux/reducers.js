@@ -94,5 +94,19 @@ const gardenId = (state = 0, action) => {
     }
 }
 
+const createGarden = (state = {
+    width: 0,
+    length: 0,
+    zipcode: 0,
+    beds: [],
+    }, action) => {
+        switch(action.type) {
+            case 'UPDATE_DIMENSIONS':
+                return action.value
+            default:
+                return state
+        }
+    }
+
 
 export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab, userInfo, userGardens, userAllGardenPlants, gardenId })

@@ -110,3 +110,10 @@ export const updateGardenId = (id) => {
         value: id
     }
 }
+
+export const updateNewGardenDimensions = (dim) => {
+    return {
+        type: 'UPDATE_DIMENSIONS',
+        value: dim
+    }
+}

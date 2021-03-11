@@ -12,6 +12,6 @@ export default {
         width: 0,
         length: 0,
         zipcode: 0,
-        beds: [],
+        beds: [[0,0,false]],
     }
 }

@@ -103,10 +103,15 @@ const createGarden = (state = {
         switch(action.type) {
             case 'UPDATE_DIMENSIONS':
                 return action.value
+            case 'ADD_BED':
+                return {
+                    ...state,
+                    beds: [...state.beds, action.value]
+                }
             default:
                 return state
         }
     }
 
 
-export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab, userInfo, userGardens, userAllGardenPlants, gardenId })
+export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab, userInfo, userGardens, userAllGardenPlants, gardenId, createGarden })

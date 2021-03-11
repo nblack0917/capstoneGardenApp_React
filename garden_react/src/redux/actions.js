@@ -117,3 +117,10 @@ export const updateNewGardenDimensions = (dim) => {
         value: dim
     }
 }
+
+export const addNewBed = (bed) => {
+    return {
+        type: 'ADD_BED',
+        value: bed
+    }
+}

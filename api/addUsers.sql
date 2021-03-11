@@ -19,8 +19,8 @@ VALUES
 INSERT INTO usersAddress
     (user_id, address, city, county, state, zip)
 VALUES
-    (1, "15267 Dashwood Creek Dr", "Pflugerville", "Travis", "Texas", "78460"),
-    (2, "15267 Dashwood Creek Dr", "Pflugerville", "Travis", "Texas", "78460"),
+    (1, "15267 Dashwood Creek Dr", "Pflugerville", "Travis", "Texas", "78660"),
+    (2, "15267 Dashwood Creek Dr", "Pflugerville", "Travis", "Texas", "78660"),
     (3, "333 Woodcrest Dr", "Georgetown", "Williamson", "Texas", "78652"),
     (4, "333 Woodcrest Dr", "Georgetown", "Williamson", "Texas", "78652"),
     (5, "23453 Dripping St. Apt 22134", "Gonzales", "Dallas", "Texas", "76793");

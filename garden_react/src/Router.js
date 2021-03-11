@@ -9,6 +9,7 @@ import Plants from './containers/Plants'
 import UserPlants from './containers/UserPlants'
 import MyPlants from './containers/MyPlants'
 import MyGardens from './containers/MyGardens'
+import AddGardens from './containers/AddGardens'
 import Garden from './containers/Garden'
 import MyCalendar from './components/MyCalendar/MyCalendar'
 import Contact from './containers/Contact'
@@ -58,6 +59,7 @@ const Router = () => {
                 <ProtectedRoute exact path="/home" component={UserHome} />
                 <ProtectedPlantRoute exact path="/user_plants" component={UserPlants} />
                 <ProtectedPlantRoute exact path="/my_plants" component={MyPlants} />
+                <ProtectedPlantRoute exact path="/add_garden" component={AddGardens} />
                 <ProtectedRoute exact path="/my_gardens" component={MyGardens} />
                 <ProtectedRoute exact path="/my_gardens/garden" component={Garden} />
                 <ProtectedRoute exact path="/my_calendar" component={MyCalendar} />

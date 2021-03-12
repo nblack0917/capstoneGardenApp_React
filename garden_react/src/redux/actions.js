@@ -119,6 +119,7 @@ export const updateNewGardenDimensions = (dim) => {
 }
 
 export const addNewBed = (bed) => {
+    console.log("action bed", bed)
     return {
         type: 'ADD_BED',
         value: bed

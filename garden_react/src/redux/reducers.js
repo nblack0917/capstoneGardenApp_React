@@ -102,8 +102,10 @@ const createGarden = (state = {
     }, action) => {
         switch(action.type) {
             case 'UPDATE_DIMENSIONS':
+                console.log("reduce", action.value)
                 return action.value
             case 'ADD_BED':
+                console.log("reduce addbed", action.value)
                 return {
                     ...state,
                     beds: [...state.beds, action.value]

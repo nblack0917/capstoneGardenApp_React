@@ -5,6 +5,7 @@ import {
 } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import BackgroundPattern from './Leaf_pattern_1.png'
 import './EnterDimensions.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -55,6 +56,18 @@ function EnterBeds(props) {
         //     // setHasZipcode(!hasZipcode)
         // }
         props.handleParentZipcodeChange(newChar)
+    }
+
+    const boxStyle = {
+        backgroundImage: `url(${BackgroundPattern})`,
+        backgroundRepeat: 'repeat',
+        border: '6px dashed #c77547',
+        borderRadius: 5,
+        marginBottom: 10,
+        maxWidth: 450,
+        maxHeight: 450,
+        width: parseInt(width),
+        height: parseInt(length),
     }
 
     // const checkLogin = () => {
@@ -131,6 +144,7 @@ function EnterBeds(props) {
                     variant="outlined"
                     className={classes.textField}/>
             </div>
+            <div className="gardenBox" style={boxStyle}></div>
         </div>
     )
 }

@@ -1,4 +1,6 @@
 import React from 'react'
+import GridList from '@material-ui/core/GridList';
+import GridListTile from '@material-ui/core/GridListTile';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import './BedList.css'
 
@@ -48,7 +50,7 @@ function BedList(props) {
         <div className="bedContainer">
             <div className="addedBeds">
                 <h3>Added Beds</h3>
-                <ul style={{ listStyle: 'none', margin: 0, padding: 0}}>
+                {/* <ul style={{ listStyle: 'none', margin: 0, padding: 0}}> */}
                     {props.createGarden.map((bed, index) => {
                         let adjustedSizes = adjustSize(bed.width, bed.length);
                         let bedType = setBedType(bed.planter)
@@ -56,6 +58,9 @@ function BedList(props) {
                             background: '#ddd3b8',
                             border: '3px solid #c77547',
                             borderRadius: bedType,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                             marginBottom: 10,
                             maxWidth: 250,
                             maxHeight: 250,
@@ -63,10 +68,11 @@ function BedList(props) {
                             height: parseInt(adjustedSizes[1]),
                         }
                         console.log(bedStyle)
-                        return <li style={{ listStyle: 'none'}}><div style={bedStyle}>{bed.width}{bed.length}</div> </li>
+                        return <div style={bedStyle}>{bed.width}" x {bed.length}"</div> 
+                        {/* return <li style={{ listStyle: 'none'}}><div style={bedStyle}>{bed.width}{bed.length}</div> </li> */}
                         // return <li style={{ listStyle: 'none'}}>{bed.variety_name} <DeleteForeverIcon color="secondary" style={{ cursor: 'pointer' }} onClick={() => props.handleRemovePlantClick(index)} /></li>
                     })}
-                </ul>
+                {/* </ul> */}
                 
             </div>
         </div>

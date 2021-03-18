@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -39,12 +39,13 @@ export default function AddGardens(props) {
   const [width, setWidth] = useState(0);
   const [length, setLength] = useState(0);
   const [zipcode, setZipcode] = useState(0);
+  const [zipcodeError, setZipcodeError] = useState('');
   const [zone, setZone] = useState(0)
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   // const [dimensions, setDimensions] = useState({ width: 0, height: 0})
 
-  console.log(props.userInfo)
+  // console.log(props.userInfo)
 
   function getSteps() {
     return ['Enter Garden Dimensions and Zip code', 'Add Garden Beds or Planters', 'Arrange Beds/Planters in Garden'];
@@ -74,12 +75,18 @@ const handleParentZipcodeChange = (zip) => {
 const convertZiptoZone = async () => {
   let reducedZip;
 
-  if (zipcode === 0) {
+  if (zipcode.length === 5) {
+    if (zipcode.charAt(0) == "0") {
+      reducedZip = zipcode.substring(1)
+    } else {
+      reducedZip = zipcode
+    }
+  } else if (zipcode === 0) {
     reducedZip = props.userInfo.zip;
-  } else if (zipcode.charAt(0) == "0") {
-    reducedZip = zipcode.substring(1)
-  } else {
-    reducedZip = zipcode
+    console.log("hjadfs")
+  } else  {
+    setZone(0)
+    return setZipcodeError('INVALID ZIPCODE. PLEASE ENTER NEW ZIPCODE')
   }
   const res = await fetch(`https://c0bra.api.stdlib.com/zipcode-to-hardiness-zone/?zipcode=${reducedZip}`);
   const data = await res.json();
@@ -98,7 +105,7 @@ const handleAddBed = (bed) => {
 // } 
 
   const handleNext = () => {
-    console.log(activeStep)
+    // console.log(activeStep)
     let userZip;
     if (zipcode === 0) {
       userZip = props.userInfo.zip;
@@ -113,7 +120,7 @@ const handleAddBed = (bed) => {
           zipcode: userZip,
           beds: [],
           };
-        convertZiptoZone()
+        
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         // console.log("new Dim", newDimensions)
         props.updateNewGardenDimensions(newDimensions)
@@ -136,26 +143,48 @@ const handleAddBed = (bed) => {
     setActiveStep(0);
   };
 
-  console.log("addGarden", props.createGarden)
+  const handleRemoveBedClick = (index) => {
+    props.removeBedFromList(index)
+    console.log("bedlist", props.beds)
+}
+const handleUpdateItem = (index) => {
+  props.updateCurrentItem(index)
+  console.log("current Index", index)
+  console.log("current Item", props.createGarden.beds[index])
+}
+
+useEffect(() => {
+  convertZiptoZone()
+}, [])
+
+  // console.log("addGarden", props.createGarden)
 
   function getStepContent(stepIndex) {
     switch (stepIndex) {
       case 0:
         return <EnterDimensions 
+          zone={zone}
+          userInfo={props.userInfo}
+          zipcodeError={zipcodeError}
           createGarden={props.createGarden}
           handleParentWidthChange={e => {handleParentWidthChange(e)}}
           handleParentLengthChange={e => {handleParentLengthChange(e)}}
           handleParentZipcodeChange={e => {handleParentZipcodeChange(e)}}
+          convertZiptoZone={() => {convertZiptoZone()}}
           // handleNewDimensions={e => {handleNewDimensions(e)}}
         />;
       case 1:
         return <EnterBeds 
-        zone={zone}
-        createGarden={props.createGarden}
-        handleAddBed={e => {handleAddBed(e)}}
+          zone={zone}
+          createGarden={props.createGarden}
+          handleRemoveBedClick={e => {handleRemoveBedClick(e)}}
+          handleAddBed={e => {handleAddBed(e)}}
         />;
       case 2:
-        return <ArrangeBeds />;
+        return <ArrangeBeds 
+          createGarden={props.createGarden}
+          handleUpdateItem={e => {handleUpdateItem(e)}}
+        />;
       default:
         return 'Unknown stepIndex';
     }

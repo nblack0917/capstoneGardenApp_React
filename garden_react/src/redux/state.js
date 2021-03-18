@@ -13,5 +13,6 @@ export default {
         length: 0,
         zipcode: 0,
         beds: [],
+        currentItem: {},
     }
 }

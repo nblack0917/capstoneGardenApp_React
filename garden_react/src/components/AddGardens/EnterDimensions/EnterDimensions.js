@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
     TextField,
     Button,
@@ -23,38 +23,26 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function EnterBeds(props) {
-    const [width, setWidth] = useState(0);
-    const [length, setLength] = useState(0);
-    const [zipcode, setZipcode] = useState(0);
+    const [width, setWidth] = useState('');
+    const [length, setLength] = useState('');
+    const [zipcode, setZipcode] = useState('');
     const classes = useStyles();
-    // const [hasWidth, setHasWidth] = useState(false)
-    // const [hasLength, setHasLength] = useState(false)
-    // const [hasZipcode, setHasZipcode] = useState(false)
 
-    console.log("enterDimensions:", props.createGarden)
+    
 
     const handleWidthChange = (e) => {
         const newChar = e.target.value
         setWidth(newChar)
-        // if(hasWidth) {
-        //     // setHasWidth(!hasWidth)
-        // }
         props.handleParentWidthChange(newChar)
     }
     const handleLengthChange = (e) => {
         const newChar = e.target.value
         setLength(newChar)
-        // if(hasLength) {
-        //     // setHasLength(!hasLength)
-        // }
         props.handleParentLengthChange(newChar)
     }
     const handleZipcodeChange = (e) => {
         const newChar = e.target.value
         setZipcode(newChar)
-        // if(hasZipcode) {
-        //     // setHasZipcode(!hasZipcode)
-        // }
         props.handleParentZipcodeChange(newChar)
     }
 
@@ -95,6 +83,14 @@ function EnterBeds(props) {
     //     props.handleNewDimensions(newDimensions)
     // }
 
+    useEffect(() => {
+        setZipcode(props.userInfo.zip)
+        if (props.createGarden.width && props.createGarden.length) {
+            setWidth(props.createGarden.width);
+            setLength(props.createGarden.length)
+        }
+    }, [])
+
     return (
         <div className="addDimension">
             <div className="heading">
@@ -108,13 +104,27 @@ function EnterBeds(props) {
             <div>
                 <TextField
                     required
+                    // error={hasZipcode}
+                    id="zipcode"
+                    value={zipcode}
+                    onChange={handleZipcodeChange}
+                    onBlur={props.convertZiptoZone}
+                    name="zipcode"
+                    label="Zip Code"
+                    type="number"
+                    variant="outlined"
+                    className={classes.textField}/>
+            </div>
+            <div>
+                <TextField
+                    required
                     // error={hasWidth}
                     id="width"
                     value={width}
                     onChange={handleWidthChange}
                     // onBlur={updateDimensions}
                     name="width"
-                    label="Width in inches"
+                    label="Width (inches)"
                     type="number"
                     variant="outlined"
                     className={classes.textField}/>
@@ -126,24 +136,12 @@ function EnterBeds(props) {
                     onChange={handleLengthChange}
                     // onBlur={updateDimensions}
                     name="length"
-                    label="Length in inches"
+                    label="Length (inches)"
                     type="number"
                     variant="outlined"
                     className={classes.textField}/>
             </div>
-            <div>
-                <TextField
-                    required
-                    // error={hasZipcode}
-                    id="zipcode"
-                    value={zipcode}
-                    onChange={handleZipcodeChange}
-                    name="zipcode"
-                    label="5 digit Zip Code"
-                    type="number"
-                    variant="outlined"
-                    className={classes.textField}/>
-            </div>
+            {props.zone ? `This garden is in Zone ${props.zone}` : <span className="errorMessage">{props.zipcodeError}</span>}
             <div className="gardenBox" style={boxStyle}></div>
         </div>
     )

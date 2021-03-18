@@ -99,16 +99,32 @@ const createGarden = (state = {
     length: 0,
     zipcode: 0,
     beds: [],
+    currentItem: {},
     }, action) => {
         switch(action.type) {
             case 'UPDATE_DIMENSIONS':
-                console.log("reduce", action.value)
+                // console.log("reduce", action.value)
                 return action.value
             case 'ADD_BED':
-                console.log("reduce addbed", action.value)
+                // console.log("reduce addbed", action.value)
                 return {
                     ...state,
                     beds: [...state.beds, action.value]
+                }
+            case 'REMOVE_BED':
+                const bedList = [...state.beds]
+                bedList.splice(action.value, 1)
+                return {
+                    ...state,
+                    beds: bedList
+                }
+            case 'UPDATE_CURRENT_ITEM':
+                const selectList = [...state.beds];
+                const selectedItem = selectList[action.value]
+                console.log("selected Item", selectedItem)
+                return {
+                    ...state,
+                        currentItem: selectedItem
                 }
             default:
                 return state

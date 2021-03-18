@@ -47,9 +47,9 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function EnterBeds(props) {
-    const [width, setWidth] = useState(0);
-    const [length, setLength] = useState(0);
-    const [planter, setPlanter] = useState("planter")
+    const [width, setWidth] = useState('');
+    const [length, setLength] = useState('');
+    const [isPlanter, setIsPlanter] = useState(true)
     const classes = useStyles();
 
     const handleWidthChange = (e) => {
@@ -68,13 +68,18 @@ function EnterBeds(props) {
         // }
         // props.handleParentLengthChange(newChar)
     }
+    const handleDiameterChange = (e) => {
+        const newChar = e.target.value
+        setLength(newChar)
+        setWidth(newChar)
+    }
 
     const handlePlanterChange = (event) => {
         const type = event.target.value;
-        if (type === "planter") {
-            setPlanter('planter');
+        if (type === true) {
+            setIsPlanter(true);
         } else {
-            setPlanter('bed')
+            setIsPlanter(false)
         }
       };
 
@@ -82,82 +87,133 @@ function EnterBeds(props) {
         let dimensions = {
             width,
             length,
-            planter,
+            isPlanter,
         };
         // dimensions.push(width);
         // dimensions.push(length);
         // dimensions.push(planter)
-        console.log("bed dims", dimensions)
+        // console.log("bed dims", dimensions)
         props.handleAddBed(dimensions)
         setWidth(0);
         setLength(0);
-        setPlanter('planter')
+        // setIsPlanter(true)
     }
 
     console.log("AddBeds:", props.createGarden)
 
-    return (
-        <div className="enterBedContainer">
-            <div>
-                <BedList createGarden={props.createGarden.beds}/>
-            </div>
-            <div className="addDimension">
-                <div className="heading">
-                    <Typography variant="h4" gutterBottom>
-                        Great! Now let’s add some garden beds and planters.
-                    </Typography>
-                    <Typography variant="h5" gutterBottom>
-                        Not all gardens are made the same. Some have one big garden bed, others have multiple, some are all planters, and everything inbetween.
-                    </Typography>
-                    <Typography variant="h5" gutterBottom>
-                        Enter the dimensions and select shape and style. Click “Next” when done adding beds and planters.  {props.zone}
-                    </Typography>
-                </div>
+    if (isPlanter === true) {
+        return (
+            <div className="enterBedContainer">
                 <div>
-                    <TextField
-                        required
-                        // error={hasWidth}
-                        id="width"
-                        value={width}
-                        onChange={handleWidthChange}
-                        // onBlur={updateDimensions}
-                        name="width"
-                        label="Width in inches"
-                        type="number"
-                        variant="outlined"
-                        className={classes.textField}/>
-                    <TextField
-                        required
-                        // error={hasWidth}
-                        id="length"
-                        value={length}
-                        onChange={handleLengthChange}
-                        // onBlur={updateDimensions}
-                        name="length"
-                        label="Length in inches"
-                        type="number"
-                        variant="outlined"
-                        className={classes.textField}/>
+                    <BedList createGarden={props.createGarden.beds} handleRemoveBedClick={props.handleRemoveBedClick} removeBed={true} />
                 </div>
-                <div>
-                    <FormControl variant="outlined" className={classes.formControl}>
-                        <InputLabel id="container-type">Type of Container</InputLabel>
-                        <Select
-                        labelId="container-type"
-                        id="container-type"
-                        value={planter}
-                        onChange={handlePlanterChange}
-                        label="Type of Container"
-                        >
-                        <MenuItem value={"planter"}>Planter(round)</MenuItem>
-                        <MenuItem value={"bed"}>Garden Bed(square)</MenuItem>
-                        </Select>
-                    </FormControl>
+                <div className="addDimension">
+                    <div className="heading">
+                        <Typography variant="h4" gutterBottom>
+                            Great! Now let’s add some garden beds and planters.
+                        </Typography>
+                        <Typography variant="h5" gutterBottom>
+                            Not all gardens are made the same. Some have one big garden bed, others have multiple, some are all planters, and everything inbetween.
+                        </Typography>
+                        <Typography variant="h5" gutterBottom>
+                            Enter the dimensions and select shape and style. Click “Next” when done adding beds and planters.  
+                        </Typography>
+                    </div>
+                    <div>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="container-type">Type of Container</InputLabel>
+                            <Select
+                            labelId="container-type"
+                            id="container-type"
+                            value={isPlanter}
+                            onChange={handlePlanterChange}
+                            label="Type of Container"
+                            >
+                            <MenuItem value={true}>Planter(round)</MenuItem>
+                            <MenuItem value={false}>Garden Bed(square)</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div>
+                        <TextField
+                            required
+                            id="width"
+                            value={width}
+                            onChange={handleDiameterChange}
+                            name="width"
+                            label="Diameter (inches)"
+                            type="number"
+                            variant="outlined"
+                            className={classes.textField}/>
+                    </div>
+                        <Button variant="contained" className={classes.buttonStyle} onClick={addBedToList}>Add</Button>
                 </div>
-                    <Button variant="contained" className={classes.buttonStyle} onClick={addBedToList}>Add</Button>
             </div>
-        </div>
-    )
+        )
+    } else if (isPlanter === false) {
+        return (
+            <div className="enterBedContainer">
+                <div>
+                    <BedList createGarden={props.createGarden.beds} removeBed={true} />
+                </div>
+                <div className="addDimension">
+                    <div className="heading">
+                        <Typography variant="h4" gutterBottom>
+                            Great! Now let’s add some garden beds and planters.
+                        </Typography>
+                        <Typography variant="h5" gutterBottom>
+                            Not all gardens are made the same. Some have one big garden bed, others have multiple, some are all planters, and everything inbetween.
+                        </Typography>
+                        <Typography variant="h5" gutterBottom>
+                            Enter the dimensions and select shape and style. Click “Next” when done adding beds and planters.  
+                        </Typography>
+                    </div>
+                    <div>
+                        <FormControl variant="outlined" className={classes.formControl}>
+                            <InputLabel id="container-type">Type of Container</InputLabel>
+                            <Select
+                            labelId="container-type"
+                            id="container-type"
+                            value={isPlanter}
+                            onChange={handlePlanterChange}
+                            label="Type of Container"
+                            >
+                            <MenuItem value={true}>Planter(round)</MenuItem>
+                            <MenuItem value={false}>Garden Bed(square)</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                    <div>
+                        <TextField
+                            required
+                            // error={hasWidth}
+                            id="width"
+                            value={width}
+                            onChange={handleWidthChange}
+                            // onBlur={updateDimensions}
+                            name="width"
+                            label="Width (inches)"
+                            type="number"
+                            variant="outlined"
+                            className={classes.textField}/>
+                        <TextField
+                            required
+                            // error={hasWidth}
+                            id="length"
+                            value={length}
+                            onChange={handleLengthChange}
+                            // onBlur={updateDimensions}
+                            name="length"
+                            label="Length (inches)"
+                            type="number"
+                            variant="outlined"
+                            className={classes.textField}/>
+                    </div>
+                        <Button variant="contained" className={classes.buttonStyle} onClick={addBedToList}>Add</Button>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default EnterBeds

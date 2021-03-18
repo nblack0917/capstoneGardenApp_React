@@ -1,6 +1,14 @@
 import { connect } from 'react-redux'
 import AddGardens from '../components/AddGardens/AddGardens'
-import { fetchUserGardenPlantsById, updateGardenId, fetchUserGardensById, updateNewGardenDimensions, addNewBed } from '../redux/actions'
+import {
+    fetchUserGardenPlantsById,
+    updateGardenId,
+    fetchUserGardensById,
+    updateNewGardenDimensions,
+    addNewBed,
+    removeBedFromList,
+    updateCurrentItem,
+} from '../redux/actions'
 
 
 const mapStateToProps = (state) => {
@@ -17,7 +25,9 @@ const mapDispatchToProps = (dispatch) => {
         updateGardenId: (id => dispatch(updateGardenId(id))),
         fetchUserGardensById: (id => dispatch(fetchUserGardensById(id))),
         updateNewGardenDimensions: (dim => dispatch(updateNewGardenDimensions(dim))),
-        addNewBed: (bed => dispatch(addNewBed(bed)))
+        addNewBed: (bed => dispatch(addNewBed(bed))),
+        removeBedFromList: (index) => dispatch(removeBedFromList(index)),
+        updateCurrentItem: (index) => dispatch(updateCurrentItem(index)),
     }
 }
 

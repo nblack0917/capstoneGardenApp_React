@@ -125,3 +125,17 @@ export const addNewBed = (bed) => {
         value: bed
     }
 }
+
+export const removeBedFromList = (index) => {
+    return {
+        type: 'REMOVE_BED',
+        value: index
+    }
+}
+
+export const updateCurrentItem = (index) => {
+    return {
+        type: 'UPDATE_CURRENT_ITEM',
+        value: index
+    }
+}

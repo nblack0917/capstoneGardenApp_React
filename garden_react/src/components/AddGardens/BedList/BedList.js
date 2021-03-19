@@ -10,7 +10,7 @@ import '../../../../node_modules/react-resizable/css/styles.css'
 import './BedList.css'
 
 function BedList(props) {
-    console.log("bedlist",props.createGarden)
+    console.log("bedlist",props.createGardenBeds)
 
     const adjustSize =(width, length) => {
         let newWidth;
@@ -53,7 +53,8 @@ function BedList(props) {
     const dragStart = (index) => {
         // let currentItem = props.createGarden[index]
         props.handleUpdateItem(index)
-        console.log("bedlist item index", index)
+        props.onDragStart(index)
+        // console.log("bedlist item index", index)
     }
 
     const pointer = { cursor: 'pointer' }
@@ -64,7 +65,7 @@ function BedList(props) {
                     <h3>Added Beds</h3>
                 <div className="addedBeds">
                         <GridList cellHeight={'auto'} className="gridList" cols={1} >
-                                {props.createGarden.map((bed, index) => {
+                                {props.createGardenBeds.map((bed, index) => {
                                     let adjustedSizes = adjustSize(bed.width, bed.length);
                                     let bedType = setBedType(bed.isPlanter)
                                     let bedStyle = {
@@ -110,7 +111,7 @@ function BedList(props) {
                     <h3>Added Beds</h3>
                 <div className="addedBeds">
                         <GridList cellHeight={'auto'} className="gridList" cols={1} >
-                                {props.createGarden.map((bed, index) => {
+                                {props.createGardenBeds.map((bed, index) => {
                                     let adjustedSizes = adjustSize(bed.width, bed.length);
                                     let bedType = setBedType(bed.isPlanter)
                                     let bedStyle = {
@@ -133,7 +134,7 @@ function BedList(props) {
                                         maxHeight: 250,
                                         width: '100%',
                                     }
-                                    console.log(bedStyle)
+                                    // console.log(bedStyle)
                                     return (
                                             <div style={bedBoxStyle}>
                                                     <div 

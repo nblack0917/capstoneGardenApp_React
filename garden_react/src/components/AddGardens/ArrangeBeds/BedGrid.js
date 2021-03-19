@@ -10,7 +10,7 @@ const ReactGridLayout = WidthProvider(RGL);
 
 
 function BedGrid(props) {
-  let rowHeight = 8;
+  let rowHeight = 18;
   const [layoutList, setLayoutList] = useState([
     {i: '0', x: 0, y: 0, w: 4, h: 4, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: false},
     {i: '1', x: 6, y: 3, w: 2, h: 3, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: false},
@@ -20,7 +20,7 @@ function BedGrid(props) {
     {i: '5', x: 0, y: 4, w: 2, h: 2, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: true},
     {i: '6', x: 9, y: 0, w: 2, h: 2, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: true},
     {i: '7', x: 3, y: 5, w: 1, h: 1, minH: 2, maxH: 1, isResizable: false, isDraggable: true, isPlanter: true},
-    {i: '8', x: 12, y: 0, w: 1, h: rowHeight, static: true, isPlanter: false},
+    {i: '8', x: 24, y: 0, w: 1, h: rowHeight, static: true, isPlanter: false},
   ]);
   const [newSizes] = useState([
     {w: 2, h: 1, isPlanter: false},
@@ -31,11 +31,12 @@ function BedGrid(props) {
   // let itemNum = layoutList.length;
   const [defaultProps, setDefaultProps] = useState(
     {
+    
       className: "layout",
-      items: 8,
-      cols: 12,
-      rowHeight: 47,
-      width: 500,
+      items: 9,
+      cols: 25,
+      rowHeight: 18,
+      // width: 500,
       onLayoutChange: function() {},
       // This turns off compaction so you can place items wherever.
       // verticalCompact: false,
@@ -57,7 +58,7 @@ function BedGrid(props) {
                       <span className="text">{iKey}</span>
                     </div>
                   );
-            } else if ( iKey===lastItem) {
+            } else if ( parseInt(iKey)===parseInt(lastItem)) {
                 return (
                     <div key={iKey} className="lastElement">
                     </div>
@@ -107,21 +108,21 @@ function BedGrid(props) {
 
       const onDrop = (layout, layoutItem, _event) => {
         
-
+        let lastItem = layoutList[layoutList.length - 1]
         let newItemSize = currentSize
         // console.log(newItemSize)
 
         let stateList = layoutList
         //pull size and coords from dropped item
-        const itemX= layoutItem.x; const itemY= layoutItem.y; const itemW= newItemSize.w; const itemH= newItemSize.h; const itemPlanter = newItemSize.isPlanter
+        const itemX= layoutItem.x; const itemY= layoutItem.y; const itemW=parseInt(newItemSize.width); const itemH=parseInt(newItemSize.length); const itemPlanter = newItemSize.isPlanter
         // console.log(layoutItem)
         const layoutLength = stateList.length
-        const lastItem = parseInt(stateList[layoutLength - 1].i)
-        const newIInt = lastItem+1;
+        const lastItemI = parseInt(stateList[layoutLength - 1].i)
+        const newIInt = lastItemI+1;
         const newIString = newIInt.toString();
         console.log("layoutLength", layoutLength, "lastItem", lastItem, " newIInt", newIInt, "NewIString", newIString)
-        const newItem = {i: lastItem.toString(), x: itemX, y: itemY, w: itemW, h: itemH, minH: 1, maxH: 1, isResizable: false, isDraggable: true, isPlanter: itemPlanter}
-        const newLastItem = {i: newIString, x: 12, y: 0, w: 1, h: 8, static: true}
+        const newItem = {i: lastItemI.toString(), x: itemX, y: itemY, w: itemW, h: itemH, minH: 1, maxH: 1, isResizable: false, isDraggable: true, isPlanter: itemPlanter}
+        const newLastItem = {i: newIString, x: lastItem.x, y: lastItem.y, w: lastItem.w, h: lastItem.h, static: true}
 
 
         stateList.pop()
@@ -132,15 +133,15 @@ function BedGrid(props) {
         })
         stateList.push(newItem);
         stateList.push(newLastItem)
-        // console.log("stateList", stateList)
-        setLayoutList(stateList)
+        console.log("stateList", stateList)
+        // setLayoutList(stateList)
         // console.log("layout after", layout)
         // generateDOM();
       };
 
       const dragStart = (index) => {
         //  console.log("index", index)
-         let currentItem = newSizes[index]
+         let currentItem = props.createGarden.beds[index]
          setCurrentSize(currentItem)
          console.log("currentItem", currentItem)
       }
@@ -150,6 +151,18 @@ function BedGrid(props) {
 
     // console.log("Starting layout", this.state.layoutList)
 
+  const boxStyle = {
+    background: '#F0E5C9',
+    border: '6px dashed #c77547',
+    borderRadius: 5,
+    marginBottom: 10,
+    width: 650,
+    height: 500,
+    // width: parseInt(width),
+    // height: parseInt(length),
+    margin: '0 auto'
+    
+  }
 
     useEffect(() => {
       console.log("creategarden bedgrid", props.createGarden)
@@ -160,7 +173,7 @@ function BedGrid(props) {
 
     return (
       <div className="bedContainer">
-              <BedList createGarden={props.createGarden} removeBeds={false} handleUpdateItem={e => {handleUpdateItem(e)}} />
+              <BedList createGardenBeds={props.createGarden.beds} removeBeds={false} handleUpdateItem={e => {handleUpdateItem(e)}} onDragStart={e => dragStart(e)} />
                 {/* <div className="listContainer">
                   {newSizes.map((item, index) => {
                     //  console.log(index)
@@ -198,7 +211,7 @@ function BedGrid(props) {
                     )
                   })}
                 </div> */}
-                <div className="gridContainer">
+                <div style={boxStyle}>
                   <ReactGridLayout
                   
                     layout={newLayout}

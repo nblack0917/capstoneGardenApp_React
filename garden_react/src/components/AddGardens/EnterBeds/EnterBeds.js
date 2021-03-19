@@ -105,7 +105,7 @@ function EnterBeds(props) {
         return (
             <div className="enterBedContainer">
                 <div>
-                    <BedList createGarden={props.createGarden.beds} handleRemoveBedClick={props.handleRemoveBedClick} removeBed={true} />
+                    <BedList createGardenBeds={props.createGarden.beds} handleRemoveBedClick={props.handleRemoveBedClick} removeBed={true} />
                 </div>
                 <div className="addDimension">
                     <div className="heading">
@@ -154,7 +154,7 @@ function EnterBeds(props) {
         return (
             <div className="enterBedContainer">
                 <div>
-                    <BedList createGarden={props.createGarden.beds} removeBed={true} />
+                    <BedList createGardenBeds={props.createGarden.beds} removeBed={true} />
                 </div>
                 <div className="addDimension">
                     <div className="heading">

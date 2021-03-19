@@ -83,7 +83,7 @@ const convertZiptoZone = async () => {
     }
   } else if (zipcode === 0) {
     reducedZip = props.userInfo.zip;
-    console.log("hjadfs")
+    // console.log("hjadfs")
   } else  {
     setZone(0)
     return setZipcodeError('INVALID ZIPCODE. PLEASE ENTER NEW ZIPCODE')
@@ -149,7 +149,7 @@ const handleAddBed = (bed) => {
 }
 const handleUpdateItem = (index) => {
   props.updateCurrentItem(index)
-  console.log("current Index", index)
+  // console.log("current Index", index)
   console.log("current Item", props.createGarden.beds[index])
 }
 

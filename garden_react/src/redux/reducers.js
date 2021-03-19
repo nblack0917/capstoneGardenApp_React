@@ -103,8 +103,13 @@ const createGarden = (state = {
     }, action) => {
         switch(action.type) {
             case 'UPDATE_DIMENSIONS':
-                // console.log("reduce", action.value)
-                return action.value
+                console.log("reduce", action.value)
+                let values = action.value;
+                return {
+                    ...state,
+                    width: values.width,
+                    length: values.length
+                }
             case 'ADD_BED':
                 // console.log("reduce addbed", action.value)
                 return {
@@ -121,7 +126,7 @@ const createGarden = (state = {
             case 'UPDATE_CURRENT_ITEM':
                 const selectList = [...state.beds];
                 const selectedItem = selectList[action.value]
-                console.log("selected Item", selectedItem)
+                // console.log("selected Item", selectedItem)
                 return {
                     ...state,
                         currentItem: selectedItem

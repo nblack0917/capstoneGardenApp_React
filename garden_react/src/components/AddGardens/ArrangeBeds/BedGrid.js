@@ -10,17 +10,138 @@ const ReactGridLayout = WidthProvider(RGL);
 
 
 function BedGrid(props) {
-  let rowHeight = 18;
+  const roundDozens = (num) => {
+    let results = Math.round(num/12)*12;
+    return results
+  }
+
+  let gardenWidth = roundDozens(parseInt(props.createGarden.width))
+  let gardenHeight = roundDozens(parseInt(props.createGarden.length))
+  const findGardenContainerHeight = () => {
+    let widthScale = 650 / gardenWidth;
+    return gardenHeight * widthScale + 30;
+  }
+  let gardenContainerHeight = findGardenContainerHeight()
+  let gridRowHeight = 18;
+  let numOfCols = 24;
+  let lastColumn = gardenWidth+1
+  let hiddenBoxHeight = 53
+  switch(gardenWidth) {
+    case 12:
+      gridRowHeight = 130;
+      numOfCols = 5;
+      break;
+    case 24:
+      gridRowHeight = 65;
+      numOfCols = 9;
+      break;
+    case 36:
+      gridRowHeight = 48;
+      numOfCols = 12;
+      break;
+    case 48:
+      gridRowHeight = 31;
+      numOfCols = 17;
+      break;
+    case 60:
+      gridRowHeight = 22;
+      numOfCols = 21;
+      break;
+    case 72:
+      gridRowHeight = 17;
+      numOfCols = 25;
+      break;
+    case 84:
+      gridRowHeight = 14;
+      numOfCols = 29;
+      break;
+    case 96:
+      gridRowHeight = 10;
+      numOfCols = 33;
+      break;
+    case 108:
+      gridRowHeight = 8;
+      numOfCols = 37;
+      break;
+    case 120:
+      gridRowHeight = 6;
+      numOfCols = 41;
+      break;
+    case 132:
+      gridRowHeight = 5;
+      numOfCols = 45;
+      break;
+    case 144:
+      gridRowHeight = 4;
+      numOfCols = 49;
+      break;
+    case 156:
+      gridRowHeight = 3;
+      numOfCols = 53;
+      break;
+    case 168:
+      gridRowHeight = 2;
+      numOfCols = 57;
+      break;
+    case 180:
+      gridRowHeight = 1;
+      numOfCols = 61;
+      break;
+    default:
+      console.log("Error, invalid size")
+  }
+  switch(gardenHeight) {
+    case 12:
+      hiddenBoxHeight = 3.825
+      break;
+    case 24:
+      hiddenBoxHeight = 7.55
+      break;
+    case 36:
+      hiddenBoxHeight = 11.125
+      break;
+    case 48:
+      hiddenBoxHeight = 16
+      break;
+    case 60:
+      hiddenBoxHeight = 20
+      break;
+    case 72:
+      hiddenBoxHeight = 23
+      break;
+    case 84:
+      hiddenBoxHeight = 28
+      break;
+    case 96:
+      hiddenBoxHeight = 32
+      break;
+    case 108:
+      hiddenBoxHeight = 37
+      break;
+    case 120:
+      hiddenBoxHeight = 40
+      break;
+    case 132:
+      hiddenBoxHeight = 45
+      break;
+    case 144:
+      hiddenBoxHeight = 48;
+      break;
+    case 156:
+      hiddenBoxHeight = 52
+      break;
+    case 168:
+      hiddenBoxHeight = 56;
+      break;
+    case 180:
+      hiddenBoxHeight = 62
+      break;
+    default:
+      console.log("Error, invalid size")
+  }
+
   const [layoutList, setLayoutList] = useState([
-    {i: '0', x: 0, y: 0, w: 4, h: 4, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: false},
-    {i: '1', x: 6, y: 3, w: 2, h: 3, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: false},
-    {i: '2', x: 8, y: 0, w: 1, h: 1, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: true},
-    {i: '3', x: 8, y: 3, w: 3, h: 3, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: false},
-    {i: '4', x: 6, y: 0, w: 2, h: 2, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: true},
-    {i: '5', x: 0, y: 4, w: 2, h: 2, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: true},
-    {i: '6', x: 9, y: 0, w: 2, h: 2, minH: 2, maxH: 2, isResizable: false, isDraggable: true, isPlanter: true},
-    {i: '7', x: 3, y: 5, w: 1, h: 1, minH: 2, maxH: 1, isResizable: false, isDraggable: true, isPlanter: true},
-    {i: '8', x: 24, y: 0, w: 1, h: rowHeight, static: true, isPlanter: false},
+    {i: '0', x: lastColumn, y: 0, w: 1, h: hiddenBoxHeight, static: true, isPlanter: false},
   ]);
   const [newSizes] = useState([
     {w: 2, h: 1, isPlanter: false},
@@ -33,9 +154,10 @@ function BedGrid(props) {
     {
     
       className: "layout",
-      items: 9,
-      cols: 25,
-      rowHeight: 18,
+      items: 1,
+      // items: 9,
+      cols: numOfCols,
+      rowHeight: gridRowHeight,
       // width: 500,
       onLayoutChange: function() {},
       // This turns off compaction so you can place items wherever.
@@ -81,14 +203,14 @@ function BedGrid(props) {
       const onDragStop = (layout) => {
         let stateList = layoutList
         let newStateList = []
-        // console.log(layout)
+        console.log("layout", layout)
 
         for ( let gridItem of layout) {
-          console.log("gridItem from Layout", gridItem)
+          // console.log("gridItem from Layout", gridItem)
           let currentItem = stateList.filter(listItem => listItem.i === gridItem.i );
-          console.log("current Item", currentItem[0])
+          // console.log("current Item", currentItem[0])
           if ( currentItem[0].x !== gridItem.x || currentItem[0].y !== gridItem.y ) {
-            console.log("grid item changed")
+            // console.log("grid item changed")
             currentItem[0].x = gridItem.x;
             currentItem[0].y = gridItem.y;
           }
@@ -114,13 +236,13 @@ function BedGrid(props) {
 
         let stateList = layoutList
         //pull size and coords from dropped item
-        const itemX= layoutItem.x; const itemY= layoutItem.y; const itemW=parseInt(newItemSize.width); const itemH=parseInt(newItemSize.length); const itemPlanter = newItemSize.isPlanter
+        const itemX= layoutItem.x; const itemY= layoutItem.y; const itemW=parseInt(newItemSize.width)/3; const itemH=parseInt(newItemSize.length)/3; const itemPlanter = newItemSize.isPlanter
         // console.log(layoutItem)
         const layoutLength = stateList.length
         const lastItemI = parseInt(stateList[layoutLength - 1].i)
         const newIInt = lastItemI+1;
         const newIString = newIInt.toString();
-        console.log("layoutLength", layoutLength, "lastItem", lastItem, " newIInt", newIInt, "NewIString", newIString)
+        // console.log("layoutLength", layoutLength, "lastItem", lastItem, " newIInt", newIInt, "NewIString", newIString)
         const newItem = {i: lastItemI.toString(), x: itemX, y: itemY, w: itemW, h: itemH, minH: 1, maxH: 1, isResizable: false, isDraggable: true, isPlanter: itemPlanter}
         const newLastItem = {i: newIString, x: lastItem.x, y: lastItem.y, w: lastItem.w, h: lastItem.h, static: true}
 
@@ -133,7 +255,7 @@ function BedGrid(props) {
         })
         stateList.push(newItem);
         stateList.push(newLastItem)
-        console.log("stateList", stateList)
+        // console.log("stateList", stateList)
         // setLayoutList(stateList)
         // console.log("layout after", layout)
         // generateDOM();
@@ -156,8 +278,8 @@ function BedGrid(props) {
     border: '6px dashed #c77547',
     borderRadius: 5,
     marginBottom: 10,
-    width: 650,
-    height: 500,
+    width: 675,
+    height: gardenContainerHeight,
     // width: parseInt(width),
     // height: parseInt(length),
     margin: '0 auto'
@@ -165,7 +287,7 @@ function BedGrid(props) {
   }
 
     useEffect(() => {
-      console.log("creategarden bedgrid", props.createGarden)
+      // console.log("creategarden bedgrid", props.createGarden)
     })
     //create copy of state to assist in refresh of component
     let newLayout = JSON.parse(JSON.stringify(layoutList))
@@ -174,43 +296,6 @@ function BedGrid(props) {
     return (
       <div className="bedContainer">
               <BedList createGardenBeds={props.createGarden.beds} removeBeds={false} handleUpdateItem={e => {handleUpdateItem(e)}} onDragStart={e => dragStart(e)} />
-                {/* <div className="listContainer">
-                  {newSizes.map((item, index) => {
-                    //  console.log(index)
-                    let newWidth = item.w * 50;
-                    let newHeight = item.h * 50;
-                    let planterStyle = {};
-                    if (!item.isPlanter) {
-                      planterStyle = {
-                        width: newWidth,
-                        height: newHeight,
-                        borderRadius: 5,
-                      }
-                    } else {
-                      planterStyle = {
-                        width: newWidth,
-                        height: newHeight,
-                        borderRadius: '50%',
-                      }
-                    }
-                    return (
-                      <div
-                          className="droppable-element"
-                          draggable={true}
-                          unselectable="off"
-                          style={planterStyle}
-                          // this is a hack for firefox
-                          // Firefox requires some kind of initialization
-                          // which we can do by adding this attribute
-                          // @see https://bugzilla.mozilla.org/show_bug.cgi?id=568313
-                          onDragStart={() => dragStart(index)}
-                          // onDrag={this.drag}
-                          >
-                          {item.w} x {item.h}
-                      </div>
-                    )
-                  })}
-                </div> */}
                 <div style={boxStyle}>
                   <ReactGridLayout
                   

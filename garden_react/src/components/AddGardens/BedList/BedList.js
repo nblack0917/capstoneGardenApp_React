@@ -10,7 +10,7 @@ import '../../../../node_modules/react-resizable/css/styles.css'
 import './BedList.css'
 
 function BedList(props) {
-    console.log("bedlist",props.createGardenBeds)
+    // console.log("bedlist",props.createGardenBeds)
 
     const adjustSize =(width, length) => {
         let newWidth;

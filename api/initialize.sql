@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS  usersContact, usersAddress, usersCredentials, plantVarieties, zones, plantParents, gardenPlants, plantTypes, gardenBeds, userGardens, users;
+DROP TABLE IF EXISTS  usersContact, usersAddress, usersCredentials, plantVarieties, zones, plantParents, gardenPlants, plantTypes, gardenBeds, gardenLayout, userGardens, users;
 
 CREATE TABLE users (
   id INT NOT NULL AUTO_INCREMENT,
@@ -67,6 +67,24 @@ CREATE TABLE gardenBeds (
   PRIMARY KEY (bed_id),
   FOREIGN KEY (garden_id)
     REFERENCES userGardens (garden_id)
+    ON DELETE CASCADE
+);
+
+CREATE TABLE gardenLayout (
+  layout_id INT NOT NULL AUTO_INCREMENT,
+  bed_id INT NOT NULL,
+  garden_id INT NOT NULL,
+  i VARCHAR(2),
+  x INT NOT NULL,
+  y INT NOT NULL,
+  w INT NOT NULL,
+  h INT NOT NULL,
+  isDraggable TINYINT NOT NULL,
+  isResizable TINYINT NOT NULL,
+  isPlanter TINYINT NOT NULL,
+  PRIMARY KEY (layout_id),
+  FOREIGN KEY (bed_id)
+    REFERENCES gardenBeds (bed_id)
     ON DELETE CASCADE
 );
 

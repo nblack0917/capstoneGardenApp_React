@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import MyGardens from '../components/MyGardens/MyGardens'
-import { fetchUserGardenPlantsById, updateGardenId, fetchUserGardensById } from '../redux/actions'
+import { fetchUserGardenPlantsById, updateGardenId, fetchUserGardensById, resetGarden } from '../redux/actions'
 
 
 const mapStateToProps = (state) => {
@@ -15,6 +15,7 @@ const mapDispatchToProps = (dispatch) => {
         fetchUserGardenPlantsById: (id => dispatch(fetchUserGardenPlantsById(id))),
         updateGardenId: (id => dispatch(updateGardenId(id))),
         fetchUserGardensById: (id => dispatch(fetchUserGardensById(id))),
+        resetGarden: () => dispatch(resetGarden()),
     }
 }
 

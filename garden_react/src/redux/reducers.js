@@ -100,15 +100,17 @@ const createGarden = (state = {
     zipcode: 0,
     beds: [],
     currentItem: {},
+    layout: [],
     }, action) => {
         switch(action.type) {
             case 'UPDATE_DIMENSIONS':
-                console.log("reduce", action.value)
+                // console.log("reduce", action.value)
                 let values = action.value;
                 return {
                     ...state,
                     width: values.width,
-                    length: values.length
+                    length: values.length,
+                    zipcode: values.zipcode,
                 }
             case 'ADD_BED':
                 // console.log("reduce addbed", action.value)
@@ -131,6 +133,15 @@ const createGarden = (state = {
                     ...state,
                         currentItem: selectedItem
                 }
+            case 'UPDATE_LAYOUT':
+                const newLayout = action.value;
+                // console.log("reduer layout", newLayout)
+                return {
+                    ...state,
+                        layout: newLayout
+                }
+            case 'RESET_GARDEN':
+                return action.value
             default:
                 return state
         }

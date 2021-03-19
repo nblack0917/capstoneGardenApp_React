@@ -14,5 +14,6 @@ export default {
         zipcode: 0,
         beds: [],
         currentItem: {},
+        layout: [],
     }
 }

@@ -37,7 +37,7 @@ VALUES
 INSERT INTO userGardens
     (user_id, zone_id, garden_width, garden_length)
 VALUES
-    (1, 8, 300, 300),
+    (1, 8, 120, 120),
     (1, 8, 18, 72),
     (1, 8, 48, 72),
     (2, 8, 24, 48),
@@ -62,4 +62,10 @@ VALUES
     (5, 0, 48, 48),
 	(2, 1, 12, 12),
     (5, 1, 12, 12);
+
+INSERT INTO gardenLayout
+    (bed_id, garden_id, i, x, y, w, h, isDraggable, isResizable, isPlanter)
+VALUES
+    (3, 1, '0', 0, 2, 24, 24, 1, 0, 0),
+    (4, 1, '1', 4, 5, 12, 12, 1, 0, 1);
 

@@ -12,6 +12,7 @@ const port = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 app.use(logger);
 app.use('/plants', plantsRouter);
 app.use('/gardens', gardenRouter);

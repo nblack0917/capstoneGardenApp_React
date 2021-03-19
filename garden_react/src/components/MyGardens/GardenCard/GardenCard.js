@@ -226,7 +226,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function GardenCard(props) {
-    const history = useHistory();
+  const history = useHistory();
   const classes = useStyles();
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
@@ -236,7 +236,7 @@ export default function GardenCard(props) {
   const [gardens, setGardens] = useState([]);
   const rows = props.userGardens;
 
-  console.log("User GArdensa",rows)
+  // console.log("User Gardens", gardens)
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -272,10 +272,11 @@ export default function GardenCard(props) {
     }
     setSelected(newSelected);
     selectedIndexes = newSelected;
+    // console.log("selected",newSelected)
   };
 
   const handleGardenClick = (id) => {
-      console.log("hllo", id);
+      // console.log("hllo", id);
       props.handleGardenClick(id)
       history.push('/my_gardens/garden')
   }   
@@ -291,17 +292,27 @@ export default function GardenCard(props) {
   };
 
   const handleAddGarden = () => {
+      props.resetGarden()
       history.push('/add_garden')
   }
 
   const handleDeleteClick = () => {
     const id = props.userInfo.id
     props.recheckGardens(id);
-    const update = setGardens(props.userGardens);
-    setTimeout(update, 2000)
+    // const update = setGardens(props.userGardens);
+    // setTimeout(update, 2000)
+    let removeSelected = gardens;
+    for (let item of selected) {
+      let idx = removeSelected.indexOf(item);
+      removeSelected.splice(idx, 1)
+    }
+    setGardens(removeSelected);
+    setSelected([]);
   }
 
-
+useEffect(() => {
+  setGardens(rows)
+}, [])
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
@@ -332,7 +343,7 @@ export default function GardenCard(props) {
               rowCount={rows.length}
             />
             <TableBody>
-              {stableSort(rows, getComparator(order, orderBy))
+              {stableSort(gardens, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row.garden_id);

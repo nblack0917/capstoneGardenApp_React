@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import _ from "lodash";
 import RGL, { WidthProvider } from "react-grid-layout";
 import BedList from '../BedList/BedList'
+import BackgroundPattern from './Leaf_pattern_1.png'
 import '../../../../node_modules/react-grid-layout/css/styles.css'
 import '../../../../node_modules/react-resizable/css/styles.css'
 import './BedGrid.css'
@@ -10,11 +11,14 @@ const ReactGridLayout = WidthProvider(RGL);
 
 
 function BedGrid(props) {
+
+  //function to round garden dimensions to nearest factor of 12
   const roundDozens = (num) => {
     let results = Math.round(num/12)*12;
     return results
   }
 
+  // variables and swith to set size and scale of grid and keep items square and round
   let gardenWidth = roundDozens(parseInt(props.createGarden.width))
   let gardenHeight = roundDozens(parseInt(props.createGarden.length))
   const findGardenContainerHeight = () => {
@@ -140,6 +144,7 @@ function BedGrid(props) {
       console.log("Error, invalid size")
   }
 
+  //states
   const [layoutList, setLayoutList] = useState([
     {i: '0', x: lastColumn, y: 0, w: 1, h: hiddenBoxHeight, static: true, isPlanter: false},
   ]);
@@ -152,13 +157,10 @@ function BedGrid(props) {
   // let itemNum = layoutList.length;
   const [defaultProps, setDefaultProps] = useState(
     {
-    
       className: "layout",
       items: 1,
-      // items: 9,
       cols: numOfCols,
       rowHeight: gridRowHeight,
-      // width: 500,
       onLayoutChange: function() {},
       // This turns off compaction so you can place items wherever.
       // verticalCompact: false,
@@ -166,6 +168,19 @@ function BedGrid(props) {
       preventCollision: true,
     }
   )
+
+  //style for garden box
+  const boxStyle = {
+    background: '#F0E5C9',
+    border: '6px dashed #c77547',
+    borderRadius: 5,
+    marginBottom: 10,
+    width: 675,
+    height: gardenContainerHeight,
+    // width: parseInt(width),
+    // height: parseInt(length),
+    margin: '0 auto'
+  }
 
       //builds list of items based on value of i
       //also applies appropriate className depending on isPlanter boolean or lastItem
@@ -177,7 +192,7 @@ function BedGrid(props) {
               if ( currentState[iKey].isPlanter) {
                 return (
                     <div key={iKey} className="round">
-                      <span className="text">{iKey}</span>
+                      {/* <span className="text">{iKey}</span> */}
                     </div>
                   );
             } else if ( parseInt(iKey)===parseInt(lastItem)) {
@@ -188,22 +203,25 @@ function BedGrid(props) {
             } else {
           return (
             <div key={iKey} className="gridBox">
-              <span className="text">{iKey}</span>
+              {/* <span className="text">{iKey}</span> */}
             </div>
           );
             }
         });
       }
 
-      const onLayoutChange = (layout) => {
+       const onLayoutChange = (layout) => {
         defaultProps.onLayoutChange(layout);
         // this.generateDOM()
       }
       
+
+      //update layoutList to new layout when moving items
+      //also updates layout state with each move
       const onDragStop = (layout) => {
         let stateList = layoutList
         let newStateList = []
-        console.log("layout", layout)
+        console.log("layout", layoutList)
 
         for ( let gridItem of layout) {
           // console.log("gridItem from Layout", gridItem)
@@ -217,6 +235,7 @@ function BedGrid(props) {
           newStateList.push(currentItem[0])
         }
         setLayoutList(newStateList)
+        props.handleCurrentLayout(layoutList)
       }
 
       //When new item is dropped from outside...
@@ -227,13 +246,13 @@ function BedGrid(props) {
       //remove last item
       //add new items then add new last item to state copy
       //set state to state copy
+      //update layout state with each dropped item
 
       const onDrop = (layout, layoutItem, _event) => {
         
         let lastItem = layoutList[layoutList.length - 1]
         let newItemSize = currentSize
         // console.log(newItemSize)
-
         let stateList = layoutList
         //pull size and coords from dropped item
         const itemX= layoutItem.x; const itemY= layoutItem.y; const itemW=parseInt(newItemSize.width)/3; const itemH=parseInt(newItemSize.length)/3; const itemPlanter = newItemSize.isPlanter
@@ -246,7 +265,6 @@ function BedGrid(props) {
         const newItem = {i: lastItemI.toString(), x: itemX, y: itemY, w: itemW, h: itemH, minH: 1, maxH: 1, isResizable: false, isDraggable: true, isPlanter: itemPlanter}
         const newLastItem = {i: newIString, x: lastItem.x, y: lastItem.y, w: lastItem.w, h: lastItem.h, static: true}
 
-
         stateList.pop()
         // itemNum++;
         let nextItemsNum = defaultProps.items + 1
@@ -256,39 +274,39 @@ function BedGrid(props) {
         stateList.push(newItem);
         stateList.push(newLastItem)
         // console.log("stateList", stateList)
-        // setLayoutList(stateList)
+        setLayoutList(stateList)
+        props.handleCurrentLayout(layoutList)
         // console.log("layout after", layout)
-        // generateDOM();
       };
 
       const dragStart = (index) => {
         //  console.log("index", index)
          let currentItem = props.createGarden.beds[index]
          setCurrentSize(currentItem)
-         console.log("currentItem", currentItem)
+        //  console.log("currentItem", currentItem)
       }
       const handleUpdateItem = (index) => {
         props.handleUpdateItem(index)
       }
 
+
     // console.log("Starting layout", this.state.layoutList)
 
-  const boxStyle = {
-    background: '#F0E5C9',
-    border: '6px dashed #c77547',
-    borderRadius: 5,
-    marginBottom: 10,
-    width: 675,
-    height: gardenContainerHeight,
-    // width: parseInt(width),
-    // height: parseInt(length),
-    margin: '0 auto'
-    
-  }
 
-    useEffect(() => {
-      // console.log("creategarden bedgrid", props.createGarden)
-    })
+    // load current layout state as layout 
+    //not currently working right
+    // useEffect(() => {
+    //   const currentLayout = props.createGarden.layout
+    //   if (currentLayout.length > 0) {
+    //     setLayoutList(currentLayout)
+    //     console.log('set current layout', currentLayout)
+    //     console.log("cols", numOfCols)
+    //     generateDOM()
+    //   }else{
+    //     console.log("no current layout", currentLayout)
+    //   }      
+    // }, [layoutList])
+
     //create copy of state to assist in refresh of component
     let newLayout = JSON.parse(JSON.stringify(layoutList))
     newLayout.x =+ 2

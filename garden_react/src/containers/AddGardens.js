@@ -8,6 +8,8 @@ import {
     addNewBed,
     removeBedFromList,
     updateCurrentItem,
+    updateCurrentLayout,
+    resetGarden,
 } from '../redux/actions'
 
 
@@ -28,6 +30,8 @@ const mapDispatchToProps = (dispatch) => {
         addNewBed: (bed => dispatch(addNewBed(bed))),
         removeBedFromList: (index) => dispatch(removeBedFromList(index)),
         updateCurrentItem: (index) => dispatch(updateCurrentItem(index)),
+        updateCurrentLayout: (layout) => dispatch(updateCurrentLayout(layout)),
+        resetGarden: () => dispatch(resetGarden()),
     }
 }
 

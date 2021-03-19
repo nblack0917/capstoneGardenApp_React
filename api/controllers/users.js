@@ -92,29 +92,49 @@ FROM plantVarieties
 //     })
 // }
 
-const addNewGarden = (req, res) => {
-
-        let id = req.params.id;
-        let zone_id = req.params.zone;
-        let garden_width =  req.params.width;
-        let garden_length = req.params.length;
-
-        const newGarden = {
-            id: id,
-            zone_id: zone_id,
-            garden_width: garden_width,
-            garden_length: garden_length
-        }
+const addNewGarden = (req, res, next) => {
+    console.log(req.body)
+    const newGarden = {
+        id: req.body.id,
+        zone_id: req.body.zone,
+        garden_width: req.body.width,
+        garden_length: req.body.length,
+    }
+    console.log("newGarden before", newGarden)
 
         sqlQuery=`INSERT INTO userGardens (user_id, zone_id, garden_width, garden_length) VALUES (?, ?, ?, ?);`
-            sqlQuery = mysql.format(sqlQuery, [id, zone_id, garden_width, garden_length]);
+            sqlQuery = mysql.format(sqlQuery, [newGarden.id, newGarden.zone_id, newGarden.garden_width, newGarden.garden_length]);
 
             pool.query(sqlQuery, (err) => {
                 if (err) return handleSQLError(res, err);
                 // return;
             })
-            res.send(newGarden)
+            // res.send(newGarden)
+            res.end()
 }
+// const addNewGarden = (req, res, next) => {
+
+//         let id = req.params.id;
+//         let zone_id = req.params.zone;
+//         let garden_width =  req.params.width;
+//         let garden_length = req.params.length;
+
+//         const newGarden = {
+//             id: id,
+//             zone_id: zone_id,
+//             garden_width: garden_width,
+//             garden_length: garden_length
+//         }
+
+//         sqlQuery=`INSERT INTO userGardens (user_id, zone_id, garden_width, garden_length) VALUES (?, ?, ?, ?);`
+//             sqlQuery = mysql.format(sqlQuery, [id, zone_id, garden_width, garden_length]);
+
+//             pool.query(sqlQuery, (err) => {
+//                 if (err) return handleSQLError(res, err);
+//                 // return;
+//             })
+//             res.send(newGarden)
+// }
 
 const updateGarden = (req, res) => {
 

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
@@ -8,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import EnterDimensions from './EnterDimensions/EnterDimensions';
 import EnterBeds from './EnterBeds/EnterBeds';
 import ArrangeBeds from './ArrangeBeds/ArrangeBeds'
+import axios from 'axios';
 import './AddGardens.css'
 
 const useStyles = makeStyles((theme) => ({
@@ -43,6 +45,8 @@ export default function AddGardens(props) {
   const [zone, setZone] = useState(0)
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
+  const [currentLayout, setCurrentLayout] = useState([]);
+  const history = useHistory();
   // const [dimensions, setDimensions] = useState({ width: 0, height: 0})
 
   // console.log(props.userInfo)
@@ -104,6 +108,25 @@ const handleAddBed = (bed) => {
 //   // console.log(dimensions)
 // } 
 
+  const updateUserGardenDB = () => {
+    const newGarden = {
+      id: props.userInfo.id,
+      zone: zone,
+      width: props.createGarden.width,
+      length: props.createGarden.length
+    }
+    console.log("newGarden obj", newGarden)
+    axios.post('http://localhost:8080/users/gardens/create', newGarden)
+    // axios({
+    //   method: 'post',
+    //   url: 'http://localhost:8080/users/gardens/create',
+    //   data: newGarden
+    // })
+      .then((res) => {
+        console.log(res.data)
+      }).catch((error) => console.log(error))
+  }
+
   const handleNext = () => {
     // console.log(activeStep)
     let userZip;
@@ -130,7 +153,10 @@ const handleAddBed = (bed) => {
         break;
         case 2:
           console.log("finished")
+          console.log("created garden", props.createGarden)
+          updateUserGardenDB();
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
+          history.push('/home')
           break;
     }
   };
@@ -140,6 +166,7 @@ const handleAddBed = (bed) => {
   };
 
   const handleReset = () => {
+    props.resetGarden()
     setActiveStep(0);
   };
 
@@ -150,11 +177,17 @@ const handleAddBed = (bed) => {
 const handleUpdateItem = (index) => {
   props.updateCurrentItem(index)
   // console.log("current Index", index)
-  console.log("current Item", props.createGarden.beds[index])
+  // console.log("current Item", props.createGarden.beds[index])
+}
+const handleCurrentLayout = (layout) => {
+  setCurrentLayout(layout)
+  props.updateCurrentLayout(layout)
+  console.log("current layout", layout)
 }
 
 useEffect(() => {
   convertZiptoZone()
+  console.log(props.createGarden)
 }, [])
 
   // console.log("addGarden", props.createGarden)
@@ -184,6 +217,8 @@ useEffect(() => {
         return <ArrangeBeds 
           createGarden={props.createGarden}
           handleUpdateItem={e => {handleUpdateItem(e)}}
+          handleCurrentLayout={e => {handleCurrentLayout(e)}}
+          
         />;
       default:
         return 'Unknown stepIndex';

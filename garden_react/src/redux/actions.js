@@ -139,3 +139,25 @@ export const updateCurrentItem = (index) => {
         value: index
     }
 }
+
+export const updateCurrentLayout = (layout) => {
+    return {
+        type: 'UPDATE_LAYOUT',
+        value: layout
+    }
+}
+
+export const resetGarden = () => {
+    const defaultValues = {
+        width: 0,
+        length: 0,
+        zipcode: 0,
+        beds: [],
+        currentItem: {},
+        layout: [],
+    }
+    return {
+        type: 'RESET_GARDEN',
+        value: defaultValues
+    }
+}

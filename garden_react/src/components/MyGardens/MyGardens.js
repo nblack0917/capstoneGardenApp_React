@@ -34,7 +34,13 @@ function MyGardens(props)  {
 
     return (
         <div className="userHomeBody">
-            <GardenCard userInfo={props.userInfo} userGardens={userGardens} handleGardenClick={e => handleGardenClick(e)} recheckGardens={(id) => recheckGardens(id)} />
+            <GardenCard
+                userInfo={props.userInfo}
+                userGardens={userGardens}
+                handleGardenClick={e => handleGardenClick(e)}
+                recheckGardens={(id) => recheckGardens(id)}
+                resetGarden={() => props.resetGarden()}
+            />
         </div>
     )
 }

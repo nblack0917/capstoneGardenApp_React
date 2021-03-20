@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -12,6 +12,7 @@ import leaf from './Leaf.png'
 import leaf2 from './Leaf_2.png'
 import calendarPlace from './calendarPlaceholder.png'
 import clockPlace from './clockPlaceholder.png'
+import { fetchUserGardensById } from '../../redux/actions';
 
 function UserHome(props) {
     const history = useHistory();
@@ -20,8 +21,8 @@ function UserHome(props) {
         history.push('/my_plants')
     }
     const handleMyGardensClick = () => {
-        const userID = props.userInfo.id
-        props.fetchUserGardensById(userID)
+        // const userID = props.userInfo.id
+        // props.fetchUserGardensById(userID)
         history.push('/my_gardens')
     }
     const handleMyCalendarClick = () => {
@@ -29,6 +30,12 @@ function UserHome(props) {
     }
     
     console.log("user info state", props.userInfo)
+
+    useEffect(() => {
+        const userID = props.userInfo.id
+        console.log("userID", userID)
+        props.fetchUserGardensById(userID)
+    }, [])
 
     return (
         <div className="userHomeBody">

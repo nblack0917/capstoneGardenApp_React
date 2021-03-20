@@ -7,11 +7,12 @@ class Connection {
       console.log('creating mysql connection...')
 
       const config = {
-        connectionLimit : 10,
-        host            : process.env.DB_HOSTNAME,
-        user            : process.env.DB_USERNAME,
-        password        : process.env.DB_PASSWORD,
-        database        : process.env.DB_DATABASENAME
+        connectionLimit     : 10,
+        host                : process.env.DB_HOSTNAME,
+        user                : process.env.DB_USERNAME,
+        password            : process.env.DB_PASSWORD,
+        database            : process.env.DB_DATABASENAME,
+        multipleStatements  : true,
       }
 
       // if (process.env.NODE_ENV === 'production' && process.env.CLOUD_INSTANCE) {

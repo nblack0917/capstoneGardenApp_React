@@ -1,5 +1,6 @@
 import React from 'react'
 import UserPlantList from '../../UserPlantList/UserPlantList'
+import GardenGrid from './GardenGrid'
 
 function Garden(props) {
 
@@ -13,6 +14,7 @@ function Garden(props) {
         <div className="userHomeBody">
             Garden # {props.gardenId}
             <UserPlantList userPlantList={props.userPlantList} handleRemovePlantClick={e => handleRemovePlantClick(e)} />
+            <GardenGrid />
         </div>
     )
 }

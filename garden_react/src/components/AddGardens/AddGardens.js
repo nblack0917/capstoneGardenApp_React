@@ -46,6 +46,7 @@ export default function AddGardens(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [currentLayout, setCurrentLayout] = useState([]);
+  const [lastBedId, setLastBedId] = useState(0)
   const history = useHistory();
   // const [dimensions, setDimensions] = useState({ width: 0, height: 0})
 
@@ -108,6 +109,17 @@ const handleAddBed = (bed) => {
 //   // console.log(dimensions)
 // } 
 
+  const getLastBedId = async () => {
+    let bedId = 0;
+
+    axios.get('http://localhost:8080/last_bed')
+      .then((res) => {
+        // console.log("get data", res.data)
+        bedId = parseInt(res.data)
+        setLastBedId(bedId)
+      }).catch((error) => console.log(error))
+}
+
   const updateUserGardenDB = () => {
     const newGarden = {
       id: props.userInfo.id,
@@ -115,7 +127,7 @@ const handleAddBed = (bed) => {
       width: props.createGarden.width,
       length: props.createGarden.length
     }
-    console.log("newGarden obj", newGarden)
+    // console.log("newGarden obj", newGarden)
     axios.post('http://localhost:8080/users/gardens/create', newGarden)
     // axios({
     //   method: 'post',
@@ -123,8 +135,26 @@ const handleAddBed = (bed) => {
     //   data: newGarden
     // })
       .then((res) => {
-        console.log(res.data)
+        console.log("update userGardens",res.data)
       }).catch((error) => console.log(error))
+  }
+
+  const updateUserGardenBedsDB = () => {
+    const gardenInfo = props.createGarden;
+    axios.post('http://localhost:8080/users/gardens/create/beds', gardenInfo)
+    .then((res) => {
+      console.log("update gardenBeds", res.data)
+    }).catch((error) => console.log(error))
+  }
+  
+  const updateUserGardenLayoutDB = () => {
+    const gardenInfo = props.createGarden;
+    const layoutInfo = [lastBedId, gardenInfo]
+    console.log("layoutInfo sent", layoutInfo)
+    axios.post('http://localhost:8080/users/gardens/create/layout', layoutInfo)
+    .then((res) => {
+      console.log("update gardenLayout",res.data)
+    }).catch((error) => console.log(error))
   }
 
   const handleNext = () => {
@@ -146,15 +176,21 @@ const handleAddBed = (bed) => {
         
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         // console.log("new Dim", newDimensions)
+        getLastBedId()
         props.updateNewGardenDimensions(newDimensions)
       break;
       case 1:
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        console.log("lastBedId", lastBedId)
         break;
         case 2:
           console.log("finished")
           console.log("created garden", props.createGarden)
-          updateUserGardenDB();
+          Promise.all([updateUserGardenDB(), updateUserGardenBedsDB(), updateUserGardenLayoutDB()])
+            .then(function (results) {
+              const acct = results[0];
+              const perm = results[1];
+          });   
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           history.push('/home')
           break;
@@ -182,12 +218,20 @@ const handleUpdateItem = (index) => {
 const handleCurrentLayout = (layout) => {
   setCurrentLayout(layout)
   props.updateCurrentLayout(layout)
-  console.log("current layout", layout)
+  // console.log("current layout", layout)
+}
+
+const updateNextGardenId = () => {
+  const lastIndex = props.userGardens.length - 1;
+  let lastGardenId = props.userGardens[lastIndex].garden_id + 1;
+  props.updateNextGardenId(lastGardenId);
 }
 
 useEffect(() => {
-  convertZiptoZone()
-  console.log(props.createGarden)
+  convertZiptoZone();
+  // getLastBedId();
+  updateNextGardenId();
+  console.log("createGarden start", props.createGarden)
 }, [])
 
   // console.log("addGarden", props.createGarden)

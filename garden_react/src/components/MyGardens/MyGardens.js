@@ -9,7 +9,7 @@ function MyGardens(props)  {
 
     const checkGardenPlants = () => {
         const userID = props.userInfo.id
-        console.log("usr id", userID)
+        // console.log("usr id", userID)
         props.fetchUserGardenPlantsById(userID)
     }
 
@@ -22,14 +22,14 @@ function MyGardens(props)  {
     }, [])
     
     const recheckGardens = (id) => {
-        console.log("refreshing gardens", id)
+        // console.log("refreshing gardens", id)
         const userID = props.userInfo.id
         props.fetchUserGardensById(userID)
     }
 
-    console.log("user info", props.userInfo)
-    console.log("user gardens",props.userGardens)
-    console.log("user Plants",props.userPlantList)
+    // console.log("user info", props.userInfo)
+    // console.log("user gardens",props.userGardens)
+    // console.log("user Plants",props.userPlantList)
     // console.log("user name", props.userName)
 
     return (

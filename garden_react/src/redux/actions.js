@@ -82,7 +82,7 @@ export const fetchUserGardensById = (id) => {
                     type: 'FETCH_USER_GARDENS',
                     value: response
                 }
-                console.log(response)
+                // console.log(response)
                 dispatch(action)
             })
     }
@@ -98,7 +98,7 @@ export const fetchUserGardenPlantsById = (id) => {
                     type: 'FETCH_ALL_GARDEN_PLANTS_BY_USER',
                     value: response
                 }
-                console.log("allplantsbyID", response)
+                // console.log("allplantsbyID", response)
                 dispatch(action)
             })
     }
@@ -107,6 +107,13 @@ export const fetchUserGardenPlantsById = (id) => {
 export const updateGardenId = (id) => {
     return {
         type: 'UPDATE_GARDEN_ID',
+        value: id
+    }
+}
+
+export const updateNextGardenId = (id) => {
+    return {
+        type: 'UPDATE_NEXT_GARDEN_ID',
         value: id
     }
 }

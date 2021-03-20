@@ -9,6 +9,7 @@ export default {
     userAllGardenPlants: [],
     gardenId: 1,
     createGarden: {
+        garden_id: 0,
         width: 0,
         length: 0,
         zipcode: 0,

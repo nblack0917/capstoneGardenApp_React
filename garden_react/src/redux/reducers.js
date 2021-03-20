@@ -95,6 +95,7 @@ const gardenId = (state = 0, action) => {
 }
 
 const createGarden = (state = {
+    garden_id: 0,
     width: 0,
     length: 0,
     zipcode: 0,
@@ -103,6 +104,11 @@ const createGarden = (state = {
     layout: [],
     }, action) => {
         switch(action.type) {
+            case 'UPDATE_NEXT_GARDEN_ID':
+                return {
+                    ...state,
+                    garden_id: action.value
+                }
             case 'UPDATE_DIMENSIONS':
                 // console.log("reduce", action.value)
                 let values = action.value;

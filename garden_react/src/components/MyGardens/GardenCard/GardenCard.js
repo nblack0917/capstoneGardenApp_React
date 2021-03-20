@@ -149,8 +149,8 @@ const EnhancedTableToolbar = (props) => {
 
 
 
-  console.log("Toolbar user", props.userInfo)
-  console.log("Toolbar gardens", props.userGardens)
+  // console.log("Toolbar user", props.userInfo)
+  // console.log("Toolbar gardens", props.userGardens)
 
   return (
     <Toolbar

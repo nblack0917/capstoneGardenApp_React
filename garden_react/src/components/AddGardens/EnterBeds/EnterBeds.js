@@ -99,7 +99,7 @@ function EnterBeds(props) {
         // setIsPlanter(true)
     }
 
-    console.log("AddBeds:", props.createGarden)
+    // console.log("AddBeds:", props.createGarden)
 
     if (isPlanter === true) {
         return (

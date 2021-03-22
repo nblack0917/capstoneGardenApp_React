@@ -1,16 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
+import clsx from 'clsx';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { green } from '@material-ui/core/colors';
 import Button from '@material-ui/core/Button';
+import Fab from '@material-ui/core/Fab';
+import CheckIcon from '@material-ui/icons/Check';
+import LocalFloristIcon from '@material-ui/icons/LocalFlorist';
 import Typography from '@material-ui/core/Typography';
 import EnterDimensions from './EnterDimensions/EnterDimensions';
 import EnterBeds from './EnterBeds/EnterBeds';
 import ArrangeBeds from './ArrangeBeds/ArrangeBeds'
 import axios from 'axios';
 import './AddGardens.css'
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +49,31 @@ const useStyles = makeStyles((theme) => ({
         opacity: "0.7"
     }
   },
+  wrapper: {
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonSuccess: {
+    backgroundColor: green[500],
+    '&:hover': {
+      backgroundColor: green[700],
+    },
+  },
+  fabProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: -6,
+    left: -6,
+    zIndex: 1,
+  },
+  buttonProgress: {
+    color: green[500],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
+  },
 }));
 
 export default function AddGardens(props) {
@@ -47,6 +86,9 @@ export default function AddGardens(props) {
   const [currentLayout, setCurrentLayout] = useState([]);
   const [lastBedId, setLastBedId] = useState(0)
   const [lastGardenId, setLastGardenId] = useState(0)
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [success, setSuccess] = useState(false);
   const history = useHistory();
   const classes = useStyles();
   // const [dimensions, setDimensions] = useState({ width: 0, height: 0})
@@ -54,10 +96,14 @@ export default function AddGardens(props) {
   // console.log(props.userInfo)
 
   function getSteps() {
-    return ['Enter Garden Dimensions and Zip code', 'Add Garden Beds or Planters', 'Arrange Beds/Planters in Garden'];
+    return ['Enter Garden Dimensions and Zip code', 'Add Garden Beds or Planters', 'Arrange Beds/Planters in Garden', 'Submit'];
   }
 
   const steps = getSteps();
+
+  const buttonClassname = clsx({
+    [classes.buttonSuccess]: success,
+  });
 
   const handleParentWidthChange = (num) => {
     setWidth(num)
@@ -110,6 +156,22 @@ const handleAddBed = (bed) => {
   props.addNewBed(bed)
 }
 
+const handleClick = () => {
+  setOpen(true);
+};
+
+const handleClose = (event, reason) => {
+  if (reason === 'clickaway') {
+    return;
+  }
+
+  setOpen(false);
+};
+
+const handleFinishLoading = () => {
+  setSuccess(true);
+  setLoading(false);
+}
 // const handleNewDimensions = (dim) => {
 //   console.log(dim)
 //   setDimensions(dim)
@@ -173,46 +235,57 @@ const handleAddBed = (bed) => {
     .then((res) => {
       console.log("update gardenLayout", res.status)
     }).catch((error) => console.log(error))
-    return console.log("Data Sent!")
+    console.log("Data Sent!")
+    handleClick()
+    return handleFinishLoading()
   }
 
 
-  const updateUserGardenDB = () => {
-    const newGarden = {
-      id: props.userInfo.id,
-      zone: zone,
-      width: props.createGarden.width,
-      length: props.createGarden.length
-    }
-    // console.log("newGarden obj", newGarden)
-    axios.post('http://localhost:8080/users/gardens/create', newGarden)
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:8080/users/gardens/create',
-    //   data: newGarden
-    // })
-      .then((res) => {
-        // console.log("update userGardens",res.data)
-      }).catch((error) => console.log(error))
-  }
-
-  const updateUserGardenBedsDB = () => {
-    const gardenInfo = props.createGarden;
-    const layoutInfo = {lastGardenId, gardenInfo}
-    axios.post('http://localhost:8080/users/gardens/create/beds', layoutInfo)
-    .then((res) => {
-      console.log("update gardenBeds", res.data)
-    }).catch((error) => console.log(error))
-  }
+  //Separate POST requests // No longer in use
   
-  const updateUserGardenLayoutDB = () => {
-    const gardenInfo = props.createGarden;
-    const layoutInfo = {lastBedId, gardenInfo}
-    console.log("layoutInfo sent", layoutInfo)
-    axios.post('http://localhost:8080/users/gardens/create/layout', layoutInfo)
-    .then((res) => {
-      console.log("update gardenLayout",res.data)
-    }).catch((error) => console.log(error))
+  // const updateUserGardenDB = () => {
+  //   const newGarden = {
+  //     id: props.userInfo.id,
+  //     zone: zone,
+  //     width: props.createGarden.width,
+  //     length: props.createGarden.length
+  //   }
+  //   // console.log("newGarden obj", newGarden)
+  //   axios.post('http://localhost:8080/users/gardens/create', newGarden)
+  //   // axios({
+  //   //   method: 'post',
+  //   //   url: 'http://localhost:8080/users/gardens/create',
+  //   //   data: newGarden
+  //   // })
+  //     .then((res) => {
+  //       // console.log("update userGardens",res.data)
+  //     }).catch((error) => console.log(error))
+  // }
+
+  // const updateUserGardenBedsDB = () => {
+  //   const gardenInfo = props.createGarden;
+  //   const layoutInfo = {lastGardenId, gardenInfo}
+  //   axios.post('http://localhost:8080/users/gardens/create/beds', layoutInfo)
+  //   .then((res) => {
+  //     console.log("update gardenBeds", res.data)
+  //   }).catch((error) => console.log(error))
+  // }
+  
+  // const updateUserGardenLayoutDB = () => {
+  //   const gardenInfo = props.createGarden;
+  //   const layoutInfo = {lastBedId, gardenInfo}
+  //   console.log("layoutInfo sent", layoutInfo)
+  //   axios.post('http://localhost:8080/users/gardens/create/layout', layoutInfo)
+  //   .then((res) => {
+  //     console.log("update gardenLayout",res.data)
+  //   }).catch((error) => console.log(error))
+  // }
+
+  const handleStartLoading = () => {
+    if (!loading) {
+      setSuccess(false);
+      setLoading(true);
+    }
   }
 
   const handleNext = () => {
@@ -240,9 +313,9 @@ const handleAddBed = (bed) => {
       break;
       case 1:
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
-        break;
-        case 2:
-          console.log("finished")
+      break;
+      case 2:
+          // console.log("finished")
           console.log("created garden", props.createGarden)
           // Promise.all([updateUserGardenDB(), updateUserGardenBedsDB(), updateUserGardenLayoutDB()])
           // // Promise.all([updateUserGardenDB(), updateUserGardenBedsDB()])
@@ -250,10 +323,14 @@ const handleAddBed = (bed) => {
           //     console.log(results)
           // });   
           sendData();
+          handleStartLoading()
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           recheckGardens(props.userInfo.id)
-          history.push('/home')
-          break;
+      break;
+      case 3:
+            setActiveStep((prevActiveStep) => prevActiveStep + 1);
+            history.push('/home')
+      break;
     }
   };
 
@@ -325,8 +402,36 @@ useEffect(() => {
           handleCurrentLayout={e => {handleCurrentLayout(e)}}
           
         />;
+        case 3:
+            return (
+              <div>Saving your garden.</div>
+            )
       default:
         return 'Unknown stepIndex';
+    }
+  }
+
+  const LastButton = () => {
+    if (activeStep === steps.length - 1) {
+      return (
+        <div className={classes.wrapper}>
+                <Fab
+                  aria-label="save"
+                  color="primary"
+                  className={buttonClassname}
+                  onClick={handleNext}
+                >
+                  {success ? <CheckIcon /> : <LocalFloristIcon />}
+                </Fab>
+                {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+              </div>
+      )
+    } else {
+      return (
+        <Button variant="contained" className={classes.buttonStyle} onClick={handleNext}>
+          Next
+        </Button>
+      )
     }
   }
 
@@ -356,10 +461,16 @@ useEffect(() => {
               >
                 Back
               </Button>
-              <Button variant="contained" className={classes.buttonStyle} onClick={handleNext}>
+              <LastButton />
+              {/* <Button variant="contained" className={classes.buttonStyle} onClick={handleNext}>
                 {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-              </Button>
+              </Button> */}
             </div>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                Your Garden has be saved!
+              </Alert>
+            </Snackbar>
           </div>
         )}
       </div>

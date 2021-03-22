@@ -8,6 +8,7 @@ export default {
     userGardens: [],
     userAllGardenPlants: [],
     gardenId: 1,
+    selectedIndexNum: 0,
     createGarden: {
         garden_id: 0,
         width: 0,
@@ -16,5 +17,7 @@ export default {
         beds: [],
         currentItem: {},
         layout: [],
-    }
+    },
+    allGardenBeds: [],
+    gridLayout: [],
 }

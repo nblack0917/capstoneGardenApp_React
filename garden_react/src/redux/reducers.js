@@ -94,6 +94,16 @@ const gardenId = (state = 0, action) => {
     }
 }
 
+const selectedIndexNum = (state = 0, action) => {
+    switch(action.type) {
+        case 'UPDATE_INDEX_NUM':
+            const newIDX = action.value
+            return newIDX
+        default:
+            return state
+    }
+}
+
 const createGarden = (state = {
     garden_id: 0,
     width: 0,
@@ -153,5 +163,38 @@ const createGarden = (state = {
         }
     }
 
+    const allGardenBeds = (state = [], action) => {
+        switch(action.type) {
+            case 'GET_ALL_USER_BEDS':
+                return action.value
+            default: 
+                return state
+        }
+    }
 
-export default combineReducers({  loggedIn, userName, allPlantsByType, userPlantList, lastTab, userInfo, userGardens, userAllGardenPlants, gardenId, createGarden })
+    const gridLayout = (state = [], action) => {
+        switch(action.type) {
+            case 'UPDATE_SAVED_LAYOUT':
+                // console.log("reducer update layout", action.value)
+                return action.value
+            default: 
+                return state
+        }
+    }
+
+
+export default combineReducers({ 
+    loggedIn,
+    userName,
+    allPlantsByType,
+    userPlantList,
+    lastTab,
+    userInfo,
+    userGardens,
+    userAllGardenPlants,
+    gardenId,
+    createGarden,
+    allGardenBeds,
+    gridLayout,
+    selectedIndexNum,
+})

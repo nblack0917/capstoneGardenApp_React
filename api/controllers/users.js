@@ -116,13 +116,12 @@ const addNewGarden = (req, res, next) => {
 
 
 const addGardenBeds = (req, res, next) => {
-    let queryParams = []
     let newBed = [];
-    let newLayout = [];
-    const dataPack = req.body
-    const gardenArray = dataPack[2]
-    let nextBedId = dataPack[1] + 1;
-    let gardenId = gardenArray.garden_id
+    const gardenInfo = req.body
+    // console.log("gardenInfo", gardenInfo)
+    let nextGardenId = parseInt(gardenInfo.lastGardenId) + 1;
+    const gardenArray = gardenInfo.gardenInfo;
+    // let gardenId = gardenArray.garden_id
     for (let item of gardenArray.layout) {
         let isPlanter;
         if (item.isPlanter === true) {
@@ -130,24 +129,18 @@ const addGardenBeds = (req, res, next) => {
         } else {
             isPlanter = 0;
         }
-        let i = item.i.toString();
         let width = item.w * 3;
         let length = item.h * 3
-        let newBedItem = [gardenId, isPlanter, width, length]
-        let newLayoutItem = [nextBedId, gardenId, i, item.x, item.y, width, length, true, false, isPlanter]
+        let newBedItem = [nextGardenId, isPlanter, width, length]
         newBed.push(newBedItem)
-        newLayout.push(newLayoutItem)
-        nextBedId = nextBedId + 1
     }
     newBed.pop();
-    newLayout.pop();
-    queryParams.push(newBed);
-    queryParams.push(newLayout)
+    // console.log(newBed)
 
-    sqlQuery=`INSERT INTO userGardens (user_id, zone_id, garden_width, garden_length) VALUES (?, ?, ?, ?);`
-        sqlQuery = mysql.format(sqlQuery, queryParams);
+    sqlQuery=`INSERT INTO gardenBeds (garden_id, bed_type, bed_width, bed_length) VALUES ?;`
+        sqlQuery = mysql.format(sqlQuery);
 
-    pool.query(sqlQuery, (err, result, fields) => {
+    pool.query(sqlQuery, [newBed], (err, result, fields) => {
         if (err) return handleSQLError(res, err);
         console.log("Number of Rows Affected: ", result.affectedRows)
     })
@@ -155,11 +148,12 @@ const addGardenBeds = (req, res, next) => {
 }
 
 const addGardenLayout = (req, res, next) => {
-    const newLayout = [];
+    let newLayout = [];
     const layoutArray = req.body;
-    console.log("layoutArray", layoutArray)
-    let nextBedId = layoutArray[0] + 1;
-    const gardenArray = layoutArray[1];
+    // console.log("layoutArray", layoutArray)
+    let nextBedId = parseInt(layoutArray.lastBedId) + 1;
+    let nextGardenId = parseInt(layoutArray.lastGardenId) + 1;
+    const gardenArray = layoutArray.gardenInfo;
     let gardenId = gardenArray.garden_id
     
     for (let item of gardenArray.layout) {
@@ -172,12 +166,12 @@ const addGardenLayout = (req, res, next) => {
         let i = item.i.toString();
         let width = item.w * 3;
         let length = item.h * 3
-        let newItem = [nextBedId, gardenId, i, item.x, item.y, width, length, true, false, isPlanter]
+        let newItem = [nextBedId, nextGardenId, i, item.x, item.y, width, length, 1, 0, isPlanter]
         newLayout.push(newItem)
         nextBedId = nextBedId + 1
     }
     newLayout.pop();
-    console.log("newLayout", newLayout)
+    // console.log("newLayout", newLayout)
 
     sqlQuery=`INSERT INTO gardenLayout (bed_id, garden_id, i, x, y, w, h, isDraggable, isResizable, isPlanter) VALUES ?;`
 

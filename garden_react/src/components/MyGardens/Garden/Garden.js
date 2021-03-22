@@ -1,10 +1,13 @@
 import React from 'react'
 import UserPlantList from '../../UserPlantList/UserPlantList'
 import GardenGrid from './GardenGrid'
+import './Garden.css'
 
 function Garden(props) {
 
-    console.log(props.userAllGardenPlants)
+    console.log("plants", props.userAllGardenPlants)
+    console.log("beds", props.allGardenBeds)
+    console.log(props.state)
 
     const handleRemovePlantClick = (index) => {
         props.removePlantFromUserList(index)
@@ -13,8 +16,10 @@ function Garden(props) {
     return (
         <div className="userHomeBody">
             Garden # {props.gardenId}
-            <UserPlantList userPlantList={props.userPlantList} handleRemovePlantClick={e => handleRemovePlantClick(e)} />
-            <GardenGrid />
+            <div className="gardenGridConatiner">
+                <UserPlantList userPlantList={props.userPlantList} handleRemovePlantClick={e => handleRemovePlantClick(e)} />
+                <GardenGrid userGardens={props.userGardens} gridLayout={props.gridLayout} gardenId={props.gardenId} indexNum={props.selectedIndexNum} allGardenBeds={props.allGardenBeds} />
+            </div>
         </div>
     )
 }

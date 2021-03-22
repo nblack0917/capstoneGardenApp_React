@@ -63,7 +63,7 @@ const getGardensByUserId = (req, res) => {
     userGardens.garden_width,
     userGardens.garden_length,
     userGardens.zone_id
-FROM userGardens
+    FROM userGardens
 	JOIN users ON userGardens.user_id=users.id
     JOIN usersContact ON usersContact.user_id=users.id
     WHERE users.id=?`;
@@ -75,8 +75,24 @@ FROM userGardens
     })
 }
 
+const getGardenBedsLayoutByUserId = (req, res) => {
+    sqlQuery = `SELECT * FROM gardenBeds
+    JOIN gardenLayout ON gardenBeds.bed_id=gardenLayout.bed_id
+    JOIN userGardens ON gardenBeds.garden_id=userGardens.garden_id
+    JOIN users ON users.id=userGardens.user_id
+    WHERE users.id = ?`
+    sqlQuery = mysql.format(sqlQuery, [req.params.id]);
+    
+    // console.log(sqlQuery)
+    pool.query(sqlQuery, (err, rows) => {
+        if (err) return handleSQLError(res, err);
+        return res.json(rows);
+    })
+}
+
 module.exports = {
     getAllGardens,
     getAllGardenPlantsByUserId,
+    getGardenBedsLayoutByUserId,
     getGardensByUserId
 }

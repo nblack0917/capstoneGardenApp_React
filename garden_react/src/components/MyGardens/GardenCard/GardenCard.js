@@ -231,14 +231,213 @@ export default function GardenCard(props) {
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('calories');
   const [selected, setSelected] = React.useState([]);
+  const [selectedIndexNum, setSelectedIndexNum] = useState(0)
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
   const [gardens, setGardens] = useState([]);
+  const [layoutList, setLayoutList] = useState([])
   const rows = props.userGardens;
 
+  console.log("state", props.state)
   // console.log("User Gardens", gardens)
+  let layoutRows = rows.map(row => row.garden_id)
+  let userLayouts = []
+  for (let row of layoutRows) {
+    let layout = props.allGardenBeds.filter(beds => beds.garden_id===row);
+    userLayouts.push(layout);
+  }
+  // console.log("layoutRows", layoutRows)
+  // console.log("userLayotus", userLayouts)
+  // const currentGardenBeds = props.allGardenBeds.filter(bed => bed.garden_id === props.gardenId)
+  // console.log("current Beds", currentGardenBeds)
 
-  const handleRequestSort = (event, property) => {
+  let importedLayout = [];
+  let otherItem = []
+  
+  const createNewLayout = () => {
+    let lastItem = {};
+    let index = 0;
+    let lastI = 0;
+    for (let item of userLayouts) {
+      let gardenItem = [];
+      // console.log("gardenItem start", gardenItem)
+      // console.log("item", item, item.length, index)
+      if (item.length !== 0) {
+        // console.log("item", item)
+        for(let bed of item) {
+          // console.log("bed", bed)
+          let planter = false;
+          if (bed.isPlanter === 0) {
+            planter = false;
+          } else {
+            planter = true;
+          };
+          let newW = bed.w/3;
+          let newH = bed.h/3;
+          let iKey = parseInt(bed.i)
+          let newItem = {i: iKey.toString(), x: bed.x, y: bed.y, w: newW, h: newH, isDraggable: false, isResizable: false, isPlanter: planter, garden_width: bed.garden_width}
+          lastI = iKey
+          // console.log("gardenItem before add", gardenItem)
+          gardenItem.push(newItem)
+          // console.log("gardenItem add", gardenItem)
+        }
+        let lastItemSizes = convertLastItem(index)
+        let finalIKey = lastI + 1
+        lastItem = {i: finalIKey.toString(), x: lastItemSizes.lastColumn, y: 0, w: 1, h: lastItemSizes.hiddenBoxHeight, static: true, isPlanter: false};
+      }
+      index = index + 1
+      gardenItem.push(lastItem)
+      importedLayout.push(gardenItem)
+    }
+    // console.log("new Layout", importedLayout)
+    setLayoutList(importedLayout)
+    props.updateLayout(importedLayout)
+  }
+
+  const convertLastItem = (index) => {
+    // console.log("convert index", index)
+
+    let returnedSizes ={}
+    //function to round garden dimensions to nearest factor of 12
+    const roundDozens = (num) => {
+      let results = Math.round(num/12)*12;
+      return results
+    }
+
+    let currentLayout = userLayouts[index]
+
+    // variables and swith to set size and scale of grid and keep items square and round
+    let gardenWidth = roundDozens(parseInt(currentLayout[0].garden_width))
+    let gardenHeight = roundDozens(parseInt(currentLayout[0].garden_length))
+    // const findGardenContainerHeight = () => {
+    //   let widthScale = 650 / gardenWidth;
+    //   return gardenHeight * widthScale + 30;
+    // }
+    // let gardenContainerHeight = findGardenContainerHeight()
+    let gridRowHeight = 18;
+    let numOfCols = 24;
+    let lastColumn = gardenWidth+1
+    let hiddenBoxHeight = 53
+    switch(gardenWidth) {
+      case 12:
+        gridRowHeight = 130;
+        numOfCols = 5;
+        break;
+      case 24:
+        gridRowHeight = 65;
+        numOfCols = 9;
+        break;
+      case 36:
+        gridRowHeight = 48;
+        numOfCols = 12;
+        break;
+      case 48:
+        gridRowHeight = 31;
+        numOfCols = 17;
+        break;
+      case 60:
+        gridRowHeight = 22;
+        numOfCols = 21;
+        break;
+      case 72:
+        gridRowHeight = 17;
+        numOfCols = 25;
+        break;
+      case 84:
+        gridRowHeight = 14;
+        numOfCols = 29;
+        break;
+      case 96:
+        gridRowHeight = 10;
+        numOfCols = 33;
+        break;
+      case 108:
+        gridRowHeight = 8;
+        numOfCols = 37;
+        break;
+      case 120:
+        gridRowHeight = 6;
+        numOfCols = 41;
+        break;
+      case 132:
+        gridRowHeight = 5;
+        numOfCols = 45;
+        break;
+      case 144:
+        gridRowHeight = 4;
+        numOfCols = 49;
+        break;
+      case 156:
+        gridRowHeight = 3;
+        numOfCols = 53;
+        break;
+      case 168:
+        gridRowHeight = 2;
+        numOfCols = 57;
+        break;
+      case 180:
+        gridRowHeight = 1;
+        numOfCols = 61;
+        break;
+      default:
+        console.log("Error, invalid size")
+    }
+    switch(gardenHeight) {
+      case 12:
+        hiddenBoxHeight = 3.825
+        break;
+      case 24:
+        hiddenBoxHeight = 7.55
+        break;
+      case 36:
+        hiddenBoxHeight = 11.125
+        break;
+      case 48:
+        hiddenBoxHeight = 16
+        break;
+      case 60:
+        hiddenBoxHeight = 20
+        break;
+      case 72:
+        hiddenBoxHeight = 23
+        break;
+      case 84:
+        hiddenBoxHeight = 28
+        break;
+      case 96:
+        hiddenBoxHeight = 32
+        break;
+      case 108:
+        hiddenBoxHeight = 37
+        break;
+      case 120:
+        hiddenBoxHeight = 40
+        break;
+      case 132:
+        hiddenBoxHeight = 45
+        break;
+      case 144:
+        hiddenBoxHeight = 48;
+        break;
+      case 156:
+        hiddenBoxHeight = 52
+        break;
+      case 168:
+        hiddenBoxHeight = 56;
+        break;
+      case 180:
+        hiddenBoxHeight = 62
+        break;
+      default:
+        console.log("Error, invalid size")
+    }
+    returnedSizes = { lastColumn, hiddenBoxHeight}
+    return returnedSizes
+
+}
+
+
+const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
@@ -270,13 +469,16 @@ export default function GardenCard(props) {
         selected.slice(selectedIndex + 1),
       );
     }
+    setSelectedIndexNum(selectedIndex)
     setSelected(newSelected);
     selectedIndexes = newSelected;
     // console.log("selected",newSelected)
   };
 
-  const handleGardenClick = (id) => {
+  const handleGardenClick = (id, index) => {
       // console.log("hllo", id);
+      console.log("selected Index", index)
+      props.updateSelectedIndex(index)
       props.handleGardenClick(id)
       history.push('/my_gardens/garden')
   }   
@@ -310,8 +512,14 @@ export default function GardenCard(props) {
     setSelected([]);
   }
 
+  const handleUpdateLayouts = (layout) => {
+    props.updateLayout(layout)
+  }
+
 useEffect(() => {
   setGardens(rows)
+  handleUpdateLayouts(userLayouts)
+  createNewLayout();
 }, [])
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
@@ -352,7 +560,7 @@ useEffect(() => {
                   return (
                     <TableRow
                       hover
-                      onClick={() => handleGardenClick(row.garden_id)}
+                      onClick={() => handleGardenClick(row.garden_id, index)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}

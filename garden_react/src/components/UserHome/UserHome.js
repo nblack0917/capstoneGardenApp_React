@@ -4,6 +4,7 @@ import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import axios from 'axios';
 import CardMedia from '@material-ui/core/CardMedia';
 import './UserHome.css'
 import garden1 from './gardenPlaceholder_1.png'
@@ -28,13 +29,23 @@ function UserHome(props) {
     const handleMyCalendarClick = () => {
         history.push('/my_calendar')
     }
+
+    const getGardenLayout = async () => {
+        let userID = props.userInfo.id
+    
+        axios.get(`http://localhost:8080/gardens/layout/${userID}`)
+          .then((res) => {
+            props.getAllUserGardenBeds(res.data)
+          }).catch((error) => console.log(error))
+      }
     
     console.log("user info state", props.userInfo)
 
     useEffect(() => {
-        const userID = props.userInfo.id
-        console.log("userID", userID)
-        props.fetchUserGardensById(userID)
+        const userID = props.userInfo.id;
+        console.log("userID", userID);
+        getGardenLayout();
+        props.fetchUserGardensById(userID);
     }, [])
 
     return (

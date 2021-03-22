@@ -111,6 +111,13 @@ export const updateGardenId = (id) => {
     }
 }
 
+export const updateSelectedIndex = (num) => {
+    return {
+        type: 'UPDATE_INDEX_NUM',
+        value: num
+    }
+}
+
 export const updateNextGardenId = (id) => {
     return {
         type: 'UPDATE_NEXT_GARDEN_ID',
@@ -166,5 +173,19 @@ export const resetGarden = () => {
     return {
         type: 'RESET_GARDEN',
         value: defaultValues
+    }
+}
+
+export const getAllUserGardenBeds = (beds) => {
+    return {
+        type: 'GET_ALL_USER_BEDS',
+        value: beds
+    }
+}
+
+export const updateLayout = (layout) => {
+    return {
+        type: 'UPDATE_SAVED_LAYOUT',
+        value: layout
     }
 }

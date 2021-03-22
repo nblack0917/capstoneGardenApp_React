@@ -5,6 +5,7 @@ const gardenRouter = require('./routes/gardens')
 const bedsRouter = require('./routes/beds')
 const usersRouter = require('./routes/users')
 const lastBedRouter = require('./routes/lastBed')
+const lastGardenRouter = require('./routes/lastGarden')
 const { logger } = require('./middleware')
 var cors = require("cors");
 
@@ -19,6 +20,7 @@ app.use('/plants', plantsRouter);
 app.use('/gardens', gardenRouter);
 app.use('/beds', bedsRouter);
 app.use('/last_bed', lastBedRouter);
+app.use('/last_garden', lastGardenRouter);
 app.use('/users', usersRouter);
 
 

@@ -40,15 +40,15 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Contact(props) {
-    const [success, setSuccess] = useState(false);
+    // const [success, setSuccess] = useState(false);
     const classes = useStyles();
     console.log(props.userInfo)
 
-    useEffect(() => {
-        if ( window.location.search.includes('success=true') ) {
-          setSuccess(true);
-        }
-      }, []);
+    // useEffect(() => {
+    //     if ( window.location.search.includes('success=true') ) {
+    //       setSuccess(true);
+    //     }
+    //   }, []);
 
     return (
         <div className="userHomeBody">
@@ -62,7 +62,7 @@ function Contact(props) {
                         name='contact'
                         method='POST'
                         data-netlify="true"
-                        action="/home"
+                        action="/"
                         className={classes.form}
                     >
                         <TextField

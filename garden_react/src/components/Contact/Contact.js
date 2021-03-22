@@ -83,6 +83,17 @@ function Contact(props) {
         console.log("message",e.target.value)
     }
     
+    const SuccessText = () => {
+        if (success) {
+            return (
+                <Typography style={{ color: "green" }} variant="h6">Thanks for your message!</Typography>
+            )
+        } else {
+            return (
+                <Typography style={{ color: "green" }} variant="h5">Please feel free to send feedback.</Typography>
+            )
+        }
+    }
 
     useEffect(() => {
         setSuccess(false)
@@ -92,10 +103,7 @@ function Contact(props) {
         <div className="userHomeBody">
             <Paper className={classes.paper}>
                 <div className={classes.formContainer}>
-                    <Typography variant="h5">Please feel free to send feedback.</Typography>
-                    {success && (
-                        <p style={{ color: "green" }}>Thanks for your message! </p>
-                    )}
+                    <SuccessText />
                     <form
                         name='contact'
                         method='POST'

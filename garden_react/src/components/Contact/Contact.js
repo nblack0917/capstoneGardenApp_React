@@ -56,6 +56,7 @@ function Contact(props) {
 
     const handleSubmit = e => {
         let dataPack = { "name": name, "email": email, "message": message }
+        console.log("dataPack", dataPack)
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -96,7 +97,7 @@ function Contact(props) {
                         <p style={{ color: "green" }}>Thanks for your message! </p>
                     )}
                     <form
-                        name='contactform'
+                        name='contact'
                         method='POST'
                         data-netlify="true"
                         action="/"
@@ -107,7 +108,7 @@ function Contact(props) {
                             className={classes.TextField}
                             required
                             id="outlined-required"
-                            label="Name"
+                            label="name"
                             value={name}
                             variant="outlined"
                             onChange={handleNameChange}

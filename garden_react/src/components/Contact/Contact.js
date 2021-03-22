@@ -56,7 +56,7 @@ function Contact(props) {
 
     const handleSubmit = e => {
         // let dataPack = { "name": name, "email": email, "message": message }
-        console.log("dataPack", dataPack)
+        // console.log("dataPack", dataPack)
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },

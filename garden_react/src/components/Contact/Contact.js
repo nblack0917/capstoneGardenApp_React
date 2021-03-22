@@ -55,15 +55,17 @@ function Contact(props) {
     // console.log(props.userInfo)
 
     const handleSubmit = e => {
-        let dataPack = { "name": name, "email": email, "message": message }
+        // let dataPack = { "name": name, "email": email, "message": message }
         console.log("dataPack", dataPack)
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact", dataPack })
+          body: encode({ "form-name": "contact", "name": name, "email": email, "message": message })
         })
           .then(() => alert("Success!"))
           .catch(error => alert(error));
+
+          setSuccess(true)
   
         e.preventDefault();
       };
@@ -83,9 +85,7 @@ function Contact(props) {
     
 
     useEffect(() => {
-        if ( window.location.search.includes('success=true') ) {
-          setSuccess(true);
-        }
+        setSuccess(false)
       }, []);
 
     return (
@@ -104,6 +104,7 @@ function Contact(props) {
                         className={classes.form}
                         onSubmit={handleSubmit}
                     >
+                        {/* <input type="hidden" name="form-name" value="contact" /> */}
                         <TextField
                             className={classes.TextField}
                             required

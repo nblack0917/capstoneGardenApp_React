@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState , useEffect } from 'react'
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
@@ -40,18 +40,29 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Contact(props) {
+    const [success, setSuccess] = useState(false);
     const classes = useStyles();
     console.log(props.userInfo)
+
+    useEffect(() => {
+        if ( window.location.search.includes('success=true') ) {
+          setSuccess(true);
+        }
+      }, []);
 
     return (
         <div className="userHomeBody">
             <Paper className={classes.paper}>
                 <div className={classes.formContainer}>
                     <Typography variant="h5">Please feel free to send feedback.</Typography>
+                    {success && (
+                        <p style={{ color: "green" }}>Thanks for your message! </p>
+                    )}
                     <form
-                        name='conatact'
+                        name='contact'
                         method='POST'
                         data-netlif="true"
+                        action="/contact/?success=true"
                         className={classes.form}
                     >
                         <TextField

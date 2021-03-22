@@ -1,6 +1,7 @@
 import React from 'react'
 import UserPlantList from '../../UserPlantList/UserPlantList'
 import GardenGrid from './GardenGrid'
+import CurrentBed from './CurrentBed'
 import './Garden.css'
 
 function Garden(props) {
@@ -18,6 +19,7 @@ function Garden(props) {
             Garden # {props.gardenId}
             <div className="gardenGridConatiner">
                 <UserPlantList userPlantList={props.userPlantList} handleRemovePlantClick={e => handleRemovePlantClick(e)} />
+                <CurrentBed />
                 <GardenGrid userGardens={props.userGardens} gridLayout={props.gridLayout} gardenId={props.gardenId} indexNum={props.selectedIndexNum} allGardenBeds={props.allGardenBeds} />
             </div>
         </div>

@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     background: "#f7f5ed",
     width: '80%',
-    margin: '20px auto'
+    margin: '35px auto'
   },
   paper: {
       background: "#f7f5ed",

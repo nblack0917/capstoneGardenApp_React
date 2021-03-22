@@ -47,13 +47,3 @@
   border: 3px solid #c77547;
   margin: 15px;
 }
-
-.listContainer {
-  background: darkgreen;
-  width: 200px;
-  height: 500px;
-  margin-left: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}

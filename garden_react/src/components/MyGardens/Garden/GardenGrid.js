@@ -211,6 +211,10 @@ function BedGrid(props) {
     margin: '0 auto'
   }
 
+  const handleBedClick = (key) => {
+    console.log("key", key)
+  }
+
       //builds list of items based on value of i
       //also applies appropriate className depending on isPlanter boolean or lastItem
       //lastItem is invisible barrier to create bounding effect for grid height
@@ -220,7 +224,7 @@ function BedGrid(props) {
         return _.map(_.range(defaultProps.items), function(iKey) {
               if ( layout[iKey].isPlanter) {
                 return (
-                    <div key={iKey} className="roundBed">
+                    <div key={iKey} className="roundBed" onClick={() => handleBedClick(iKey)}>
                       {/* <span className="text">{iKey}</span> */}
                     </div>
                   );
@@ -231,7 +235,7 @@ function BedGrid(props) {
                   );
             } else {
           return (
-            <div key={iKey} className="gridBoxBed">
+            <div key={iKey} className="gridBoxBed" onClick={() => handleBedClick(iKey)}>
               {/* <span className="text">{iKey}</span> */}
             </div>
           );

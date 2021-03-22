@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   }));
 
 function Contact(props) {
-    // const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(false);
     const classes = useStyles();
     console.log(props.userInfo)
 

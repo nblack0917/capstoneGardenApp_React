@@ -52,10 +52,10 @@ function Contact(props) {
     const [message, setMessage] = useState('');
 
     const classes = useStyles();
-    console.log(props.userInfo)
+    // console.log(props.userInfo)
 
     const handleSubmit = e => {
-        let dataPack = { name: name, email: email, message: message }
+        let dataPack = { "name": name, "email": email, "message": message }
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },

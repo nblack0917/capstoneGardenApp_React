@@ -55,7 +55,7 @@ function Contact(props) {
     console.log(props.userInfo)
 
     const handleSubmit = e => {
-        let dataPack = { name, email, message }
+        let dataPack = { name: name, email: email, message: message }
         fetch("/", {
           method: "POST",
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -69,12 +69,15 @@ function Contact(props) {
       
     const handleNameChange = (e) => {
         setName(e.target.value)
+        console.log("name",e.target.value)
     }
     const handleEmailChange = (e) => {
         setEmail(e.target.value)
+        console.log("email",e.target.value)
     }
     const handleMessageChange = (e) => {
         setMessage(e.target.value)
+        console.log("message",e.target.value)
     }
     
 

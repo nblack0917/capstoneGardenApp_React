@@ -61,7 +61,7 @@ function Contact(props) {
                     <form
                         name='contact'
                         method='POST'
-                        data-netlif="true"
+                        data-netlify="true"
                         action="/contact/?success=true"
                         className={classes.form}
                     >

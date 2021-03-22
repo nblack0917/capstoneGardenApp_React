@@ -44,11 +44,11 @@ function Contact(props) {
     const classes = useStyles();
     console.log(props.userInfo)
 
-    // useEffect(() => {
-    //     if ( window.location.search.includes('success=true') ) {
-    //       setSuccess(true);
-    //     }
-    //   }, []);
+    useEffect(() => {
+        if ( window.location.search.includes('success=true') ) {
+          setSuccess(true);
+        }
+      }, []);
 
     return (
         <div className="userHomeBody">

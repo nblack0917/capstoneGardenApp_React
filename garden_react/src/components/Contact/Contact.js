@@ -39,10 +39,44 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
+  const encode = (data) => {
+    return Object.keys(data)
+        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+        .join("&");
+  }
+
 function Contact(props) {
     const [success, setSuccess] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
     const classes = useStyles();
     console.log(props.userInfo)
+
+    const handleSubmit = e => {
+        let dataPack = { name, email, message }
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: encode({ "form-name": "contact", dataPack })
+        })
+          .then(() => alert("Success!"))
+          .catch(error => alert(error));
+  
+        e.preventDefault();
+      };
+      
+    const handleNameChange = (e) => {
+        setName(e.target.value)
+    }
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value)
+    }
+    const handleMessageChange = (e) => {
+        setMessage(e.target.value)
+    }
+    
 
     useEffect(() => {
         if ( window.location.search.includes('success=true') ) {
@@ -64,14 +98,16 @@ function Contact(props) {
                         data-netlify="true"
                         action="/"
                         className={classes.form}
+                        onSubmit={handleSubmit}
                     >
                         <TextField
                             className={classes.TextField}
                             required
                             id="outlined-required"
                             label="Name"
-                            defaultValue=""
+                            value={name}
                             variant="outlined"
+                            onChange={handleNameChange}
                         />
                         <TextField
                             className={classes.TextField}
@@ -79,8 +115,9 @@ function Contact(props) {
                             id="outlined-required"
                             label="email"
                             type="email"
-                            defaultValue=""
+                            value={email}
                             variant="outlined"
+                            onChange={handleEmailChange}
                         />
                         <TextField
                             className={classes.textarea}
@@ -88,8 +125,9 @@ function Contact(props) {
                             multiline
                             rows={8}
                             label="Please let me know what you think of my app or any plant varieties you'd like to see in the future."
-                            defaultValue=""
+                            value={message}
                             variant="outlined"
+                            onChange={handleMessageChange}
                         />
                         <Button type="submit">Submit</Button>
 

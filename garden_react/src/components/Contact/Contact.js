@@ -62,7 +62,7 @@ function Contact(props) {
                         name='contact'
                         method='POST'
                         data-netlify="true"
-                        action="/contact/?success=true"
+                        action="/home"
                         className={classes.form}
                     >
                         <TextField

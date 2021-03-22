@@ -99,7 +99,7 @@ function Contact(props) {
                     <form
                         name='contact'
                         method='POST'
-                        data-netlify="true"
+                        // data-netlify="true"
                         action="/"
                         className={classes.form}
                         onSubmit={handleSubmit}

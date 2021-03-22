@@ -59,7 +59,7 @@ function Contact(props) {
                         <p style={{ color: "green" }}>Thanks for your message! </p>
                     )}
                     <form
-                        name='contact'
+                        name='contactform'
                         method='POST'
                         data-netlify="true"
                         action="/"

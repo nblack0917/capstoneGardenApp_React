@@ -13,7 +13,7 @@ const ReactGridLayout = WidthProvider(RGL);
 function BedGrid(props) {
 
   // const currentGardenBeds = props.allGardenBeds.filter(bed => bed.garden_id === props.gardenId)
-  console.log("gridLayout", props.gridLayout, "indexNum", props.indexNum)
+  // console.log("gridLayout", props.gridLayout, "indexNum", props.indexNum)
   const currentGardens = props.userGardens[props.indexNum]
   console.log("current Beds", currentGardens)
 
@@ -213,6 +213,7 @@ function BedGrid(props) {
 
   const handleBedClick = (key) => {
     console.log("key", key)
+    props.handleBedClick(key)
   }
 
       //builds list of items based on value of i

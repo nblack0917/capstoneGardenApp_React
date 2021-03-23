@@ -138,7 +138,7 @@ const EnhancedTableToolbar = (props) => {
   
   
   const handleDelete = () => {
-      console.log(selectedIndexes)
+      // console.log(selectedIndexes)
       selectedIndexes.forEach(id => {
         fetch(`http://localhost:8080/users/gardens/remove/${id}`, { method: 'DELETE' })
         .then(console.log({ status: 'Delete successful' }))
@@ -238,7 +238,7 @@ export default function GardenCard(props) {
   const [layoutList, setLayoutList] = useState([])
   const rows = props.userGardens;
 
-  console.log("state", props.state)
+  // console.log("state", props.state)
   // console.log("User Gardens", gardens)
   let layoutRows = rows.map(row => row.garden_id)
   let userLayouts = []
@@ -477,7 +477,7 @@ const handleRequestSort = (event, property) => {
 
   const handleGardenClick = (id, index) => {
       // console.log("hllo", id);
-      console.log("selected Index", index)
+      // console.log("selected Index", index)
       props.updateSelectedIndex(index)
       props.handleGardenClick(id)
       history.push('/my_gardens/garden')

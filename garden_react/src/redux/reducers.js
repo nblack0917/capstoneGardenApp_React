@@ -181,7 +181,32 @@ const createGarden = (state = {
                 return state
         }
     }
-
+    
+    const gardenPlantArray = (state = {}, action) => {
+        switch(action.type) {
+            case 'UPDATE_PLANT_ARRAY':
+                console.log("reduce plant array", action.value)
+                return action.value
+            case 'ADD_PLANT_TO_BED':
+                console.log("action", action)
+                // const values = action.value
+                // const id = values[0];
+                // const plant = values[1];
+                return {
+                    ...state,
+                    [action.value]: [...state[action.value], action.plant]
+                }
+            case 'REMOVE_PLANT_FROM_BED':
+                const bedList = [...state[action.value]]
+                bedList.splice(action.index, 1)
+                return {
+                    ...state,
+                    [action.value]: bedList
+                }
+            default: 
+                return state
+        }
+    }
 
 export default combineReducers({ 
     loggedIn,
@@ -197,4 +222,5 @@ export default combineReducers({
     allGardenBeds,
     gridLayout,
     selectedIndexNum,
+    gardenPlantArray,
 })

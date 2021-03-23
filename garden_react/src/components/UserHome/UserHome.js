@@ -39,11 +39,11 @@ function UserHome(props) {
           }).catch((error) => console.log(error))
       }
     
-    console.log("user info state", props.userInfo)
+    // console.log("user info state", props.userInfo)
 
     useEffect(() => {
         const userID = props.userInfo.id;
-        console.log("userID", userID);
+        // console.log("userID", userID);
         getGardenLayout();
         props.fetchUserGardensById(userID);
     }, [])

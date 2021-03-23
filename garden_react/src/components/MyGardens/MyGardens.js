@@ -19,7 +19,7 @@ function MyGardens(props)  {
     }
 
     const updateLayout = (layout) => {
-        console.log("layout obj", layout)
+        // console.log("layout obj", layout)
         props.updateLayout(layout)
     }
 
@@ -39,10 +39,10 @@ function MyGardens(props)  {
     // console.log("user Plants",props.userPlantList)
     // console.log("user name", props.userName)
 
-    useEffect(() => {
-        checkGardenPlants()
-        console.log("allGardenBeds", props.allGardenBeds)
-    }, [])
+    // useEffect(() => {
+    //     checkGardenPlants()
+    //     console.log("allGardenBeds", props.allGardenBeds)
+    // }, [])
 
     return (
         <div className="userHomeBody">

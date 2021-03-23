@@ -20,7 +20,32 @@ const getBedsById = (req, res) => {
     })
 }
 
+const addGardenPlants = (req, res) => {
+    let newPlants = [];
+    const plantsArray = req.body;
+    console.log("plantsArray", plantsArray)
+    for (let bedId in plantsArray) {
+        console.log("key", bedId)
+        for (let plants of plantsArray[bedId]) {
+            console.log("plants", plants)
+            let bedId = parseInt(plants.bed_id);
+            let varName = plants.variety_name
+            let newPlant = [bedId, varName]
+            newPlants.push(newPlant)
+        }
+    }
+
+    sqlQuery=`INSERT INTO gardenPlants (bed_id, plant_variety) VALUES ?;`
+
+    pool.query(sqlQuery, [newPlants], (err, result, fields) => {
+        if (err) return handleSQLError(res, err);
+        console.log("Number of Rows Affected: ", result.affectedRows)
+    })
+    res.end()
+}
+
 module.exports = {
     getAllBeds,
-    getBedsById
+    getBedsById,
+    addGardenPlants,
 }

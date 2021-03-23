@@ -16,6 +16,8 @@ import leafLogo from './Leaf_lg.png';
 //     return cookies["loggedIn"] ? true : false
 // }
 
+netlifyIdentity.init()
+
 // Styles for navbar
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -74,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
 // NavBar component with two versions depending on login status
 const NavBar = (props) => {
     const history = useHistory();
+    const [userName, setUserName] = useState("");
     const [loggedIn, setLoggedIn] =  useState(false);
     // let currentUserInfo = [];
 
@@ -112,6 +115,15 @@ const NavBar = (props) => {
     //     history.push('/home')
     // }
 
+    const login = () => {
+        // e.preventDefault()
+        document.cookie = "loggedIn=true"
+        props.enableLogin();
+        props.updateUserName(userName);
+        props.fetchUserbyUserName(userName)
+        history.push('/home')
+    }
+
     const setLogOut = () => {
         props.updateUserName("")
         props.disableLogin();
@@ -122,6 +134,17 @@ const NavBar = (props) => {
         document.cookie = "loggedIn=false;max-age=1"
         console.log(document.cookie)
         history.push('/') 
+    }
+
+    const handleClick = () => {
+        netlifyIdentity.open()
+        netlifyIdentity.on("login", user => {
+            console.log(user)
+            console.log("email: ", user.email)
+            console.log("name: ", user.user_metadata.full_name)
+            setUserName(user.user_metadata.full_name)
+            login();
+        })
     }
 
     // const loginAuth = () => {
@@ -159,11 +182,11 @@ const NavBar = (props) => {
                         <Link to="/plants" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Plants</Button>
                         </Link>
-                            {/* <Button color="inherit" className={classes.linkStyle} onClick={ () => loginAuth() } >Log In</Button> */}
+                            <Button color="inherit" className={classes.linkStyle} onClick={handleClick} >Log In</Button>
 
-                        <Link to="/login" style={{textDecoration: 'none'}}>
+                        {/* <Link to="/login" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Log In</Button>
-                        </Link>
+                        </Link> */}
                         <Link to="/contact" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Contact</Button>
                         </Link>

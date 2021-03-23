@@ -30,7 +30,7 @@ const MyPlants = (props) => {
     const handleAddPlantsClick = () => {
         history.push('/user_plants')
     }
-    console.log(props.userPlantList)
+    // console.log(props.userPlantList)
     if (props.userPlantList.length === 0) {
         return (
             <div className="userPlantsBody">

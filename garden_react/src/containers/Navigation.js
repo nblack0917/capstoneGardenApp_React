@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Navbar from '../components/Navigation/Navigation'
-import { enableLogin, disableLogin, updateUserName } from '../redux/actions'
+import { enableLogin, disableLogin, updateUserName, fetchUserbyUserName } from '../redux/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -13,7 +13,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         enableLogin: () => dispatch(enableLogin()),
         disableLogin: () => dispatch(disableLogin()),
-        updateUserName: (userName) => dispatch(updateUserName(userName))
+        updateUserName: (userName) => dispatch(updateUserName(userName)),
+        fetchUserbyUserName: (userName => dispatch(fetchUserbyUserName(userName))),
     }
 }
 

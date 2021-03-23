@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import Garden from '../components/MyGardens/Garden/Garden'
-import { removePlantFromUserList, getAllUserGardenBeds } from '../redux/actions'
+import { removePlantFromUserList, getAllUserGardenBeds, updateGardenPlantArray, addToGardenPlantArray, removeFromGardenPlantArray } from '../redux/actions'
 
 const mapStateToProps = (state) => {
     return {
@@ -14,6 +14,7 @@ const mapStateToProps = (state) => {
         selectedIndexNum: state.selectedIndexNum,
         gridLayout: state.gridLayout,
         userGardens: state.userGardens,
+        gardenPlantArray: state.gardenPlantArray,
         state: state,
     }
 }
@@ -21,7 +22,10 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         removePlantFromUserList: (index) => dispatch(removePlantFromUserList(index)),
-        getAllUserGardenBeds: (beds) => dispatch(getAllUserGardenBeds(beds))
+        getAllUserGardenBeds: (beds) => dispatch(getAllUserGardenBeds(beds)),
+        updateGardenPlantArray: (layout) => dispatch(updateGardenPlantArray(layout)),
+        addToGardenPlantArray: (key, plant) => dispatch(addToGardenPlantArray(key, plant)),
+        removeFromGardenPlantArray: (key, index) => dispatch(removeFromGardenPlantArray(key, index))
 
     }
 

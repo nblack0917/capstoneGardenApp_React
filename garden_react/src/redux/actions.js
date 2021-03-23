@@ -189,3 +189,24 @@ export const updateLayout = (layout) => {
         value: layout
     }
 }
+
+export const updateGardenPlantArray = (layout) => {
+    return {
+        type: 'UPDATE_PLANT_ARRAY',
+        value: layout
+    }
+}
+
+export const addToGardenPlantArray = (key, plant) => {
+    return {
+        type: 'ADD_PLANT_TO_BED',
+        value: key, plant
+    }
+}
+
+export const removeFromGardenPlantArray = (key, index) => {
+    return {
+        type: 'REMOVE_PLANT_FROM_BED',
+        value: key, index
+    }
+}

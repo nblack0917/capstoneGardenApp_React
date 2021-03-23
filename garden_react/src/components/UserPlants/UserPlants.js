@@ -67,7 +67,7 @@ export default function FullWidthTabs(props) {
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
-        console.log(newValue)
+        // console.log(newValue)
         props.updateLastTab(newValue)
     };
 
@@ -75,9 +75,9 @@ export default function FullWidthTabs(props) {
         setValue(index);
     };
 
-    const stateCheck = () => {
-        console.log(props.allPlantsByType)
-    }
+    // const stateCheck = () => {
+    //     console.log(props.allPlantsByType)
+    // }
     
     const fruitList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Fruit")
     const veggieList = props.allPlantsByType.filter(plant => plant.plantGroupName==="Vegetable")
@@ -120,7 +120,7 @@ export default function FullWidthTabs(props) {
         // console.log(selectedPlant, index)
         // props.addPlantToUserList(selectedPlant)
         if(!props.userPlantList.some(plant => plant.variety_name === selectedPlant.variety_name)) {
-            console.log(selectedPlant.variety_name)
+            // console.log(selectedPlant.variety_name)
             props.addPlantToUserList(selectedPlant)
         }
     }
@@ -133,9 +133,9 @@ export default function FullWidthTabs(props) {
         props.getAllPlantsByType()
     }, [])
 
-    useEffect(() => {
-        console.log(props.userPlantList)
-    })
+    // useEffect(() => {
+    //     console.log(props.userPlantList)
+    // })
 
     return (
         <div className="plantsBody">

@@ -39,18 +39,18 @@ function UserHome(props) {
           }).catch((error) => console.log(error))
       }
     
-    // console.log("user info state", props.userInfo)
+    console.log("user info state", props.userInfo)
 
     useEffect(() => {
         const userID = props.userInfo.id;
-        // console.log("userID", userID);
+        console.log("userID", userID);
         getGardenLayout();
         props.fetchUserGardensById(userID);
     }, [])
 
     return (
         <div className="userHomeBody">
-            <h1>Welcome {props.userName ? props.userName : "Gardener"}</h1>
+            <h1>Welcome {props.userName ? props.userInfo.first_name : "Gardener"}</h1>
             <Card className="homeCard">
             <CardActionArea onClick={handleMyPlantsClick}>
                     <CardContent className="cardContent">

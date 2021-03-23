@@ -28,7 +28,7 @@ const getUserInfoByUserName = (req, res) => {
             JOIN usersContact ON usersContact.user_id=users.id
             JOIN usersAddress ON usersAddress.user_id=users.id
             JOIN usersCredentials ON usersCredentials.user_id=users.id
-        WHERE usersCredentials.username = ?`
+        WHERE usersContact.email = ?`
         sqlQuery = mysql.format(sqlQuery, [req.params.id]);
 
         pool.query(sqlQuery, (err, rows) => {

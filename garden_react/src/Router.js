@@ -13,6 +13,7 @@ import AddGardens from './containers/AddGardens'
 import Garden from './containers/Garden'
 import MyCalendar from './components/MyCalendar/MyCalendar'
 import Contact from './containers/Contact'
+import GetStarted from './containers/GetStarted'
 // import BusinessDetail from './containers/BusinessDetail'
 // import AddBusiness from './containers/AddBusiness'
 import Navigation from './containers/Navigation'
@@ -55,6 +56,7 @@ const Router = () => {
                 <Route path="/login" component={Login} />
                 <Route path="/plants" component={Plants} />
                 <Route path="/contact" component={Contact} />
+                <Route path="/get_started" component={GetStarted} />
                 <Route path="/plant/:id" component={PlantDetails} />
                 <ProtectedRoute exact path="/home" component={UserHome} />
                 <ProtectedPlantRoute exact path="/user_plants" component={UserPlants} />

@@ -61,6 +61,8 @@ const userInfo = (state = {}, action) => {
         case 'FETCH_USER_BY_USERNAME':
             const userInfo = action.value
             return userInfo
+        case 'RESET_USER_INFO':
+            return action.value
         default:
             return state
     }

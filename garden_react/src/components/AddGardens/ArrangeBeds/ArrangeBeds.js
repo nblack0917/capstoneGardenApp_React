@@ -12,7 +12,6 @@ function ArrangeBeds(props) {
 
     return (
         <div className="userHomeBody">
-            Arrange the beds in the garden. I don't know how. Just do it!!!!!
             <BedGrid createGarden={props.createGarden} handleUpdateItem={e => handleUpdateItem(e)} handleCurrentLayout={e => {handleCurrentLayout(e)}}/>
         </div>
     )

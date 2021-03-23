@@ -57,18 +57,37 @@ export const updateLastTab = (tab) => {
 }
 
 export const fetchUserbyUserName = (userName) => {
+    console.log(userName)
     const userInfoUrl = `http://localhost:8080/users/${userName}`
+    // console.log(userInfoUrl)
     return (dispatch) => {
         fetch(userInfoUrl)
             .then(res => res.json())
             .then(response => {
-                const action = {
-                    type: 'FETCH_USER_BY_USERNAME',
-                    value: response[0]
-                }
-                // console.log(response[0])
+                console.log("get user response", response)
+                let action;
+                if (response.length === 0) {
+                    let newUser = {user: "newuser"}
+                    action = {
+                        type: 'FETCH_USER_BY_USERNAME',
+                        value: newUser
+                    }
+                } else {
+                    action = {
+                        type: 'FETCH_USER_BY_USERNAME',
+                        value: response[0]
+                    }
                 dispatch(action)
-            })
+            }
+        })
+    }
+}
+
+export const resetUserInfo = () => {
+    const defaultUser = {};
+    return {
+        type: 'RESET_USER_INFO',
+        value: defaultUser
     }
 }
 

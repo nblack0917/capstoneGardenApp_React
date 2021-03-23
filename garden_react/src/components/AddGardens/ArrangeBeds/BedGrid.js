@@ -175,6 +175,7 @@ function BedGrid(props) {
     border: '6px dashed #c77547',
     borderRadius: 5,
     marginBottom: 10,
+    marginTop: 35,
     width: 675,
     height: gardenContainerHeight,
     // width: parseInt(width),

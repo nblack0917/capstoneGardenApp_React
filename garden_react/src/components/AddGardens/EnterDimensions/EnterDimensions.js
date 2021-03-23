@@ -93,14 +93,6 @@ function EnterBeds(props) {
 
     return (
         <div className="addDimension">
-            <div className="heading">
-                <Typography variant="h4" gutterBottom>
-                    Let's add a garden!
-                </Typography>
-                <Typography variant="h5" gutterBottom>
-                What are the total dimensions of your garden? Keep in mind that anywhere can be a garden. It can be your yard, patio, balcony, or living room. We’ll add garden beds and planters in the next step. Also add your zipcode so we can find the right plants for where you live.
-                </Typography>
-            </div>
             <div>
                 <TextField
                     required
@@ -128,6 +120,8 @@ function EnterBeds(props) {
                     type="number"
                     variant="outlined"
                     className={classes.textField}/>
+            </div>
+            <div>
                 <TextField
                     required
                     // error={hasWidth}

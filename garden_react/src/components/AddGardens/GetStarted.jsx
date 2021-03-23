@@ -18,6 +18,7 @@ import EnterDimensions from './EnterDimensions/EnterDimensions';
 import InfoModal from './InfoModal'
 import EnterBeds from './EnterBeds/EnterBeds';
 import ArrangeBeds from './ArrangeBeds/ArrangeBeds'
+import EnterUserInfo from './EnterUserInfo/EnterUserInfo'
 import axios from 'axios';
 import './AddGardens.css'
 
@@ -97,7 +98,7 @@ export default function AddGardens(props) {
   // console.log(props.userInfo)
 
   function getSteps() {
-    return ['Enter Garden Dimensions and Zip code', 'Add Garden Beds or Planters', 'Arrange Beds/Planters in Garden', 'Submit'];
+    return ['Enter your info', 'Enter Garden Dimensions and Zip code', 'Add Garden Beds or Planters', 'Arrange Beds/Planters in Garden', 'Submit'];
   }
 
   const steps = getSteps();
@@ -243,7 +244,9 @@ const handleFinishLoading = () => {
       userZip = zipcode;
     };
     switch(activeStep) {
-      case 0:
+        case 0:
+            break;
+      case 1:
         handleModalOpen();
         const newDimensions = {
           width,
@@ -258,11 +261,11 @@ const handleFinishLoading = () => {
         console.log("lastBedId", lastBedId)
         props.updateNewGardenDimensions(newDimensions)
       break;
-      case 1:
+      case 2:
         handleModalOpen();
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
       break;
-      case 2:
+      case 3:
           // console.log("finished")
           console.log("created garden", props.createGarden)
           sendData();
@@ -270,7 +273,7 @@ const handleFinishLoading = () => {
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           recheckGardens(props.userInfo.id)
       break;
-      case 3:
+      case 4:
             setActiveStep((prevActiveStep) => prevActiveStep + 1);
             history.push('/home')
       break;
@@ -314,6 +317,13 @@ const updateNextGardenId = () => {
       case 0:
         return (
           <div>
+            <InfoModal modalOpen={modalOpen} handleModalClose={handleModalClose} page={"userInfo"} />
+            <EnterUserInfo />
+          </div>
+        )
+      case 1:
+        return (
+          <div>
             <InfoModal modalOpen={modalOpen} handleModalClose={handleModalClose} page={"addGarden"} />
             <EnterDimensions
               zone={zone}
@@ -323,12 +333,12 @@ const updateNextGardenId = () => {
               handleParentWidthChange={e => {handleParentWidthChange(e)}}
               handleParentLengthChange={e => {handleParentLengthChange(e)}}
               handleParentZipcodeChange={e => {handleParentZipcodeChange(e)}}
-              convertZiptoZone={() => {convertZiptoZone()}}
+            //   convertZiptoZone={() => {convertZiptoZone()}}
               // handleNewDimensions={e => {handleNewDimensions(e)}}
             />;
           </div>
         )
-      case 1:
+      case 2:
         return (
           <div>
             <InfoModal modalOpen={modalOpen} handleModalClose={handleModalClose} page={"enterBeds"} />
@@ -340,7 +350,7 @@ const updateNextGardenId = () => {
             />
           </div>
         )
-      case 2:
+      case 3:
         return (
           <div>
             <InfoModal modalOpen={modalOpen} handleModalClose={handleModalClose} page={"arrangeBeds"} />
@@ -352,7 +362,7 @@ const updateNextGardenId = () => {
             />;
           </div>
         )
-        case 3:
+        case 4:
             return (
               <div>Saving your garden.</div>
             )
@@ -393,7 +403,7 @@ const updateNextGardenId = () => {
   };
 
   useEffect(() => {
-    convertZiptoZone();
+    // convertZiptoZone();
     getLastBedId();
     getLastGardenId();
     handleModalOpen();

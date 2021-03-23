@@ -77,56 +77,41 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props) => {
     const history = useHistory();
     const [userName, setUserName] = useState("");
+    const [email, setEmail] = useState("");
     const [loggedIn, setLoggedIn] =  useState(false);
     // let currentUserInfo = [];
 
-    // Netlify login and logout
+    let loginEmail = '';
+    let createdAt = ''
 
-    // const netlifyAuth = {
-    //     isAuthenticated: false,
-    //     user: null,
-    //     authenticate(callback) {
-    //         this.isAuthenticated = true;
-    //         netlifyIdentity.open('login');
-    //         netlifyIdentity.on('login', user => {
-    //             this.user = user;
-    //             // console.log(user);
-    //             currentUserInfo.push(user);
-    //             // console.log("current user info", currentUserInfo)
-    //             login();
-    //             callback();
-    //         });
-    //     },
-    //     signout(callback) {
-    //         this.isAuthenticated = false;
-    //         netlifyIdentity.logout();
-    //         netlifyIdentity.on('logout', () => {
-    //             this.user = null;
-    //             setLogOut();
-    //             callback();
-    //         });
-    //     }
-    // };
-
-    // const login = () => {
-    //     document.cookie = "loggedIn=true"
-    //     props.enableLogin();
-    //     props.updateUserName(currentUserName)
-    //     history.push('/home')
-    // }
+    const handleLoginEmail = () => {
+        setEmail(loginEmail)
+    }
 
     const login = () => {
-        // e.preventDefault()
-        document.cookie = "loggedIn=true"
-        props.enableLogin();
-        props.updateUserName(userName);
-        props.fetchUserbyUserName(userName)
-        history.push('/home')
+        let createDate = new Date(createdAt);
+        let currentDate = new Date();
+        let createTime = `${createDate.getUTCHours()}${createDate.getUTCMinutes()}`
+        let currentTime = `${currentDate.getUTCHours()}${currentDate.getUTCMinutes()}`
+        let compareTimes = parseInt(currentTime) - parseInt(createTime)
+        if ( compareTimes < 2 ) {
+            document.cookie = "loggedIn=true"
+            props.enableLogin();
+            props.updateUserName(loginEmail);
+            history.push('/get_started')
+        } else {
+            document.cookie = "loggedIn=true"
+            props.enableLogin();
+            props.updateUserName(loginEmail);
+            props.fetchUserbyUserName(loginEmail)
+            history.push('/home')
+        }
     }
 
     const setLogOut = () => {
         props.updateUserName("")
         props.disableLogin();
+        // props.resetUserInfo();
         logout();
     }
     
@@ -141,21 +126,22 @@ const NavBar = (props) => {
         netlifyIdentity.on("login", user => {
             console.log(user)
             console.log("email: ", user.email)
-            console.log("name: ", user.user_metadata.full_name)
-            setUserName(user.user_metadata.full_name)
+            console.log("created At", user.created_at)
+            createdAt= user.created_at;
+            // console.log("name: ", user.user_metadata.full_name)
+            loginEmail = user.email
+            handleLoginEmail()
             login();
         })
+        netlifyIdentity.on("logout", user => {
+            console.log(user)
+            // console.log("email: ", user.email)
+            // console.log("name: ", user.user_metadata.full_name)
+            // loginEmail = user.email
+            props.resetUserInfo();
+            setLogOut()
+        })
     }
-
-    // const loginAuth = () => {
-    //     netlifyAuth.authenticate();
-        
-    // }
-
-    // const logOutAuth = () => {
-    //     netlifyAuth.signout();
-    //     setLogOut();
-    // }
 
     useEffect(() => {
         if (!props.loggedIn) {
@@ -224,7 +210,7 @@ const NavBar = (props) => {
                         </Link>
                             {/* <Button color="inherit" className={classes.linkStyle} onClick={ () => logOutAuth() }>Log Out</Button> */}
                         <Link to="/" style={{textDecoration: 'none'}}>
-                            <Button color="inherit" className={classes.linkStyle} onClick={setLogOut}>Log Out</Button>
+                            <Button color="inherit" className={classes.linkStyle} onClick={handleClick}>Log Out</Button>
                         </Link>
                         <Link to="/my_gardens" style={{textDecoration: 'none'}}>
                             <Button  variant="contained" className={classes.buttonStyle}>My Gardens</Button>

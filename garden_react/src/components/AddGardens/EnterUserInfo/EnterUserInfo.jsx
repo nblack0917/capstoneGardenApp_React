@@ -46,40 +46,66 @@ const useStyles = makeStyles((theme) => ({
 
 function EnterUserInfo(props) {
     const [success, setSuccess] = useState(false);
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [message, setMessage] = useState('');
+    const [username, setUsername] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phone, setPhone] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+    const [state, setState] = useState('');
+    const [zipcode, setZipcode] = useState('');
 
     const classes = useStyles();
     // console.log(props.userInfo)
 
-    const handleSubmit = e => {
-        // let dataPack = { "name": name, "email": email, "message": message }
-        // console.log("dataPack", dataPack)
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: encode({ "form-name": "contact", "name": name, "email": email, "message": message })
-        })
-          .then(() => alert("Success!"))
-          .catch(error => alert(error));
-
-          setSuccess(true)
-  
-        e.preventDefault();
+    const handleSubmit = () => {
+        const lastUserId = props.lastUserId
+        const infoPack = {
+            first_name: firstName,
+            last_name: lastName,
+            phone1: phone,
+            address: address,
+            city: city,
+            state: state,
+            zipcode: zipcode,
+            username: username,
+            lastUserId: lastUserId,
+        }
+        props.handleUpdateUserInfo(infoPack)
+        setSuccess(true)
       };
       
-    const handleNameChange = (e) => {
-        setName(e.target.value)
-        console.log("name",e.target.value)
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value)
+        // console.log("name",e.target.value)
     }
-    const handleEmailChange = (e) => {
-        setEmail(e.target.value)
-        console.log("email",e.target.value)
+    const handleFirstNameChange = (e) => {
+        setFirstName(e.target.value)
+        // console.log("name",e.target.value)
     }
-    const handleMessageChange = (e) => {
-        setMessage(e.target.value)
-        console.log("message",e.target.value)
+    const handleLastNameChange = (e) => {
+        setLastName(e.target.value)
+        // console.log("name",e.target.value)
+    }
+    const handlePhoneChange = (e) => {
+        setPhone(e.target.value)
+        // console.log("email",e.target.value)
+    }
+    const handleAddressChange = (e) => {
+        setAddress(e.target.value)
+        // console.log("message",e.target.value)
+    }
+    const handleCityChange = (e) => {
+        setCity(e.target.value)
+        // console.log("message",e.target.value)
+    }
+    const handleStateChange = (e) => {
+        setState(e.target.value)
+        // console.log("message",e.target.value)
+    }
+    const handleZipcodeChange = (e) => {
+        setZipcode(e.target.value)
+        // console.log("message",e.target.value)
     }
     
     const SuccessText = () => {
@@ -109,7 +135,7 @@ function EnterUserInfo(props) {
                         // // data-netlify="true"
                         // action="/"
                         className={classes.form}
-                        // onSubmit={handleSubmit}
+                        onSubmit={handleSubmit}
                     >
                         {/* <input type="hidden" name="form-name" value="contact" /> */}
                         <TextField
@@ -117,53 +143,63 @@ function EnterUserInfo(props) {
                             required
                             id="outlined-required"
                             label="user name"
-                            value={name}
+                            value={username}
                             variant="outlined"
-                            onChange={handleNameChange}
+                            onChange={handleUsernameChange}
                         />
-                        {/* <TextField
-                            className={classes.TextField}
-                            required
-                            id="outlined-required"
-                            label="email"
-                            type="email"
-                            value={email}
-                            variant="outlined"
-                            onChange={handleEmailChange}
-                        /> */}
+                        <div style = {{display: 'flex'}}>
+                            <TextField
+                                className={classes.TextField}
+                                required
+                                id="outlined-required"
+                                label="first name"
+                                value={firstName}
+                                variant="outlined"
+                                onChange={handleFirstNameChange}
+                            />
+                            <TextField
+                                className={classes.TextField}
+                                required
+                                id="outlined-required"
+                                label="last name"
+                                value={lastName}
+                                variant="outlined"
+                                onChange={handleLastNameChange}
+                                />
+                        </div>
                         <TextField
                             className={classes.TextField}
                             id="outlined-required"
                             label="phone"
                             type="tel"
-                            value={email}
+                            value={phone}
                             variant="outlined"
-                            onChange={handleEmailChange}
+                            onChange={handlePhoneChange}
                         />
                         <TextField
                             className={classes.TextField}
                             id="outlined-required"
                             label="address"
-                            value={email}
+                            value={address}
                             variant="outlined"
-                            onChange={handleEmailChange}
+                            onChange={handleAddressChange}
                         />
                         <div style = {{display: 'flex'}}>
                             <TextField
                                 className={classes.TextField}
                                 id="outlined-required"
                                 label="city"
-                                value={email}
+                                value={city}
                                 variant="outlined"
-                                onChange={handleEmailChange}
+                                onChange={handleCityChange}
                             />
                             <TextField
                                 className={classes.TextField}
                                 id="outlined-required"
                                 label="state"
-                                value={email}
+                                value={state}
                                 variant="outlined"
-                                onChange={handleEmailChange}
+                                onChange={handleStateChange}
                                 />
                         </div>
                             <TextField
@@ -172,11 +208,11 @@ function EnterUserInfo(props) {
                                 required
                                 label="zipcode"
                                 type="address"
-                                value={email}
+                                value={zipcode}
                                 variant="outlined"
-                                onChange={handleEmailChange}
+                                onChange={handleZipcodeChange}
                             />
-                        <Button type="submit">Submit</Button>
+                        <Button onClick={handleSubmit} >Submit</Button>
 
                     </form>
                 </div>

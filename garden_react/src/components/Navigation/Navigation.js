@@ -98,6 +98,7 @@ const NavBar = (props) => {
             document.cookie = "loggedIn=true"
             props.enableLogin();
             props.updateUserName(loginEmail);
+            props.updateEmail(loginEmail);
             history.push('/get_started')
         } else {
             document.cookie = "loggedIn=true"
@@ -176,9 +177,7 @@ const NavBar = (props) => {
                         <Link to="/contact" style={{textDecoration: 'none'}}>
                             <Button color="inherit" className={classes.linkStyle}>Contact</Button>
                         </Link>
-                        <Link to="/get_started" style={{textDecoration: 'none'}}>
-                            <Button  variant="contained" className={classes.buttonStyle}>Get Started</Button>
-                        </Link>
+                            <Button onClick={handleClick} variant="contained" className={classes.buttonStyle}>Get Started</Button>
                     </Toolbar>
                 </AppBar>
             </div>

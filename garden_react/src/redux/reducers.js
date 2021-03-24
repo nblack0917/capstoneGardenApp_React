@@ -210,6 +210,56 @@ const createGarden = (state = {
         }
     }
 
+    const createNewUser = (state = {
+        first_name: '',
+        last_name: '',
+        phone1: '',
+        phone2: '',
+        email: '',
+        address: '',
+        city: '',
+        county: '',
+        state: '',
+        zip: '',
+        username: '',
+        nextUserId: 0,
+    }, action) => {
+        switch(action.type) {
+            case 'UPDATE_EMAIL':
+                const newEmail = action.value
+                return {
+                    ...state,
+                    email: newEmail
+                }
+            case 'UPDATE_REMAINING_INFO':
+                const dataPack = action.value;
+                // console.log("dataPack",dataPack)
+                const firstName = dataPack.first_name;
+                const lastName = dataPack.last_name;
+                const phoneNum = dataPack.phone1;
+                const addressName = dataPack.address;
+                const cityName = dataPack.city;
+                const stateName = dataPack.state;
+                const zipcode = dataPack.zipcode;
+                const userName = dataPack.username;
+                const nextUserId = dataPack.lastUserId + 1
+                return {
+                    ...state,
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone1: phoneNum,
+                    address: addressName,
+                    city: cityName,
+                    state: stateName,
+                    zip: zipcode,
+                    username: userName,
+                    nextUserId: nextUserId,
+                }
+            default:
+                return state
+        }
+    }
+
 export default combineReducers({ 
     loggedIn,
     userName,
@@ -225,4 +275,5 @@ export default combineReducers({
     gridLayout,
     selectedIndexNum,
     gardenPlantArray,
+    createNewUser,
 })

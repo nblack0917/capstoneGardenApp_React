@@ -21,4 +21,18 @@ export default {
     allGardenBeds: [],
     gridLayout: [],
     gardenPlantArray: {},
+    createNewUser: {
+        first_name: '',
+        last_name: '',
+        phone1: '',
+        phone2: ' ',
+        email: '',
+        address: '',
+        city: '',
+        county: ' ',
+        state: '',
+        zip: '',
+        username: '',
+        nextUserId: 0,
+    }
 }

@@ -143,18 +143,18 @@ export default function InfoModal(props) {
         return (
             <Dialog onClose={props.handleModalClose} aria-labelledby="customized-dialog-title" open={props.modalOpen}>
                 <DialogTitle id="customized-dialog-title" onClose={props.handleModalClose}>
-                    Add your info!
+                    Add your info to get started!
                 </DialogTitle>
                 <DialogContent dividers>
                 <Typography gutterBottom>
-                    Click and drag a bed or planter from the list on the left into the empty garden.
+                    Please fill out the form below.
 
                 </Typography>
                 <Typography gutterBottom>
-                    Arrange them in any way you want as long as they stay inside the gardern border.
+                    Your username can be anything you want.
                 </Typography>
                 <Typography gutterBottom>
-                    When you have it looking exactly how you want your garden to look, click finish at the bottom to save your new garden.
+                    Make sure to hit the submit button before moving onto the next step.
                 </Typography>
                 </DialogContent>
                 <DialogActions>

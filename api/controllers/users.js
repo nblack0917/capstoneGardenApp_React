@@ -215,8 +215,82 @@ const removeGarden = (req, res) => {
                 console.log("Deleted Gardens: " + res.affectedRows)
             })
             res.status(200).end('Success!')
-
 }
+
+const addNewUser = (req, res, next) => {
+    // console.log(req.body)
+    const newUser = {
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+    }
+
+    sqlQuery=`INSERT INTO users (first_name, last_name) VALUES (?, ?);`
+        sqlQuery = mysql.format(sqlQuery, [newUser.first_name, newUser.last_name]);
+
+    pool.query(sqlQuery, (err, result, fields) => {
+        if (err) return handleSQLError(res, err);
+        console.log("Number of Rows Affected: ", result.affectedRows)
+    })
+    res.end()
+}
+
+const addNewUserContact = (req, res, next) => {
+    // console.log(req.body)
+    const newUserContact = {
+        user_id: req.body.nextUserId,
+        phone1: req.body.phone1,
+        phone2: req.body.phone2,
+        email: req.body.email,
+    }
+
+    sqlQuery=`INSERT INTO usersContact (user_id, phone1, phone2, email) VALUES (?, ?, ?, ?);`
+        sqlQuery = mysql.format(sqlQuery, [newUserContact.user_id, newUserContact.phone1, newUserContact.phone2, newUserContact.email]);
+
+    pool.query(sqlQuery, (err, result, fields) => {
+        if (err) return handleSQLError(res, err);
+        console.log("Number of Rows Affected: ", result.affectedRows)
+    })
+    res.end()
+}
+
+const addNewUserAddress = (req, res, next) => {
+    // console.log(req.body)
+    const newUserAddress = {
+        user_id: req.body.nextUserId,
+        address: req.body.address,
+        city: req.body.city,
+        county: req.body.county,
+        state: req.body.state,
+        zip: req.body.zip,
+    }
+
+    sqlQuery=`INSERT INTO usersAddress (user_id, address, city, county, state, zip) VALUES (?, ?, ?, ?, ? ,?);`
+        sqlQuery = mysql.format(sqlQuery, [newUserAddress.user_id, newUserAddress.address, newUserAddress.city, newUserAddress.county, newUserAddress.state, newUserAddress.zip]);
+
+    pool.query(sqlQuery, (err, result, fields) => {
+        if (err) return handleSQLError(res, err);
+        console.log("Number of Rows Affected: ", result.affectedRows)
+    })
+    res.end()
+}
+
+const addNewUserCreditials = (req, res, next) => {
+    // console.log(req.body)
+    const newUserCredentials = {
+        user_id: req.body.nextUserId,
+        username: req.body.username,
+    }
+
+    sqlQuery=`INSERT INTO usersCredentials (user_id, username) VALUES (?, ?);`
+        sqlQuery = mysql.format(sqlQuery, [newUserCredentials.user_id, newUserCredentials.username]);
+
+    pool.query(sqlQuery, (err, result, fields) => {
+        if (err) return handleSQLError(res, err);
+        console.log("Number of Rows Affected: ", result.affectedRows)
+    })
+    res.end()
+}
+
 
 module.exports = {
     getAllUsers,
@@ -227,4 +301,8 @@ module.exports = {
     removeGarden,
     addGardenBeds,
     addGardenLayout,
+    addNewUser,
+    addNewUserContact,
+    addNewUserAddress,
+    addNewUserCreditials,
 }

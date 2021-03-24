@@ -229,3 +229,17 @@ export const removeFromGardenPlantArray = (key, index) => {
         value: key, index
     }
 }
+
+export const updateEmail = (email) => {
+    return {
+        type: 'UPDATE_EMAIL',
+        value: email
+    }
+}
+
+export const updateRemainingInfo = (info) => {
+    return {
+        type: 'UPDATE_REMAINING_INFO',
+        value: info
+    }
+}

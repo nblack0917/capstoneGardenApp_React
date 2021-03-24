@@ -88,10 +88,12 @@ export default function AddGardens(props) {
   const [currentLayout, setCurrentLayout] = useState([]);
   const [lastBedId, setLastBedId] = useState(0)
   const [lastGardenId, setLastGardenId] = useState(0)
+  const [lastUserId, setLastUserId] = useState(0)
   const [open, setOpen] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
+  const [sendData, setSendData] = useState(false)
   const history = useHistory();
   const classes = useStyles();
 
@@ -165,6 +167,9 @@ const handleFinishLoading = () => {
   setSuccess(true);
   setLoading(false);
 }
+const handleFinishLoadingUser = () => {
+  console.log("User info uploaded!")
+}
 
   const getLastBedId = async () => {
     let bedId = 0;
@@ -187,7 +192,24 @@ const handleFinishLoading = () => {
       }).catch((error) => console.log(error))
   }
 
-  const sendData = async() => {
+//   const updateUserInfoDB = () => {
+//     console.log("new user data", props.createNewUser)
+// }
+
+const getLastUserId = async () => {
+    let gardenId = 0;
+
+    axios.get('http://localhost:8080/last_user')
+      .then((res) => {
+        // console.log("get data", res.data)
+        gardenId = parseInt(res.data)
+        setLastUserId(gardenId)
+      }).catch((error) => console.log(error))
+  }
+
+
+  
+  const sendGardenData = async() => {
     async function wait(ms) {
       return new Promise(resolve => {
         setTimeout(resolve, ms);
@@ -223,8 +245,48 @@ const handleFinishLoading = () => {
     .then((res) => {
       console.log("update gardenLayout", res.status)
     }).catch((error) => console.log(error))
+
     console.log("Data Sent!")
     handleClick()
+    return handleFinishLoadingUser()
+  }
+
+  const sendUserData = async() => {
+    async function wait(ms) {
+      return new Promise(resolve => {
+        setTimeout(resolve, ms);
+      });
+    }
+
+    const newUser = props.createNewUser;
+
+    let sendUser = await axios.post('http://localhost:8080/users/create/users', newUser)
+      .then((res) => {
+        console.log("update userGardens", res.status)
+      }).catch((error) => console.log(error))
+
+    let firstWait = await wait(1000);
+
+    let sendContact = await axios.post('http://localhost:8080/users/create/contact', newUser)
+    .then((res) => {
+      console.log("update gardenBeds", res.status)
+    }).catch((error) => console.log(error))
+
+    let secondWait = await wait(1000)
+
+    let sendAddress = await axios.post('http://localhost:8080/users/create/address', newUser)
+    .then((res) => {
+      console.log("update gardenLayout", res.status)
+    }).catch((error) => console.log(error))
+
+    let thirdWait = await wait(1000)
+
+    let sendCredentials = await axios.post('http://localhost:8080/users/create/credentials', newUser)
+    .then((res) => {
+      console.log("update gardenLayout", res.status)
+    }).catch((error) => console.log(error))
+
+    console.log("User Data Sent!")
     return handleFinishLoading()
   }
 
@@ -268,7 +330,7 @@ const handleFinishLoading = () => {
       case 3:
           // console.log("finished")
           console.log("created garden", props.createGarden)
-          sendData();
+          sendGardenData();
           handleStartLoading()
           setActiveStep((prevActiveStep) => prevActiveStep + 1);
           recheckGardens(props.userInfo.id)
@@ -310,6 +372,12 @@ const updateNextGardenId = () => {
   props.updateNextGardenId(lastGarden);
 }
 
+const handleUpdateUserInfo = (info) => {
+    // console.log("info", info)
+    props.updateRemainingInfo(info)
+    setSendData(true)
+}
+
   // console.log("addGarden", props.createGarden)
 
   function getStepContent(stepIndex) {
@@ -318,7 +386,7 @@ const updateNextGardenId = () => {
         return (
           <div>
             <InfoModal modalOpen={modalOpen} handleModalClose={handleModalClose} page={"userInfo"} />
-            <EnterUserInfo />
+            <EnterUserInfo handleUpdateUserInfo={e => {handleUpdateUserInfo(e)}} lastUserId={lastUserId} />
           </div>
         )
       case 1:
@@ -406,10 +474,17 @@ const updateNextGardenId = () => {
     // convertZiptoZone();
     getLastBedId();
     getLastGardenId();
+    getLastUserId();
     handleModalOpen();
     
     console.log("createGarden start", props.createGarden)
   }, [])
+
+  useEffect(() => {
+    if(sendData === true){
+        sendUserData()
+    }
+  }, [sendData])
 
 
   return (

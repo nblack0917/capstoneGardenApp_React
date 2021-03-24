@@ -11,6 +11,7 @@ import {
     updateCurrentItem,
     updateCurrentLayout,
     resetGarden,
+    updateRemainingInfo,
 } from '../redux/actions'
 
 
@@ -19,6 +20,7 @@ const mapStateToProps = (state) => {
         userInfo: state.userInfo,
         userGardens: state.userGardens,
         createGarden: state.createGarden,
+        createNewUser: state.createNewUser,
     }
 }
 
@@ -34,6 +36,7 @@ const mapDispatchToProps = (dispatch) => {
         updateCurrentItem: (index) => dispatch(updateCurrentItem(index)),
         updateCurrentLayout: (layout) => dispatch(updateCurrentLayout(layout)),
         resetGarden: () => dispatch(resetGarden()),
+        updateRemainingInfo: (info) => dispatch(updateRemainingInfo(info)),
     }
 }
 

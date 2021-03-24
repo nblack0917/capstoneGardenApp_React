@@ -92,8 +92,11 @@ const NavBar = (props) => {
         let createDate = new Date(createdAt);
         let currentDate = new Date();
         let createTime = `${createDate.getUTCHours()}${createDate.getUTCMinutes()}`
+        console.log(createTime)
         let currentTime = `${currentDate.getUTCHours()}${currentDate.getUTCMinutes()}`
-        let compareTimes = parseInt(currentTime) - parseInt(createTime)
+        console.log(currentTime)
+        let compareTimes = parseInt(createTime) - parseInt(currentTime)
+        console.log("compareTimes", compareTimes)
         if ( compareTimes < 2 ) {
             document.cookie = "loggedIn=true"
             props.enableLogin();
@@ -163,7 +166,7 @@ const NavBar = (props) => {
                         </Link>
                         <Typography variant="h6" className={classes.title}>
                             <Link to="/" style={{textDecoration: 'none', color: "#009344"}}>
-                                garden app
+                                garden plan(ter)
                             </Link>
                         </Typography>
                         <Link to="/plants" style={{textDecoration: 'none'}}>

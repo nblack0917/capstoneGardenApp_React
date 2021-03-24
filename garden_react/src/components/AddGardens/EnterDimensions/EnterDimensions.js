@@ -84,7 +84,7 @@ function EnterBeds(props) {
     // }
 
     useEffect(() => {
-        setZipcode(props.userInfo.zip)
+        // setZipcode(props.userInfo.zip.toString())
         if (props.createGarden.width && props.createGarden.length) {
             setWidth(props.createGarden.width);
             setLength(props.createGarden.length)

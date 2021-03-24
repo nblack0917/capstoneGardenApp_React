@@ -12,6 +12,9 @@ import {
     updateCurrentLayout,
     resetGarden,
     updateRemainingInfo,
+    getAllUserGardenBeds,
+    updateUserName,
+    fetchUserbyUserName,
 } from '../redux/actions'
 
 
@@ -19,8 +22,10 @@ const mapStateToProps = (state) => {
     return {
         userInfo: state.userInfo,
         userGardens: state.userGardens,
+        allGardenBeds: state.allGardenBeds,
         createGarden: state.createGarden,
         createNewUser: state.createNewUser,
+        
     }
 }
 
@@ -37,6 +42,9 @@ const mapDispatchToProps = (dispatch) => {
         updateCurrentLayout: (layout) => dispatch(updateCurrentLayout(layout)),
         resetGarden: () => dispatch(resetGarden()),
         updateRemainingInfo: (info) => dispatch(updateRemainingInfo(info)),
+        getAllUserGardenBeds: (beds) => dispatch(getAllUserGardenBeds(beds)),
+        updateUserName: (userName) => dispatch(updateUserName(userName)),
+        fetchUserbyUserName: (userName => dispatch(fetchUserbyUserName(userName))),
     }
 }
 

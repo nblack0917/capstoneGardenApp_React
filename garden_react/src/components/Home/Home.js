@@ -37,11 +37,16 @@ function Home(props) {
             <section className="container">
                 <div className="welcome">
                     <h1>Build Your Garden And Grow It!</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                    <div className="welcomeButtons">
-                        <Button variant="contained" className={classes.buttonStyle}>Get Started</Button>  or <Link to="/login" style={{textDecoration: 'none'}}>
-                            <Button className={classes.linkStyle}>Log In</Button>
-                            </Link>
+                    <div className="welcomeText">
+                        <p>Welcome to garden plant(ter). An app made to help you build and plan your garden.</p>
+                        <p>Many people find that managing a garden can be a lot more work than they expected. Problems like poorly timed plantings, overcrowding, and improper plant maintenance are some of the most common problems even experienced gardeners face. How many times have you heard (or said), "everything kill everything I try to grow."  It's time to make that phrase outdated.</p>
+                        <p>Using garden plant(ter) you will be able to do various tasks to plan your garden space for the best results. First you'll define your gardens space which can be anything from your backyard to a shelf in your kitchen. Then add a list of your pots, planters, and garden beds. You can even arrange them in your garden to match what you have or try out new arrangements without having to lift heavy pots. From there, you can choose what plants you wish to grow and add them to you garden. You will even get a calendar of events to help you know when to sow, transplant or harvest your plants.</p>
+                        <p>With these tools at your disposal, even a first-time gardener can manage a garden to success. Click get started at the top to build your first garden plan(ter).</p>
+                        {/* <div className="welcomeButtons">
+                            <Button variant="contained" className={classes.buttonStyle}>Get Started</Button>  or <Link to="/login" style={{textDecoration: 'none'}}>
+                                <Button className={classes.linkStyle}>Log In</Button>
+                                </Link>
+                        </div> */}
                     </div>
                 </div>
             </section>

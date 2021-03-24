@@ -94,6 +94,9 @@ export default function AddGardens(props) {
   const [loading, setLoading] = useState(true);
   const [success, setSuccess] = useState(false);
   const [sendData, setSendData] = useState(false)
+  const [requestData, setRequestData] = useState(false)
+  const [newUserId, setNewUserId] = useState(0)
+  const [email, setEmail] =useState('')
   const history = useHistory();
   const classes = useStyles();
 
@@ -163,13 +166,33 @@ const handleClose = (event, reason) => {
   setOpen(false);
 };
 
+const getGardenLayout = async () => {
+    let userID = props.userInfo.id
+
+    axios.get(`http://localhost:8080/gardens/layout/${userID}`)
+      .then((res) => {
+        props.getAllUserGardenBeds(res.data)
+      }).catch((error) => console.log(error))
+  }
+
+
 const handleFinishLoading = () => {
   setSuccess(true);
   setLoading(false);
 }
 const handleFinishLoadingUser = () => {
   console.log("User info uploaded!")
-}
+  const userID = props.userInfo.id;
+  console.log("email", email)
+  getGardenLayout();
+  props.fetchUserGardensById(userID);
+  setRequestData(true)
+ }
+
+ const requestUserData = () => {
+    props.updateUserName(email);
+    props.fetchUserbyUserName(email)
+ }
 
   const getLastBedId = async () => {
     let bedId = 0;
@@ -191,10 +214,6 @@ const handleFinishLoadingUser = () => {
         setLastGardenId(gardenId)
       }).catch((error) => console.log(error))
   }
-
-//   const updateUserInfoDB = () => {
-//     console.log("new user data", props.createNewUser)
-// }
 
 const getLastUserId = async () => {
     let gardenId = 0;
@@ -248,7 +267,7 @@ const getLastUserId = async () => {
 
     console.log("Data Sent!")
     handleClick()
-    return handleFinishLoadingUser()
+    return handleFinishLoading()
   }
 
   const sendUserData = async() => {
@@ -259,10 +278,16 @@ const getLastUserId = async () => {
     }
 
     const newUser = props.createNewUser;
+    console.log("new user zip", newUser.zip)
+    const newId = props.createNewUser.nextUserId
+    const newEmail = props.createNewUser.email
+    setEmail(newEmail)
+
 
     let sendUser = await axios.post('http://localhost:8080/users/create/users', newUser)
       .then((res) => {
         console.log("update userGardens", res.status)
+        setNewUserId(newId)
       }).catch((error) => console.log(error))
 
     let firstWait = await wait(1000);
@@ -287,7 +312,7 @@ const getLastUserId = async () => {
     }).catch((error) => console.log(error))
 
     console.log("User Data Sent!")
-    return handleFinishLoading()
+    return handleFinishLoadingUser()
   }
 
   const handleStartLoading = () => {
@@ -306,8 +331,9 @@ const getLastUserId = async () => {
       userZip = zipcode;
     };
     switch(activeStep) {
-        case 0:
-            break;
+    case 0:
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
+        break;
       case 1:
         handleModalOpen();
         const newDimensions = {
@@ -378,6 +404,7 @@ const handleUpdateUserInfo = (info) => {
     setSendData(true)
 }
 
+
   // console.log("addGarden", props.createGarden)
 
   function getStepContent(stepIndex) {
@@ -401,9 +428,9 @@ const handleUpdateUserInfo = (info) => {
               handleParentWidthChange={e => {handleParentWidthChange(e)}}
               handleParentLengthChange={e => {handleParentLengthChange(e)}}
               handleParentZipcodeChange={e => {handleParentZipcodeChange(e)}}
-            //   convertZiptoZone={() => {convertZiptoZone()}}
+              convertZiptoZone={() => {convertZiptoZone()}}
               // handleNewDimensions={e => {handleNewDimensions(e)}}
-            />;
+            />
           </div>
         )
       case 2:
@@ -485,6 +512,12 @@ const handleUpdateUserInfo = (info) => {
         sendUserData()
     }
   }, [sendData])
+
+  useEffect(() => {
+    if(requestData === true){
+        requestUserData()
+    }
+  }, [requestData])
 
 
   return (

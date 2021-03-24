@@ -9,6 +9,7 @@ const mapStateToProps = (state) => {
         userGardens: state.userGardens,
         allGardenBeds: state.allGardenBeds,
         selectedIndexNum: state.selectedIndexNum,
+        userAllGardenPlants: state.userAllGardenPlants,
         state: state,
     }
 }

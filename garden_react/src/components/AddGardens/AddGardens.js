@@ -127,17 +127,25 @@ const convertZiptoZone = async () => {
 
   if (zipcode.length === 5) {
     if (zipcode.charAt(0) == "0") {
-      reducedZip = zipcode.substring(1)
+      const userZip = zipcode.substring(1)
+      console.log("userZip", userZip)
+      reducedZip = userZip.toString();
     } else {
+      const userZip = zipcode
+      reducedZip = userZip.toString();
+      console.log("userZip", userZip)
       reducedZip = zipcode
     }
   } else if (zipcode === 0) {
-    reducedZip = props.userInfo.zip;
+    const userZip = props.userInfo.zip
+    reducedZip = userZip.toString();
+    console.log("userZip", userZip)
     // console.log("hjadfs")
   } else  {
     setZone(0)
     return setZipcodeError('INVALID ZIPCODE. PLEASE ENTER NEW ZIPCODE')
   }
+  console.log("reducedZip", reducedZip)
   const res = await fetch(`https://c0bra.api.stdlib.com/zipcode-to-hardiness-zone/?zipcode=${reducedZip}`);
   const data = await res.json();
   return setZone(parseInt(data.zone.charAt(0)));
@@ -325,7 +333,7 @@ const updateNextGardenId = () => {
               handleParentZipcodeChange={e => {handleParentZipcodeChange(e)}}
               convertZiptoZone={() => {convertZiptoZone()}}
               // handleNewDimensions={e => {handleNewDimensions(e)}}
-            />;
+            />
           </div>
         )
       case 1:
@@ -349,7 +357,7 @@ const updateNextGardenId = () => {
               handleUpdateItem={e => {handleUpdateItem(e)}}
               handleCurrentLayout={e => {handleCurrentLayout(e)}}
             
-            />;
+            />
           </div>
         )
         case 3:
@@ -393,7 +401,7 @@ const updateNextGardenId = () => {
   };
 
   useEffect(() => {
-    convertZiptoZone();
+    // convertZiptoZone();
     getLastBedId();
     getLastGardenId();
     handleModalOpen();

@@ -111,7 +111,7 @@ function EnterUserInfo(props) {
     const SuccessText = () => {
         if (success) {
             return (
-                <Typography style={{ color: "green" }} variant="h6">Thanks for your message!</Typography>
+                <Typography style={{ color: "green" }} variant="h6">Your info is being saved!</Typography>
             )
         } else {
             return (

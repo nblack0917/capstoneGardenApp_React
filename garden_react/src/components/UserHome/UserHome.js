@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -16,6 +16,8 @@ import clockPlace from './clockPlaceholder.png'
 import { fetchUserGardensById } from '../../redux/actions';
 
 function UserHome(props) {
+    const [gardenPlants, setGardenPlants] = useState([])
+    const [gardenState, setGardenState] = useState(false)
     const history = useHistory();
 
     const handleMyPlantsClick = () => {
@@ -38,6 +40,13 @@ function UserHome(props) {
             props.getAllUserGardenBeds(res.data)
           }).catch((error) => console.log(error))
       }
+
+      const checkGardenPlants = () => {
+        const userID = props.userInfo.id
+        // console.log("usr id", userID)
+        props.fetchUserGardenPlantsById(userID)
+        setGardenState(!gardenState)
+    }
     
     console.log("user info state", props.userInfo)
 
@@ -46,7 +55,14 @@ function UserHome(props) {
         console.log("userID", userID);
         getGardenLayout();
         props.fetchUserGardensById(userID);
+        checkGardenPlants()
     }, [])
+
+    useEffect(() => {
+        setGardenPlants(props.userAllGardenPlants)
+        console.log("All garden plants", props.userAllGardenPlants)
+        // console.log("allGardenBeds", props.allGardenBeds)
+    }, [gardenState])
 
     return (
         <div className="userHomeBody">

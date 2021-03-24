@@ -1,10 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Paper from '@material-ui/core/Paper';
 import GardenCard from './GardenCard/GardenCard'
 import axios from 'axios';
 import './MyGardens.css';
+import { set } from 'lodash';
 
 function MyGardens(props)  {
+    const [gardenPlants, setGardenPlants] = useState([])
+    const [gardenState, setGardenState] = useState(false)
     const userGardens = props.userGardens;
 
 
@@ -12,6 +15,7 @@ function MyGardens(props)  {
         const userID = props.userInfo.id
         // console.log("usr id", userID)
         props.fetchUserGardenPlantsById(userID)
+        setGardenState(!gardenState)
     }
 
     const handleGardenClick = (event) => {
@@ -28,6 +32,8 @@ function MyGardens(props)  {
         // console.log("refreshing gardens", id)
         const userID = props.userInfo.id
         props.fetchUserGardensById(userID)
+        console.log(props.userAllGardenPlants)
+        setGardenState(!gardenState)
     }
     
     const updateSelectedIndex = (num) => {
@@ -39,10 +45,15 @@ function MyGardens(props)  {
     // console.log("user Plants",props.userPlantList)
     // console.log("user name", props.userName)
 
-    // useEffect(() => {
-    //     checkGardenPlants()
-    //     console.log("allGardenBeds", props.allGardenBeds)
-    // }, [])
+    useEffect(() => {
+        checkGardenPlants()
+        // console.log("allGardenBeds", props.allGardenBeds)
+    }, [])
+    useEffect(() => {
+        setGardenPlants(props.userAllGardenPlants)
+        console.log("All garden plants", props.userAllGardenPlants)
+        // console.log("allGardenBeds", props.allGardenBeds)
+    }, [gardenState])
 
     return (
         <div className="userHomeBody">

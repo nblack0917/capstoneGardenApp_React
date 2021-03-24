@@ -373,16 +373,16 @@ const updateNextGardenId = () => {
     if (activeStep === steps.length - 1) {
       return (
         <div className={classes.wrapper}>
-                <Fab
-                  aria-label="save"
-                  color="primary"
-                  className={buttonClassname}
-                  onClick={handleNext}
-                >
-                  {success ? <CheckIcon /> : <LocalFloristIcon />}
-                </Fab>
-                {loading && <CircularProgress size={68} className={classes.fabProgress} />}
-              </div>
+          <Fab
+            aria-label="save"
+            color="primary"
+            className={buttonClassname}
+            onClick={handleNext}
+          >
+            {success ? <CheckIcon /> : <LocalFloristIcon />}
+          </Fab>
+          {loading && <CircularProgress size={68} className={classes.fabProgress} />}
+        </div>
       )
     } else {
       return (

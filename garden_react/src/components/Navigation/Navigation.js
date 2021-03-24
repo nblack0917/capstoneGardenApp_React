@@ -97,7 +97,7 @@ const NavBar = (props) => {
         console.log(currentTime)
         let compareTimes = parseInt(createTime) - parseInt(currentTime)
         console.log("compareTimes", compareTimes)
-        if ( compareTimes < 2 ) {
+        if ( compareTimes === 0 ) {
             document.cookie = "loggedIn=true"
             props.enableLogin();
             props.updateUserName(loginEmail);

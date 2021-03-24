@@ -1,8 +1,12 @@
 import React, { useState , useEffect } from 'react'
+import clsx from 'clsx';
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
+import { green } from '@material-ui/core/colors';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CheckIcon from '@material-ui/icons/Check';
 import Button from '@material-ui/core/Button'
 import 'fontsource-roboto';
 
@@ -35,16 +39,42 @@ const useStyles = makeStyles((theme) => ({
     textarea: {
         width: '80%',
         marginTop: 40,
-    }
+    },
+    wrapper: {
+        margin: theme.spacing(1),
+        position: 'relative',
+      },
+      buttonSuccess: {
+        backgroundColor: green[500],
+        '&:hover': {
+          backgroundColor: green[700],
+        },
+      },
+    //   fabProgress: {
+    //     color: green[500],
+    //     position: 'absolute',
+    //     top: -6,
+    //     left: -6,
+    //     zIndex: 1,
+    //   },
+      buttonProgress: {
+        color: green[500],
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginTop: -12,
+        marginLeft: -12,
+      },
   }));
 
-  const encode = (data) => {
-    return Object.keys(data)
-        .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-        .join("&");
-  }
+//   const encode = (data) => {
+//     return Object.keys(data)
+//         .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+//         .join("&");
+//   }
 
 function EnterUserInfo(props) {
+    const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [username, setUsername] = useState('');
     const [firstName, setFirstName] = useState('');
@@ -54,6 +84,7 @@ function EnterUserInfo(props) {
     const [city, setCity] = useState('');
     const [state, setState] = useState('');
     const [zipcode, setZipcode] = useState('');
+    const [dataSent, setDataSent] = useState(false)
 
     const classes = useStyles();
     // console.log(props.userInfo)
@@ -111,7 +142,7 @@ function EnterUserInfo(props) {
     const SuccessText = () => {
         if (success) {
             return (
-                <Typography style={{ color: "green" }} variant="h6">Your info is being saved!</Typography>
+                <Typography style={{ color: "green" }} variant="h6">Your info is saved!</Typography>
             )
         } else {
             return (
@@ -120,10 +151,80 @@ function EnterUserInfo(props) {
         }
     }
 
-    useEffect(() => {
-        setSuccess(false)
-      }, []);
+    const handleStartLoading = () => {
+        if (!loading) {
+          setSuccess(false);
+          setLoading(true);
+          handleSubmit()
+        }
+      }
 
+    const handleFinishLoading = () => {
+        setDataSent(props.requestData)
+        // if (dataSent === true) {
+            setSuccess(true);
+            setLoading(false);
+        // }
+      }
+
+    const buttonClassname = clsx({
+        [classes.buttonSuccess]: success,
+      });
+
+    // const SubmitButton = () => {
+    //     if (loading) {
+    //         return <UploadButton />
+    //     } else {
+    //          return (
+    //             <Button onClick={handleSubmit} >Submit</Button>
+    //          )
+    //     }
+    // }
+
+    const CheckButton = () => {
+        return (
+            <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <CheckIcon />
+                Click next to continue
+            </div>
+        )
+    }
+
+    const UploadButton = () => {
+        return (
+            <div className={classes.wrapper}>
+                <Button
+                    variant="contained"
+                    color="disabled"
+                    className={buttonClassname}
+                    disabled={loading}
+                    onClick={handleStartLoading}
+                    >
+                    {!dataSent ? "Sumbit Information" : <CheckButton />}
+                </Button>
+                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+            </div>
+        )
+    }
+
+    const didMount = React.useRef(false);
+
+    useEffect(() => {
+        setLoading(false)
+        setSuccess(false)
+        setDataSent(false)
+      }, []);
+    // useEffect(() => {
+    //     handleFinishLoading()
+    //   }, [dataSent]);
+      useEffect(() => {
+          if (didMount.current) {
+              setDataSent(true)
+              handleFinishLoading()
+          } else {
+              didMount.current = true;
+          }
+      }, [props.requestData])
     return (
         <div className="userHomeBody">
             <Paper className={classes.paper}>
@@ -212,7 +313,8 @@ function EnterUserInfo(props) {
                                 variant="outlined"
                                 onChange={handleZipcodeChange}
                             />
-                        <Button onClick={handleSubmit} >Submit</Button>
+                        <UploadButton />
+                        
 
                     </form>
                 </div>

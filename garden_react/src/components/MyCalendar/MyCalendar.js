@@ -145,7 +145,7 @@ const MyCalendar = props => {
               components={{
                 timeSlotWrapper: ColoredDateCellWrapper,
               }}
-              style={{ height: '70vh', width: '80%' }}
+              style={{ height: '80vh', width: '80%' }}
               localizer={localizer}
             />
             {/* <Calendar

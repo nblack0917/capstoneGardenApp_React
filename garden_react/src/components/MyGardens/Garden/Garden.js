@@ -26,13 +26,13 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: green[700],
       },
     },
-    fabProgress: {
-      color: green[500],
-      position: 'absolute',
-      top: -6,
-      left: -6,
-      zIndex: 1,
-    },
+    // fabProgress: {
+    //   color: green[500],
+    //   position: 'absolute',
+    //   top: -6,
+    //   left: -6,
+    //   zIndex: 1,
+    // },
     buttonProgress: {
       color: green[500],
       position: 'absolute',

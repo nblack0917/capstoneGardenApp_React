@@ -76,6 +76,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: -12,
     marginLeft: -12,
   },
+  
 }));
 
 export default function AddGardens(props) {
@@ -413,7 +414,7 @@ const handleUpdateUserInfo = (info) => {
         return (
           <div>
             <InfoModal modalOpen={modalOpen} handleModalClose={handleModalClose} page={"userInfo"} />
-            <EnterUserInfo handleUpdateUserInfo={e => {handleUpdateUserInfo(e)}} lastUserId={lastUserId} />
+            <EnterUserInfo handleUpdateUserInfo={e => {handleUpdateUserInfo(e)}} lastUserId={lastUserId} requestData={requestData} />
           </div>
         )
       case 1:

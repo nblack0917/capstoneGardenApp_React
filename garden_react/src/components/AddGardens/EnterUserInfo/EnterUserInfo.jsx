@@ -190,21 +190,42 @@ function EnterUserInfo(props) {
         )
     }
 
+    const handleNext = () => {
+        props.handleNext()
+    }
+
     const UploadButton = () => {
-        return (
-            <div className={classes.wrapper}>
-                <Button
-                    variant="contained"
-                    color="disabled"
-                    className={buttonClassname}
-                    disabled={loading}
-                    onClick={handleStartLoading}
-                    >
-                    {!dataSent ? "Sumbit Information" : <CheckButton />}
-                </Button>
-                {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-            </div>
-        )
+        if (dataSent === true) {
+            return (
+                <div className={classes.wrapper}>
+                    <Button
+                        variant="contained"
+                        color="disabled"
+                        className={buttonClassname}
+                        disabled={loading}
+                        onClick={handleNext}
+                        >
+                        {!dataSent ? "Sumbit Information" : <CheckButton />}
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
+            )
+        } else {
+            return (
+                <div className={classes.wrapper}>
+                    <Button
+                        variant="contained"
+                        color="disabled"
+                        className={buttonClassname}
+                        disabled={loading}
+                        onClick={handleStartLoading}
+                        >
+                        {!dataSent ? "Sumbit Information" : <CheckButton />}
+                    </Button>
+                    {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
+                </div>
+            )
+        }
     }
 
     const didMount = React.useRef(false);

@@ -414,7 +414,7 @@ const handleUpdateUserInfo = (info) => {
         return (
           <div>
             <InfoModal modalOpen={modalOpen} handleModalClose={handleModalClose} page={"userInfo"} />
-            <EnterUserInfo handleUpdateUserInfo={e => {handleUpdateUserInfo(e)}} lastUserId={lastUserId} requestData={requestData} />
+            <EnterUserInfo handleUpdateUserInfo={e => {handleUpdateUserInfo(e)}} lastUserId={lastUserId} requestData={requestData} handleNext={e => {handleNext(e)}} />
           </div>
         )
       case 1:

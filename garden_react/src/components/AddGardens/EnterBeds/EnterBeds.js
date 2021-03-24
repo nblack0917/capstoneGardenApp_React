@@ -146,7 +146,7 @@ function EnterBeds(props) {
                     <BedList createGardenBeds={props.createGarden.beds} removeBed={true} />
                 </div>
                 <div className="addDimension">
-                    <div className="heading">
+                    {/* <div className="heading">
                         <Typography variant="h4" gutterBottom>
                             Great! Now let’s add some garden beds and planters.
                         </Typography>
@@ -156,7 +156,7 @@ function EnterBeds(props) {
                         <Typography variant="h5" gutterBottom>
                             Enter the dimensions and select shape and style. Click “Next” when done adding beds and planters.  
                         </Typography>
-                    </div>
+                    </div> */}
                     <div>
                         <FormControl variant="outlined" className={classes.formControl}>
                             <InputLabel id="container-type">Type of Container</InputLabel>

@@ -195,7 +195,7 @@ const NavBar = (props) => {
                         </Link>
                         <Typography variant="h6" className={classes.title}>
                             <Link to="/home" style={{textDecoration: 'none', color: "#009344"}}>
-                                garden app
+                            garden plan(ter)
                             </Link>
                         </Typography>
                         <Link to="/home" style={{textDecoration: 'none'}}>

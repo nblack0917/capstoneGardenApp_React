@@ -109,6 +109,7 @@ const addNewGarden = (req, res, next) => {
     pool.query(sqlQuery, (err, result, fields) => {
         if (err) return handleSQLError(res, err);
         console.log("Number of Rows Affected: ", result.affectedRows)
+        return result
     })
     res.end()
 }
@@ -143,6 +144,7 @@ const addGardenBeds = (req, res, next) => {
     pool.query(sqlQuery, [newBed], (err, result, fields) => {
         if (err) return handleSQLError(res, err);
         console.log("Number of Rows Affected: ", result.affectedRows)
+        return result
     })
     res.end()
 }
@@ -178,6 +180,7 @@ const addGardenLayout = (req, res, next) => {
     pool.query(sqlQuery, [newLayout], (err, result, fields) => {
         if (err) return handleSQLError(res, err);
         console.log("Number of Rows Affected: ", result.affectedRows)
+        return result
     })
     res.end()
 }
@@ -218,7 +221,7 @@ const removeGarden = (req, res) => {
 }
 
 const addNewUser = (req, res, next) => {
-    // console.log(req.body)
+    console.log(req.body)
     const newUser = {
         first_name: req.body.first_name,
         last_name: req.body.last_name,
@@ -230,6 +233,7 @@ const addNewUser = (req, res, next) => {
     pool.query(sqlQuery, (err, result, fields) => {
         if (err) return handleSQLError(res, err);
         console.log("Number of Rows Affected: ", result.affectedRows)
+        return result
     })
     res.end()
 }
@@ -249,6 +253,7 @@ const addNewUserContact = (req, res, next) => {
     pool.query(sqlQuery, (err, result, fields) => {
         if (err) return handleSQLError(res, err);
         console.log("Number of Rows Affected: ", result.affectedRows)
+        return result
     })
     res.end()
 }

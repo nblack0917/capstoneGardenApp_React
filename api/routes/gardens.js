@@ -5,6 +5,6 @@ const router = express.Router();
 router.get('/', gardensController.getAllGardens)
 router.get('/user/:id', gardensController.getAllGardenPlantsByUserId)
 router.get('/id/:id', gardensController.getGardensByUserId)
-router.route('/layout/:id').get(gardensController.getGardenBedsLayoutByUserId)
+router.get('/layout/:id', gardensController.getGardenBedsLayoutByUserId)
 
 module.exports = router

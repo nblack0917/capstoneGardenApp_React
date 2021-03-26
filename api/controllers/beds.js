@@ -40,6 +40,7 @@ const addGardenPlants = (req, res) => {
     pool.query(sqlQuery, [newPlants], (err, result, fields) => {
         if (err) return handleSQLError(res, err);
         console.log("Number of Rows Affected: ", result.affectedRows)
+        return result
     })
     res.end()
 }

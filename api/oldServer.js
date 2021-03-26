@@ -1,9 +1,9 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const plantsRouter = require('./routes/plants')
 const gardenRouter = require('./routes/gardens')
 const bedsRouter = require('./routes/beds')
-const usersRouter = require('./routes/users')
+const usersRouter = require('./routes/apiUsers')
 const lastBedRouter = require('./routes/lastBed')
 const lastGardenRouter = require('./routes/lastGarden')
 const lastUserRouter = require('./routes/lastUser')
@@ -16,8 +16,6 @@ const port = process.env.PORT || 3002;
 app.use(cors());
 // app.use(bodyParser.json());
 // app.use(bodyParser.urlencoded());
-app.use(express.json()); //Used to parse JSON bodies
-app.use(express.urlencoded()); //Parse URL-encoded bodies
 app.use(logger);
 app.use('/plants', plantsRouter);
 app.use('/gardens', gardenRouter);

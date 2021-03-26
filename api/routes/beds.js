@@ -4,6 +4,6 @@ const router = express.Router();
 
 router.get('/', bedsController.getAllBeds)
 router.get('/id/:id', bedsController.getBedsById)
-router.route('/create/gardenPlants').post(bedsController.addGardenPlants)
+router.post('/create/gardenPlants', bedsController.addGardenPlants)
 
 module.exports = router

@@ -8,7 +8,13 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import veggiePlaceholder from '../PlantCard/veggie_placeholder_wide.png'
+// import veggiePlaceholder from '../PlantCard/veggie_placeholder_wide.png'
+import FruitImage from '../PlantCard/fruit_image.png'
+import VeggieImage from '../PlantCard/veggie_image.png'
+import LegumeImage from '../PlantCard/legumes_image.png'
+import GreensImage from '../PlantCard/greens_image.png'
+import HerbsImage from '../PlantCard/herbs_image.png'
+import FlowersImage from '../PlantCard/flowers_image.png'
 import './PlantDetails.css'
 
 const useStyles = makeStyles({
@@ -22,26 +28,55 @@ const useStyles = makeStyles({
   });
   
 
+
+
 const PlantDetails = (props) => {
     const history = useHistory();
     const { id } = useParams();
     // console.log(id)
     const selectPlant = props.allPlantsByType.filter(plant => plant.variety_id === parseInt(id));
     const specificPlant = selectPlant[0];
-    // console.log(specificPlant)
+    console.log(specificPlant)
     const classes = useStyles();
 
     const handleClick = () => {
         history.push('/user_plants')
     }
     
+    const PlantImage = () => {
+
+      switch(specificPlant.plantGroupName) {
+        case "Fruit":
+          return FruitImage
+          // console.log("fruit")
+          break;
+        case "Vegetable":
+          return VeggieImage
+          break;
+          case "Legume":
+            return LegumeImage
+            break;
+        case "Leafy Greens":
+          return GreensImage
+          break;
+        case "Herb":
+          return HerbsImage
+          break;
+        case "Flower":
+          return FlowersImage
+          break;
+        default:
+          console.log("no name")
+      }
+  }
+
     return (
         <div className="userHomeBody">
             <Card className={classes.root} onClick={handleClick}>
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image={veggiePlaceholder}
+                  image={PlantImage()}
                   title="placeholder plant"
                 />
                 <CardContent>

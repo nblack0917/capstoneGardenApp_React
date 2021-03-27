@@ -11,7 +11,14 @@ import Fab from '@material-ui/core/Fab';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from 'react-router-dom';
 import ControlPointIcon from '@material-ui/icons/ControlPoint';
-import veggiePlaceholder from './veggie_placeholder_wide.png'
+// import veggiePlaceholder from './veggie_placeholder_wide.png'
+import FruitImage from './fruit_image.png'
+import VeggieImage from './veggie_image.png'
+import LegumeImage from './legumes_image.png'
+import GreensImage from './greens_image.png'
+import HerbsImage from './herbs_image.png'
+import FlowersImage from './flowers_image.png'
+
 
 const useStyles = makeStyles({
   root: {
@@ -34,9 +41,38 @@ export default function PlantCard(props) {
   const thisPlant = props.plant
   let currentIndex = props.index
 
+const PlantImage = () => {
+
+    switch(thisPlant.plantGroupName) {
+      case "Fruit":
+        return FruitImage
+        // console.log("fruit")
+        break;
+      case "Vegetable":
+        return VeggieImage
+        break;
+        case "Legume":
+          return LegumeImage
+          break;
+      case "Leafy Greens":
+        return GreensImage
+        break;
+      case "Herb":
+        return HerbsImage
+        break;
+      case "Flower":
+        return FlowersImage
+        break;
+      default:
+        console.log("no name")
+    }
+}
+
+
   // if(props.myPlants) {
   //   setMyPlants(true);
   // }
+  console.log("thisPlant", thisPlant)
 
   const handleAddToList = (index, plantGroupName) => {
      let results = []
@@ -56,7 +92,7 @@ export default function PlantCard(props) {
       <Card className={classes.root}>
           <CardMedia
             className={classes.media}
-            image={veggiePlaceholder}
+            image={PlantImage()}
             title="placeholder plant"
           />
           <CardContent>
@@ -87,7 +123,7 @@ export default function PlantCard(props) {
       <Card className={classes.root}>
           <CardMedia
             className={classes.media}
-            image={veggiePlaceholder}
+            image={PlantImage()}
             title="placeholder plant"
           />
           <CardContent>
@@ -112,7 +148,7 @@ export default function PlantCard(props) {
         <CardActionArea>
           <CardMedia
             className={classes.media}
-            image={veggiePlaceholder}
+            image={PlantImage()}
             title="placeholder plant"
           />
           <CardContent>

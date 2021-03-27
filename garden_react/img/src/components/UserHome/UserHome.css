@@ -1,0 +1,28 @@
+h1 {
+  color: #009344;
+}
+
+.userHomeBody {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: auto;
+  background: #f7f5ed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.homeCard {
+  width: 700px;
+  height: 139px;
+  margin: 30px 0;
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #009344;
+}

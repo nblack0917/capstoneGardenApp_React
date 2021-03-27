@@ -1,0 +1,14 @@
+.footer {
+  width: 100%;
+  height: 30px;
+  /* background: #ddd3b8; */
+  background: #ddb8b8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin-top: 1rem; */
+  /* padding: 1rem; */
+  position: absolute;
+  bottom: 0;
+  z-index: 500;
+}

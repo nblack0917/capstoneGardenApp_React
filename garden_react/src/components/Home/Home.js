@@ -34,29 +34,31 @@ function Home(props) {
     const classes = useStyles();
     return (
         <div className="homeBody">
-            <section className="container">
-                <div className="welcome">
-                    <h1>Build Your Garden And Grow It!</h1>
-                    <div className="welcomeText">
-                        <p>Welcome to garden plan(ter). An app made to help you build and plan your garden.</p>
-                        <p>Many people find that managing a garden can be more work than they expected. Even experienced gardeners face problems like poorly-timed plantings, overcrowding, and improper plant maintenance. How many times have you heard (or said), "I kill everything I try to grow." It's time to make that phrase outdated.</p>
-                        <p>Using garden plan(ter) you will be able to do various tasks to plan your garden space for the best results. First you'll define your garden's space which can be anything from your backyard to a shelf in your kitchen. Then add a list of your pots, planters, and garden beds. You can even arrange them in your garden to match what you have or try new arrangements without having to lift heavy pots. From there you can choose what plants you wish to grow and add them to you garden. You will even get a calendar of events to help you know when to sow, transplant or harvest your plants.</p>
-                        <p>With these tools at your disposal, even a first-time gardener can manage a garden to success. Click get started at the top to build your first garden plan(ter).</p>
-                        {/* <div className="welcomeButtons">
-                            <Button variant="contained" className={classes.buttonStyle}>Get Started</Button>  or <Link to="/login" style={{textDecoration: 'none'}}>
-                                <Button className={classes.linkStyle}>Log In</Button>
-                                </Link>
-                        </div> */}
+            <div className="homeContainer">
+                <section className="container">
+                    <div className="welcome">
+                        <h1>Build Your Garden And Grow It!</h1>
+                        <div className="welcomeText">
+                            <p>Welcome to garden plan(ter). An app made to help you build and plan your garden.</p>
+                            <p>Many people find that managing a garden can be more work than they expected. Even experienced gardeners face problems like poorly-timed plantings, overcrowding, and improper plant maintenance. How many times have you heard (or said), "I kill everything I try to grow." It's time to make that phrase outdated.</p>
+                            <p>Using garden plan(ter) you will be able to do various tasks to plan your garden space for the best results. First you'll define your garden's space which can be anything from your backyard to a shelf in your kitchen. Then add a list of your pots, planters, and garden beds. You can even arrange them in your garden to match what you have or try new arrangements without having to lift heavy pots. From there you can choose what plants you wish to grow and add them to you garden. You will even get a calendar of events to help you know when to sow, transplant or harvest your plants.</p>
+                            <p>With these tools at your disposal, even a first-time gardener can manage a garden to success. Click get started at the top to build your first garden plan(ter).</p>
+                            {/* <div className="welcomeButtons">
+                                <Button variant="contained" className={classes.buttonStyle}>Get Started</Button>  or <Link to="/login" style={{textDecoration: 'none'}}>
+                                    <Button className={classes.linkStyle}>Log In</Button>
+                                    </Link>
+                            </div> */}
+                        </div>
                     </div>
-                </div>
-            </section>
-            <section className="container">
-                <div className="plantArt">
-                    <div className="tableTop">
-                        <img src={PlantPic} alt="Plant Art" className="plantPic" />
+                </section>
+                <section className="container">
+                    <div className="plantArt">
+                        <div className="tableTop">
+                            <img src={PlantPic} alt="Plant Art" className="plantPic" />
+                        </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
     )
 }

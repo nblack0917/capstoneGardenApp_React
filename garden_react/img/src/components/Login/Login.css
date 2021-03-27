@@ -1,0 +1,15 @@
+.loginBody {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 750px;
+  background: #f7f5ed;
+  display: flex;
+  justify-content: center;
+}
+
+.loginCard {
+  margin-top: 100px;
+  height: 300px;
+  width: 500px;
+}

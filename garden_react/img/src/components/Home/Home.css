@@ -1,0 +1,69 @@
+h1 {
+  font-size: 56px;
+  margin: 0 auto;
+}
+p {
+  margin-bottom: 30px;
+  text-align: justify;
+}
+
+.homeBody {
+  margin: 0;
+  background: #f7f5ed;
+  width: 100%;
+  height: 845px;
+}
+
+.container {
+  width: 50%;
+  height: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: top;
+  margin: 0;
+}
+
+.container:nth-child(2) {
+  background: #f0e5c9;
+}
+
+.welcome {
+  width: 80%;
+  height: 100%;
+  color: #009344;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcomeButtons {
+  align-self: start;
+}
+
+.plantArt {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.tableTop {
+  width: 100%;
+  height: 300px;
+  background: #ddd3b8;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.plantPic {
+  z-index: 10;
+  margin-bottom: 40px;
+  width: 52%;
+  height: 750px;
+}

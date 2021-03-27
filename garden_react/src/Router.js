@@ -17,6 +17,7 @@ import GetStarted from './containers/GetStarted'
 // import BusinessDetail from './containers/BusinessDetail'
 // import AddBusiness from './containers/AddBusiness'
 import Navigation from './containers/Navigation'
+import Footer from './components/Footer/Footer'
 
 const checkAuth = () => {
     const cookies = cookie.parse(document.cookie)
@@ -49,7 +50,7 @@ const ProtectedPlantRoute = ({component: Component, ...rest}) => {
 
 const Router = () => {
     return (
-        <div>
+        <div className="routerContainer">
             <Navigation />
             <Switch>
                 <Route exact path="/" component={Home} />
@@ -66,11 +67,7 @@ const Router = () => {
                 <ProtectedRoute exact path="/my_gardens/garden" component={Garden} />
                 <ProtectedRoute exact path="/my_calendar" component={MyCalendar} />
             </Switch>
-            {/* <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/detail/:id" component={BusinessDetail} />
-                <Route path="/add" component={AddBusiness} />
-            </Switch> */}
+            <Footer />
         </div>
     )
 }

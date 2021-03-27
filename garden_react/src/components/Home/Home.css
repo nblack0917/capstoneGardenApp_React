@@ -58,7 +58,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .tableTop {
@@ -71,9 +71,9 @@ p {
   justify-content: center;
 }
 
-.plantPic {
+/* .plantPic {
   z-index: 10;
   margin-bottom: 40px;
   width: 52%;
   height: 750px;
-}
+} */

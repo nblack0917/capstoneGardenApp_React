@@ -45,7 +45,7 @@ function Home(props) {
                         </div>
                     </div>
                 </section>
-                <section className="container">
+                <section >
                     <div className="plantArt">
                             <img src={PlantPic} alt="Plant Art"  />
                     </div>

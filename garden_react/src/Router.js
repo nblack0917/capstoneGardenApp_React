@@ -48,6 +48,15 @@ const ProtectedPlantRoute = ({component: Component, ...rest}) => {
     )
 }
 
+const GitHubLink = () => {
+    window.location.href = "https://github.com/nblack0917/capstoneGardenApp_React";
+    return null
+}
+const LinkedInLink = () => {
+    window.location.href = "https://www.linkedin.com/in/nick-a-black/";
+    return null
+}
+
 const Router = () => {
     return (
         <div className="routerContainer">
@@ -59,6 +68,8 @@ const Router = () => {
                 <Route path="/contact" component={Contact} />
                 <Route path="/get_started" component={GetStarted} />
                 <Route path="/plant/:id" component={PlantDetails} />
+                <Route path="/git" component={GitHubLink} />
+                <Route path="/linkedin" component={LinkedInLink} />
                 <ProtectedRoute exact path="/home" component={UserHome} />
                 <ProtectedPlantRoute exact path="/user_plants" component={UserPlants} />
                 <ProtectedPlantRoute exact path="/my_plants" component={MyPlants} />
@@ -67,7 +78,7 @@ const Router = () => {
                 <ProtectedRoute exact path="/my_gardens/garden" component={Garden} />
                 <ProtectedRoute exact path="/my_calendar" component={MyCalendar} />
             </Switch>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

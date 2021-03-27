@@ -104,7 +104,7 @@ export default function InfoModal(props) {
                     Enter the dimensions and select shape and style. Click “Next” when done adding beds and planters. You only need to enter each unique size once.
                 </Typography>
                 <Typography gutterBottom>
-                    It's helpful to use the round planters to represent pots or antyhing that's round. The square beds can represent garden plots, beds, planters, or antyhing else square.
+                    It's helpful to use the round planters to represent pots or anything that's round. The square beds can represent garden plots, beds, planters, or anything else square.
                 </Typography>
                 </DialogContent>
                 <DialogActions>
@@ -126,7 +126,7 @@ export default function InfoModal(props) {
 
                 </Typography>
                 <Typography gutterBottom>
-                    Arrange them in any way you want as long as they stay inside the gardern border.
+                    Arrange them in any way you want as long as they stay inside the garden border.
                 </Typography>
                 <Typography gutterBottom>
                     When you have it looking exactly how you want your garden to look, click finish at the bottom to save your new garden.

@@ -205,7 +205,7 @@ function EnterUserInfo(props) {
                         disabled={loading}
                         onClick={handleNext}
                         >
-                        {!dataSent ? "Sumbit Information" : <CheckButton />}
+                        {!dataSent ? "Submit Information" : <CheckButton />}
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>
@@ -220,7 +220,7 @@ function EnterUserInfo(props) {
                         disabled={loading}
                         onClick={handleStartLoading}
                         >
-                        {!dataSent ? "Sumbit Information" : <CheckButton />}
+                        {!dataSent ? "Submit Information" : <CheckButton />}
                     </Button>
                     {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
                 </div>

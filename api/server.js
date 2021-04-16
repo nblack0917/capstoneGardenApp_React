@@ -1,5 +1,4 @@
 const express = require('express');
-// const bodyParser = require('body-parser');
 const plantsRouter = require('./routes/plants')
 const gardenRouter = require('./routes/gardens')
 const bedsRouter = require('./routes/beds')
@@ -14,8 +13,6 @@ const app = express();
 const port = process.env.PORT || 3002;
 
 app.use(cors());
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded());
 app.use(express.json()); //Used to parse JSON bodies
 app.use(express.urlencoded()); //Parse URL-encoded bodies
 app.use(logger);
@@ -29,11 +26,7 @@ app.use('/users', usersRouter);
 
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my Re-UPDATED Garden App!')
+    res.send('Welcome to my Newly UPDATED Garden App!')
   })
-  
-  // app.listen(port, () => {
-  //  console.log(`Web server is listening on port ${port}!`);
-  // });
   
   module.exports = app;

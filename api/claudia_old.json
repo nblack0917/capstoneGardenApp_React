@@ -1,0 +1,10 @@
+{
+  "lambda": {
+    "role": "practiceGardenApp-executor",
+    "name": "practiceGardenApp",
+    "region": "us-east-2"
+  },
+  "api": {
+    "id": "me16gqnge2"
+  }
+}

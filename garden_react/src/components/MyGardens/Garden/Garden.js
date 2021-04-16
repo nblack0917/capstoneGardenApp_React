@@ -139,7 +139,7 @@ function Garden(props) {
 
         const newGardenPlants = props.gardenPlantArray
     
-        let sendPlants = await axios.post('https://me16gqnge2.execute-api.us-east-2.amazonaws.com/latest/beds/create/gardenPlants', newGardenPlants)
+        let sendPlants = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/beds/create/gardenPlants', newGardenPlants)
           .then((res) => {
             console.log("update userGardens", res.status)
           }).catch((error) => console.log(error))

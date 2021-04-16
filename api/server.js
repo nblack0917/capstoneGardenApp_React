@@ -29,7 +29,7 @@ app.use('/users', usersRouter);
 
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my UPDATED Garden App!')
+    res.send('Welcome to my Re-UPDATED Garden App!')
   })
   
   // app.listen(port, () => {

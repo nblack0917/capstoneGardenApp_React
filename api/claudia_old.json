@@ -1,7 +1,7 @@
 {
   "lambda": {
-    "role": "practiceGardenApp-executor",
-    "name": "practiceGardenApp",
+    "role": "garden-plan-ter-executor",
+    "name": "garden-plan-ter",
     "region": "us-east-2"
   },
   "api": {

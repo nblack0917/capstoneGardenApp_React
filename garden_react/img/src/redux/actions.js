@@ -20,7 +20,7 @@ export const updateUserName = (userName) => {
 }
 
 export const getAllPlantsByType = (plantList) => {
-    const byTypeUrl = "http://localhost:3002/plants/plantTypes";
+    const byTypeUrl = "https://4d8w99cyh7.execute-api.us-east-2.amazonaws.com/latest/plants/plantTypes";
     return (dispatch) => {
         fetch(byTypeUrl)
             .then(res => res.json())

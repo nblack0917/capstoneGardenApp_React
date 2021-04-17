@@ -26,7 +26,7 @@ app.use('/users', usersRouter);
 
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my Newly UPDATED Garden App!')
+    res.send('Welcome to my Repeatedly UPDATED Garden App!')
   })
   
   module.exports = app;

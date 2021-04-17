@@ -35,7 +35,7 @@ function UserHome(props) {
     const getGardenLayout = async () => {
         let userID = props.userInfo.id
     
-        axios.get(`https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/gardens/layout/${userID}`)
+        axios.get(`https://4d8w99cyh7.execute-api.us-east-2.amazonaws.com/latest/gardens/layout/${userID}`)
           .then((res) => {
             props.getAllUserGardenBeds(res.data)
           }).catch((error) => console.log(error))

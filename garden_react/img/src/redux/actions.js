@@ -20,7 +20,7 @@ export const updateUserName = (userName) => {
 }
 
 export const getAllPlantsByType = (plantList) => {
-    const byTypeUrl = "https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/plants/plantTypes";
+    const byTypeUrl = "http://localhost:3002/plants/plantTypes";
     return (dispatch) => {
         fetch(byTypeUrl)
             .then(res => res.json())
@@ -58,7 +58,7 @@ export const updateLastTab = (tab) => {
 
 export const fetchUserbyUserName = (userName) => {
     console.log(userName)
-    const userInfoUrl = `https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/${userName}`
+    const userInfoUrl = `https://4d8w99cyh7.execute-api.us-east-2.amazonaws.com/latest/users/${userName}`
     // console.log(userInfoUrl)
     return (dispatch) => {
         fetch(userInfoUrl)
@@ -92,7 +92,7 @@ export const resetUserInfo = () => {
 }
 
 export const fetchUserGardensById = (id) => {
-    const userGardensUrl = `https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/gardens/id/${id}`
+    const userGardensUrl = `https://4d8w99cyh7.execute-api.us-east-2.amazonaws.com/latest/gardens/id/${id}`
     return (dispatch) => {
         fetch(userGardensUrl)
             .then(res => res.json())
@@ -108,7 +108,7 @@ export const fetchUserGardensById = (id) => {
 }
 
 export const fetchUserGardenPlantsById = (id) => {
-    const userGardenPlantsUrl = `https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/gardens/${id}`
+    const userGardenPlantsUrl = `https://4d8w99cyh7.execute-api.us-east-2.amazonaws.com/latest/users/gardens/${id}`
     return (dispatch) => {
         fetch(userGardenPlantsUrl)
             .then(res => res.json())

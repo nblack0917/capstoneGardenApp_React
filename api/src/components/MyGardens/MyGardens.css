@@ -1,9 +1,0 @@
-.gardenListContainer {
-  width: 800px;
-  height: 800px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  margin-top: 20px;
-}

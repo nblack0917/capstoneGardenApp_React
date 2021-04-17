@@ -170,7 +170,7 @@ const handleClose = (event, reason) => {
 const getGardenLayout = async () => {
     let userID = props.userInfo.id
 
-    axios.get(`https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/gardens/layout/${userID}`)
+    axios.get(`https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/gardens/layout/${userID}`)
       .then((res) => {
         props.getAllUserGardenBeds(res.data)
       }).catch((error) => console.log(error))
@@ -198,7 +198,7 @@ const handleFinishLoadingUser = () => {
   const getLastBedId = async () => {
     let bedId = 0;
 
-    axios.get('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/last_bed')
+    axios.get('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/last_bed')
       .then((res) => {
         // console.log("get data", res.data)
         bedId = parseInt(res.data)
@@ -208,7 +208,7 @@ const handleFinishLoadingUser = () => {
   const getLastGardenId = async () => {
     let gardenId = 0;
 
-    axios.get('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/last_garden')
+    axios.get('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/last_garden')
       .then((res) => {
         // console.log("get data", res.data)
         gardenId = parseInt(res.data)
@@ -219,7 +219,7 @@ const handleFinishLoadingUser = () => {
 const getLastUserId = async () => {
     let gardenId = 0;
 
-    axios.get('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/last_user')
+    axios.get('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/last_user')
       .then((res) => {
         // console.log("get data", res.data)
         gardenId = parseInt(res.data)
@@ -247,21 +247,21 @@ const getLastUserId = async () => {
     const bedInfo = {lastGardenId, gardenInfo}
     console.log(layoutInfo)
 
-    let sendGarden = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/gardens/create', newGarden)
+    let sendGarden = await axios.post('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/users/gardens/create', newGarden)
       .then((res) => {
         console.log("update userGardens", res.status)
       }).catch((error) => console.log(error))
 
     let firstWait = await wait(1000);
 
-    let sendBeds = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/gardens/create/beds', bedInfo)
+    let sendBeds = await axios.post('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/users/gardens/create/beds', bedInfo)
     .then((res) => {
       console.log("update gardenBeds", res.status)
     }).catch((error) => console.log(error))
 
     let secondWait = await wait(1000)
 
-    let sendLayout = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/gardens/create/layout', layoutInfo)
+    let sendLayout = await axios.post('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/users/gardens/create/layout', layoutInfo)
     .then((res) => {
       console.log("update gardenLayout", res.status)
     }).catch((error) => console.log(error))
@@ -285,7 +285,7 @@ const getLastUserId = async () => {
     setEmail(newEmail)
 
 
-    let sendUser = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/create/users', newUser)
+    let sendUser = await axios.post('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/users/create/users', newUser)
       .then((res) => {
         console.log("update userGardens", res.status)
         setNewUserId(newId)
@@ -293,21 +293,21 @@ const getLastUserId = async () => {
 
     let firstWait = await wait(1000);
 
-    let sendContact = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/create/contact', newUser)
+    let sendContact = await axios.post('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/users/create/contact', newUser)
     .then((res) => {
       console.log("update gardenBeds", res.status)
     }).catch((error) => console.log(error))
 
     let secondWait = await wait(1000)
 
-    let sendAddress = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/create/address', newUser)
+    let sendAddress = await axios.post('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/users/create/address', newUser)
     .then((res) => {
       console.log("update gardenLayout", res.status)
     }).catch((error) => console.log(error))
 
     let thirdWait = await wait(1000)
 
-    let sendCredentials = await axios.post('https://rhj82wylo8.execute-api.us-east-2.amazonaws.com/latest/users/create/credentials', newUser)
+    let sendCredentials = await axios.post('https://xpsx862ed6.execute-api.us-east-2.amazonaws.com/latest/users/create/credentials', newUser)
     .then((res) => {
       console.log("update gardenLayout", res.status)
     }).catch((error) => console.log(error))

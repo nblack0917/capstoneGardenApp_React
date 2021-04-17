@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express');
 const plantsRouter = require('./routes/plants')
 const gardenRouter = require('./routes/gardens')
@@ -26,7 +27,7 @@ app.use('/users', usersRouter);
 
 
 app.get('/', (req, res) => {
-    res.send('Welcome to my Newly UPDATED Garden App!')
+    res.send('Welcome to my Constantly UPDATED Garden App!')
   })
   
   module.exports = app;
